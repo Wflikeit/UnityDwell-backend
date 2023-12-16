@@ -2,9 +2,9 @@ server:
   port: 80
 spring:
   datasource:
-    url: jdbc:oracle:thin://${POSTGRES_HOST}:${POSTGRES_PORT:5432}/${POSTGRES_DB}?currentSchema=app
-    username: ${POSTGRES_USER}
-    password: ${POSTGRES_PASSWORD}
+    url: jdbc:oracle:thin://${ORACLE_HOST}:${ORACLE_PORT:5432}/${ORACLE_DB}
+    username: ${ORACLE_USER}
+    password: ${ORACLE_PASSWORD}
     driver-class-name: oracle.jdbc.OracleDriver
   flyway:
     locations: classpath:db/migration
