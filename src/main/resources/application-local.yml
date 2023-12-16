@@ -1,0 +1,17 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: jdbc:oracle:thin:@localhost:1522:XE
+    username: C##MACIEK
+    password: pass
+    driver-class-name: oracle.jdbc.OracleDriver
+
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 2MB
+      max-request-size: 2MB
+  flyway:
+    baselineOnMigrate: true
