@@ -10,7 +10,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @Builder
-public class EmployerResponse {
+public class EmployeeResponse {
     private String name;
     private String surname;
     private String phoneNumber;
