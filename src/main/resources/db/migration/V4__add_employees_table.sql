@@ -1,6 +1,6 @@
 -- Table Pracownicy
 
-CREATE TABLE Pracownicy
+CREATE TABLE C##MACIEK.Pracownicy
 (
     Id_pracownika     CHAR(36)      NOT NULL,
     Imie              Varchar2(20)  NOT NULL,
@@ -19,22 +19,22 @@ CREATE TABLE Pracownicy
 
 -- Create indexes for table Pracownicy
 
-CREATE INDEX IX_Pracuje_w ON Pracownicy (Id_spoldzielni)
+CREATE INDEX IX_Pracuje_w ON C##MACIEK.Pracownicy (Id_spoldzielni)
 /
 
-CREATE INDEX IX_Relationship5 ON Pracownicy (Id_adresu)
+CREATE INDEX IX_Relationship5 ON C##MACIEK.Pracownicy (Id_adresu)
 /
 
 -- Add keys for table Pracownicy
 
-ALTER TABLE Pracownicy
+ALTER TABLE C##MACIEK.Pracownicy
     ADD CONSTRAINT PracownikPK PRIMARY KEY (Id_pracownika)
 /
 
-ALTER TABLE Pracownicy
+ALTER TABLE C##MACIEK.Pracownicy
     ADD CONSTRAINT Email UNIQUE (Email)
 /
 
-ALTER TABLE Pracownicy
+ALTER TABLE C##MACIEK.Pracownicy
     ADD CONSTRAINT Nr_telefonu UNIQUE (Nr_telefonu)
 /

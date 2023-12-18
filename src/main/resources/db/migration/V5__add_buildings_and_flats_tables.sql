@@ -1,6 +1,6 @@
 -- Table Budynki
 
-CREATE TABLE Budynki
+CREATE TABLE C##MACIEK.Budynki
 (
     Id_budynku                   CHAR(36) NOT NULL,
     Data_modernizacji_termicznej Date     NOT NULL,
@@ -10,26 +10,26 @@ CREATE TABLE Budynki
     Czy_zdatny_do_mieszkania     Char(1)  NOT NULL,
     Id_spoldzielni               CHAR(36) NOT NULL,
     Id_adresu                    CHAR(36) NOT NULL
-)
+);
 /
 
 -- Create indexes for table Budynki
 
-CREATE INDEX IX_posiadane_przez_spoldzielnie ON Budynki (Id_spoldzielni)
+CREATE INDEX IX_posiadane_przez_spoldzielnie ON C##MACIEK.Budynki (Id_spoldzielni);
 /
 
-CREATE INDEX IX_Relationship1 ON Budynki (Id_adresu)
+CREATE INDEX IX_Relationship1 ON C##MACIEK.Budynki (Id_adresu);
 /
 
 -- Add keys for table Budynki
 
-ALTER TABLE Budynki
-    ADD CONSTRAINT BudynekPK PRIMARY KEY (Id_budynku)
+ALTER TABLE C##MACIEK.Budynki
+    ADD CONSTRAINT BudynekPK PRIMARY KEY (Id_budynku);
 /
 
 -- Table Mieszkania
 
-CREATE TABLE Mieszkania
+CREATE TABLE C##MACIEK.Mieszkania
 (
     Id_mieszkania         CHAR(36)    NOT NULL,
     Nr_mieszkania         Varchar2(5) NOT NULL,
@@ -37,16 +37,16 @@ CREATE TABLE Mieszkania
     Liczba_pokoi          Integer     NOT NULL,
     Data_kontroli_gazowej Date        NOT NULL,
     Id_budynku            CHAR(36)    NOT NULL
-)
+);
 /
 
 -- Create indexes for table Mieszkania
 
-CREATE INDEX IX_ma ON Mieszkania (Id_budynku)
+CREATE INDEX IX_ma ON C##MACIEK.Mieszkania (Id_budynku)
 /
 
 -- Add keys for table Mieszkania
 
-ALTER TABLE Mieszkania
+ALTER TABLE C##MACIEK.Mieszkania
     ADD CONSTRAINT MieszkaniePK PRIMARY KEY (Id_mieszkania)
 /
