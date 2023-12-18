@@ -1,2 +1,4 @@
-package UnityDwell.com.UnityDwell.model;public class OwnerOfFlat {
+package UnityDwell.com.UnityDwell.model;
+
+public class OwnerOfFlat {
 }

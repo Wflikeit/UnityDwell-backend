@@ -1,4 +1,4 @@
-package com.sourceryacademy.apartmentbooking.config.mybatis;
+package UnityDwell.com.UnityDwell.config.mybatis;
 
 import org.apache.ibatis.type.BaseTypeHandler;
 import org.apache.ibatis.type.JdbcType;

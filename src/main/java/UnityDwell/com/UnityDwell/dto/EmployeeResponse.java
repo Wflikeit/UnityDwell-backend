@@ -20,5 +20,4 @@ public class EmployeeResponse {
     private LocalDate dateOfEmployment;
     private LocalDate dateOfEndOfEmployment;
     private UUID idOfHousingAssociation;
-    private UUID idOfAddress;
 }
