@@ -14,7 +14,7 @@ public class Bill {
     private UUID id;
     private double amount;
     private LocalDate DateOfPublishing;
-    private UUID idOfFlatOwner;
-    private UUID idOfResident;
-    private UUID idOfHousingAssociation;
+    private OwnerOfFlat ofFlatOwner;
+    private Resident resident;
+    private HousingAssociation housingAssociation;
 }
