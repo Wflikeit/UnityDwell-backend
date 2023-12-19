@@ -3,6 +3,8 @@ package UnityDwell.com.UnityDwell.config.mybatis;
 import org.apache.ibatis.type.BaseTypeHandler;
 import org.apache.ibatis.type.JdbcType;
 import org.apache.ibatis.type.MappedTypes;
+import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.context.annotation.Configuration;
 
 import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
@@ -12,6 +14,8 @@ import java.util.Optional;
 import java.util.UUID;
 
 @MappedTypes(UUID.class)
+@Configuration
+@MapperScan("UnityDwell.com.UnityDwell.repository")
 public class UuidTypeHandler extends BaseTypeHandler<UUID> {
 
     @Override
@@ -21,7 +25,14 @@ public class UuidTypeHandler extends BaseTypeHandler<UUID> {
     }
 
     private UUID toUuid(String uuid) {
-        return Optional.ofNullable(uuid).map(UUID::fromString).orElse(null);
+        return Optional.ofNullable(uuid)
+                .map(value -> {
+                    if (value.length() == 36) {
+                        return UUID.fromString(value);
+                    }
+                    return null;
+                })
+                .orElse(null);
     }
 
     @Override

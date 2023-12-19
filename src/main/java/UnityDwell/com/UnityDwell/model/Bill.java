@@ -13,8 +13,8 @@ import java.util.UUID;
 public class Bill {
     private UUID id;
     private double amount;
-    private LocalDate DateOfPublishing;
-    private OwnerOfFlat ofFlatOwner;
+    private LocalDate dateOfPublishing;
+    private OwnerOfFlat flatOwner;
     private Resident resident;
     private HousingAssociation housingAssociation;
 }

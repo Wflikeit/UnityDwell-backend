@@ -7,7 +7,6 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.UUID;
 
 @Component
 public class BillDTOMapper {
@@ -19,7 +18,7 @@ public class BillDTOMapper {
                         .id(bill.getId())
                         .amount(bill.getAmount())
                         .DateOfPublishing(bill.getDateOfPublishing())
-                        .idOfFlatOwner(bill.getOfFlatOwner().getId())
+                        .idOfFlatOwner(bill.getFlatOwner().getId())
                         .idOfHousingAssociation(bill.getHousingAssociation().getId())
                         .build())
                 .toList();

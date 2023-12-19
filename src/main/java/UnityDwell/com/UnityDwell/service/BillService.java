@@ -5,13 +5,14 @@ import UnityDwell.com.UnityDwell.dto.mapper.BillDTOMapper;
 import UnityDwell.com.UnityDwell.model.Bill;
 import UnityDwell.com.UnityDwell.repository.BillRepository;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class BillService {
     private final BillRepository billRepository;
     private final BillDTOMapper billDTOMapper;
