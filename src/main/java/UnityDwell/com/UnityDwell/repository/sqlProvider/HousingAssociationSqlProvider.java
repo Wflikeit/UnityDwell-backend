@@ -12,7 +12,8 @@ public class HousingAssociationSqlProvider implements ProviderMethodResolver {
                 .SELECT("s.ID_SPOLDZIELNI", "s.NAZWA", "s.DATA_ZALOZENIA", "s.NIP", "s.ID_ADRESU")
                 .INNER_JOIN("C##MACIEK.ADRESY a ON s.ID_ADRESU = a.ID_ADRESU")
                 .FROM("C##MACIEK.SPOLDZIELNIE s")
-                .WHERE("s.ID_ID_SPOLDZIELNI = #{ID}")
+                .WHERE("s.ID_SPOLDZIELNI = '" + id + "'")
+
                 .toString();
     }
 
