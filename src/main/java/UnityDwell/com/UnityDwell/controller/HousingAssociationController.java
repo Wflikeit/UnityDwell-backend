@@ -1,7 +1,6 @@
 package UnityDwell.com.UnityDwell.controller;
 
 import UnityDwell.com.UnityDwell.dto.HousingAssociationResponse;
-import UnityDwell.com.UnityDwell.dto.listResponses.HousingAssociationsResponse;
 import UnityDwell.com.UnityDwell.service.HousingAssociationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
