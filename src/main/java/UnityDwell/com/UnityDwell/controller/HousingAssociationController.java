@@ -1,5 +1,6 @@
 package UnityDwell.com.UnityDwell.controller;
 
+import UnityDwell.com.UnityDwell.dto.HousingAssociationResponse;
 import UnityDwell.com.UnityDwell.dto.listResponses.HousingAssociationsResponse;
 import UnityDwell.com.UnityDwell.service.HousingAssociationService;
 import lombok.RequiredArgsConstructor;
@@ -16,10 +17,8 @@ import java.util.UUID;
 public class HousingAssociationController {
     private final HousingAssociationService housingAssociationService;
 
-    @GetMapping(value = "/#{id}")
-    public HousingAssociationsResponse getHousingAssociations(@PathVariable("id") UUID housingAssociationId) {
-        return HousingAssociationsResponse.builder()
-                .housingAssociations(housingAssociationService.getHousingAssociation(housingAssociationId))
-                .build();
+    @GetMapping(value = "/{id}")
+    public HousingAssociationResponse getHousingAssociations(@PathVariable("id") UUID housingAssociationId) {
+        return housingAssociationService.getHousingAssociation(housingAssociationId);
     }
 }
