@@ -1,0 +1,24 @@
+package UnityDwell.com.UnityDwell.model;
+
+import lombok.*;
+
+import java.time.LocalDate;
+import java.util.UUID;
+
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Setter
+@Getter
+public class Employee {
+    private String name;
+    private String surname;
+    private String phoneNumber;
+    private String email;
+    private String gender;
+    private double salary;
+    private LocalDate dateOfEmployment;
+    private LocalDate dateOfEndOfEmployment;
+    private HousingAssociation housingAssociation;
+
+}
