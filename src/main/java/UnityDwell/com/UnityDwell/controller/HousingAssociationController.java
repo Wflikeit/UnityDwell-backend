@@ -18,6 +18,6 @@ public class HousingAssociationController {
 
     @GetMapping(value = "/{id}")
     public HousingAssociationResponse getHousingAssociations(@PathVariable("id") UUID housingAssociationId) {
-        return housingAssociationService.getHousingAssociation(housingAssociationId);
+        return housingAssociationService.getHousingAssociationById(housingAssociationId);
     }
 }

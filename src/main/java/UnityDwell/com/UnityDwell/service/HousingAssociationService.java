@@ -18,9 +18,10 @@ public class HousingAssociationService {
     private final HousingAssociationDTOMapper housingAssociationDTOMapper;
 
     @Transactional(readOnly = true)
-    public HousingAssociationResponse getHousingAssociation(UUID housingAssociationId) {
+    public HousingAssociationResponse getHousingAssociationById(UUID housingAssociationId) {
 
-        Optional<HousingAssociation> list = Optional.of(housingAssociationRepository.getHousingAssociation(housingAssociationId).orElseThrow());
+        Optional<HousingAssociation> list = Optional
+                .of(housingAssociationRepository.findByIdHousingAssociation(housingAssociationId).orElseThrow());
         return housingAssociationDTOMapper.mapTo(list.get());
     }
 }

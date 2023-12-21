@@ -25,6 +25,6 @@ public interface HousingAssociationRepository {
                             "AddressRepository.findAddressById")
             )
     })
-    Optional<HousingAssociation> getHousingAssociation(UUID id);
+    Optional<HousingAssociation> findByIdHousingAssociation(UUID id);
 
 }
