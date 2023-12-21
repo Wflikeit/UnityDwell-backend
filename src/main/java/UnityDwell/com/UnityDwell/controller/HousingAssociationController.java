@@ -17,7 +17,7 @@ public class HousingAssociationController {
     private final HousingAssociationService housingAssociationService;
 
     @GetMapping(value = "/{id}")
-    public HousingAssociationResponse getHousingAssociations(@PathVariable("id") UUID housingAssociationId) {
+    public HousingAssociationResponse getHousingAssociation(@PathVariable("id") UUID housingAssociationId) {
         return housingAssociationService.getHousingAssociationById(housingAssociationId);
     }
 }
