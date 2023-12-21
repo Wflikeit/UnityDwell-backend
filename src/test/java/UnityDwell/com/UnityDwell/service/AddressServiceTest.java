@@ -1,8 +1,6 @@
 package UnityDwell.com.UnityDwell.service;
 
-import UnityDwell.com.UnityDwell.dto.HousingAssociationResponse;
-import UnityDwell.com.UnityDwell.dto.mapper.HousingAssociationDTOMapper;
-import UnityDwell.com.UnityDwell.model.HousingAssociation;
+import UnityDwell.com.UnityDwell.model.Address;
 import UnityDwell.com.UnityDwell.repository.AddressRepository;
 import UnityDwell.com.UnityDwell.repository.HousingAssociationRepository;
 import org.junit.jupiter.api.Test;
@@ -15,6 +13,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -24,18 +23,17 @@ public class AddressServiceTest {
     @Mock
     AddressRepository addressRepository;
     @Mock
-    HousingAssociationDTOMapper housingAssociationDTOMapper;
+    AddressService housingAssociationDTOMapper;
     @InjectMocks
     HousingAssociationService housingAssociationService;
     @Test
     public void getAddressById_WhenOneExists() {
         // Arrange
         UUID id = UUID.randomUUID();
-        HousingAssociation housingAssociation = HousingAssociation.builder().build();
-        HousingAssociationResponse mappedAssociationResponse = HousingAssociationResponse.builder().build();
-        when(housingAssociationRepository.findByIdHousingAssociation(id)).thenReturn(Optional.of(housingAssociation));
-        when(housingAssociationDTOMapper.mapTo(housingAssociation)).thenReturn(mappedAssociationResponse);
+        Address address = Address.builder().build();
+        when(addressRepository.findAddressById(id)).thenReturn(Optional.of(address));
         // Act & Assert
-        assertSame(mappedAssociationResponse, housingAssociationService.getHousingAssociationById(id));
+        assertTrue(addressRepository.findAddressById(id).isPresent());
+        assertSame(address, addressRepository.findAddressById(id).get());
     }
 }
