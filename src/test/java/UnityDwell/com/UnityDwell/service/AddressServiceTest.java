@@ -3,6 +3,7 @@ package UnityDwell.com.UnityDwell.service;
 import UnityDwell.com.UnityDwell.dto.HousingAssociationResponse;
 import UnityDwell.com.UnityDwell.dto.mapper.HousingAssociationDTOMapper;
 import UnityDwell.com.UnityDwell.model.HousingAssociation;
+import UnityDwell.com.UnityDwell.repository.AddressRepository;
 import UnityDwell.com.UnityDwell.repository.HousingAssociationRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -17,16 +18,17 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class HousingAssociationServiceTest {
+public class AddressServiceTest {
     @Mock
     HousingAssociationRepository housingAssociationRepository;
+    @Mock
+    AddressRepository addressRepository;
     @Mock
     HousingAssociationDTOMapper housingAssociationDTOMapper;
     @InjectMocks
     HousingAssociationService housingAssociationService;
-
     @Test
-    public void testGetHousingAssociationById_WhenOneExists() {
+    public void getAddressById_WhenOneExists() {
         // Arrange
         UUID id = UUID.randomUUID();
         HousingAssociation housingAssociation = HousingAssociation.builder().build();
@@ -36,6 +38,4 @@ public class HousingAssociationServiceTest {
         // Act & Assert
         assertSame(mappedAssociationResponse, housingAssociationService.getHousingAssociationById(id));
     }
-
-
 }

@@ -35,7 +35,7 @@ dependencies {
 
 	compileOnly 'org.projectlombok:lombok'
 
-	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+//	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 
 	runtimeOnly 'com.oracle.database.jdbc:ojdbc11'
 
@@ -47,4 +47,5 @@ dependencies {
 
 tasks.named('test') {
 	useJUnitPlatform()
+	systemProperty "spring.profiles.active", "local"
 }
