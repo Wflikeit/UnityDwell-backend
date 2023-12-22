@@ -7,6 +7,7 @@ import UnityDwell.com.UnityDwell.repository.sqlProvider.BuildingsSqlProvider;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -26,11 +27,13 @@ public interface BuildingsRepository {
                     column = "ID_SPOLDZIELNI",
                     one = @One(select = "UnityDwell.com.UnityDwell.repository." +
                             "HousingAssociationRepository.findByIdHousingAssociation")),
-            @Result(property = "dateOfThermalModernization", column = "DATA_MODERNIZACJI"),
+            @Result(property = "dateOfThermalModernization", column = "DATA_MODERNIZACJI_TERMICZNEJ"),
             @Result(property = "dateOfCommissioning", column = "DATA_ODDANIA_DO_UZYTKU"),
             @Result(property = "dateOfMajorRenovation", column = "DATA_REMONTU_OGOLNEGO"),
-            @Result(property = "numberOfFloors", column = "ULICA"),
+            @Result(property = "numberOfFloors", column = "LICZBA_PIETER"),
             @Result(property = "intendedForLiving", column = "CZY_ZDATNY_DO_MIESZKANIA"),
     })
-    Optional<Building> getBuildingsInHousingAssociation(UUID id);
+    List<Building> getBuildingsInHousingAssociation(UUID id);
+
+    Optional<Building> getBuildingById(UUID id);
 }
