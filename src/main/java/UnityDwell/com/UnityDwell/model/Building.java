@@ -18,4 +18,5 @@ public class Building {
     private int numberOfFloors;
     private boolean intendedForLiving;
     private Address address;
+    private HousingAssociation housingAssociation;
 }
