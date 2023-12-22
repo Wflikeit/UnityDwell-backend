@@ -6,6 +6,7 @@ import UnityDwell.com.UnityDwell.dto.mapper.PublicationDTOMapper;
 import UnityDwell.com.UnityDwell.repository.PublicationRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.UUID;
@@ -16,6 +17,7 @@ public class PublicationsService {
     private final PublicationRepository publicationRepository;
     private final PublicationDTOMapper publicationDTOMapper;
 
+    @Transactional(readOnly = true)
     public PublicationsResponse getPublicationsByHousingAssociationId(UUID publicationId) {
         List<PublicationResponse> publications = publicationRepository
                 .getAllPublicationsFromHousingAssociation(publicationId).stream()
