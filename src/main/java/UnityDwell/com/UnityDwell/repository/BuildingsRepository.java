@@ -8,7 +8,6 @@ import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 @Repository
@@ -26,7 +25,7 @@ public interface BuildingsRepository {
                     javaType = HousingAssociation.class,
                     column = "ID_SPOLDZIELNI",
                     one = @One(select = "UnityDwell.com.UnityDwell.repository." +
-                            "HousingAssociationRepository.findByIdHousingAssociation")),
+                            "HousingAssociationRepository.findHousingAssociationById")),
             @Result(property = "dateOfThermalModernization", column = "DATA_MODERNIZACJI_TERMICZNEJ"),
             @Result(property = "dateOfCommissioning", column = "DATA_ODDANIA_DO_UZYTKU"),
             @Result(property = "dateOfMajorRenovation", column = "DATA_REMONTU_OGOLNEGO"),
@@ -35,5 +34,4 @@ public interface BuildingsRepository {
     })
     List<Building> getBuildingsInHousingAssociation(UUID id);
 
-    Optional<Building> getBuildingById(UUID id);
 }

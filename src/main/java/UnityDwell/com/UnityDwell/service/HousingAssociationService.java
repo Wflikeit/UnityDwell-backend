@@ -1,6 +1,5 @@
 package UnityDwell.com.UnityDwell.service;
 
-import UnityDwell.com.UnityDwell.dto.BuildingResponse;
 import UnityDwell.com.UnityDwell.dto.HousingAssociationResponse;
 import UnityDwell.com.UnityDwell.dto.PublicationResponse;
 import UnityDwell.com.UnityDwell.dto.listResponses.BuildingsResponse;
@@ -61,18 +60,15 @@ public class HousingAssociationService {
     @Transactional(readOnly = true)
     public BuildingsResponse getBuildings(UUID housingAssociationId) {
 
-        housingAssociationRepository.findByIdHousingAssociation(housingAssociationId)
+        housingAssociationRepository.findHousingAssociationById(housingAssociationId)
                 .orElseThrow(() -> new ResourceNotFoundException(String
                         .format("HousingAssociation with id %s not found", housingAssociationId)));
 
         List<Building> buildingList = buildingsRepository
                 .getBuildingsInHousingAssociation(housingAssociationId);
 
-        List<BuildingResponse> buildingResponseList = buildingList
-                .stream()
-                .map(buildingDTOMapper::mapTo)
-                .toList();
-
-        return BuildingsResponse.builder().buildings(buildingResponseList).build();
+        return BuildingsResponse.builder()
+                .buildings(buildingDTOMapper.mapToBuildingList(buildingList))
+                .build();
     }
 }
