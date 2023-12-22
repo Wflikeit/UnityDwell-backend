@@ -69,6 +69,38 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "get publication",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", () =>{\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/publications/8f14bf9e-8579-41a3-a594-de8d1e2ce629",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"publications",
+						"8f14bf9e-8579-41a3-a594-de8d1e2ce629"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }

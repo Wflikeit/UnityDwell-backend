@@ -13,7 +13,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.Optional;
 import java.util.UUID;
 
-import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -36,6 +36,6 @@ public class AddressServiceTest {
         when(addressDTOMapper.mapTo(address)).thenReturn(addressResponse);
 
         // Act & Assert
-        assertSame(addressResponse, addressService.getAddressRepositoryById(id));
+        assertEquals(addressResponse, addressService.getAddressRepositoryById(id));
     }
 }
