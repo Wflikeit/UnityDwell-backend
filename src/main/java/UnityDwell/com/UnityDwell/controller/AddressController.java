@@ -18,6 +18,6 @@ public class AddressController {
 
     @GetMapping(value = "/{id}")
     public AddressResponse getHousingAddress(@PathVariable("id") UUID addressId) {
-        return addressService.getAddressRepositoryById(addressId);
+        return addressService.getAddressByHousingAssociationId(addressId);
     }
 }

@@ -36,6 +36,6 @@ public class AddressServiceTest {
         when(addressDTOMapper.mapTo(address)).thenReturn(addressResponse);
 
         // Act & Assert
-        assertEquals(addressResponse, addressService.getAddressRepositoryById(id));
+        assertEquals(addressResponse, addressService.getAddressByHousingAssociationId(id));
     }
 }
