@@ -6,7 +6,7 @@ import org.apache.ibatis.jdbc.SQL;
 import java.util.UUID;
 
 public class HousingAssociationSqlProvider implements ProviderMethodResolver {
-    public static String findByIdHousingAssociation(UUID id) {
+    public static String findHousingAssociationById(UUID id) {
         return new SQL()
                 .SELECT("s.ID_SPOLDZIELNI", "s.NAZWA", "s.DATA_ZALOZENIA", "s.NIP", "s.ID_ADRESU")
                 .INNER_JOIN("C##MACIEK.ADRESY a ON s.ID_ADRESU = a.ID_ADRESU")

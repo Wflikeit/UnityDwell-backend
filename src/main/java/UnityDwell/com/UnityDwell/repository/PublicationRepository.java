@@ -12,7 +12,7 @@ import java.util.UUID;
 @Mapper
 public interface PublicationRepository {
     @SelectProvider(PublicationSqlProvider.class)
-    @Results(id = "PublicationId", value = {
+    @Results(id = "PublicationMapping", value = {
             @Result(property = "id", column = "ID_OGLOSZENIA"),
             @Result(property = "content", column = "TRESC"),
             @Result(property = "title", column = "TYTUL"),
@@ -21,7 +21,7 @@ public interface PublicationRepository {
                     javaType = Publication.class,
                     column = "ID_SPOLDZIELNI",
                     one = @One(select = "UnityDwell.com.UnityDwell.repository." +
-                            "HousingAssociationRepository.findByIdHousingAssociation")
+                            "HousingAssociationRepository.findHousingAssociationById")
 
             )
 

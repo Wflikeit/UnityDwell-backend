@@ -18,7 +18,7 @@ public class AddressService {
     private final AddressDTOMapper addressDTOMapper;
 
     @Transactional(readOnly = true)
-    public AddressResponse getAddressRepositoryById(UUID id) {
+    public AddressResponse getAddressByHousingAssociationId(UUID id) {
 
         Address address = addressRepository.findAddressById(id)
                 .orElseThrow(() -> new ResourceNotFoundException(String

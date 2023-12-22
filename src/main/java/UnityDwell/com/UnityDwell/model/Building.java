@@ -13,10 +13,10 @@ import java.util.UUID;
 public class Building {
     private UUID id;
     private Address address;
-    private HousingAssociation housingAssociation;
     private LocalDate dateOfThermalModernization;
     private LocalDate dateOfCommissioning;
     private LocalDate dateOfMajorRenovation;
     private int numberOfFloors;
     private boolean intendedForLiving;
+    private HousingAssociation housingAssociation;
 }

@@ -2,6 +2,7 @@ package UnityDwell.com.UnityDwell.controller;
 
 import UnityDwell.com.UnityDwell.dto.HousingAssociationResponse;
 import UnityDwell.com.UnityDwell.dto.listResponses.BuildingsResponse;
+import UnityDwell.com.UnityDwell.dto.listResponses.PublicationsResponse;
 import UnityDwell.com.UnityDwell.service.HousingAssociationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,5 +26,9 @@ public class HousingAssociationController {
     @GetMapping("/{id}/buildings")
     public BuildingsResponse getBuildingsFromHousingAssociation(@PathVariable("id") UUID housingAssociationId) {
         return housingAssociationService.getBuildings(housingAssociationId);
+    }
+    @GetMapping("/{id}/publications")
+    public PublicationsResponse getPublicationsFromHousingAssociation(@PathVariable("id") UUID id) {
+        return housingAssociationService.getPublicationsByHousingAssociationId(id);
     }
 }

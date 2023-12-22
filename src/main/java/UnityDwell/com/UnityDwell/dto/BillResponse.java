@@ -15,6 +15,5 @@ public class BillResponse {
     private double amount;
     private LocalDate DateOfPublishing;
     private UUID idOfFlatOwner;
-    private UUID idOfResident;
     private UUID idOfHousingAssociation;
 }
