@@ -42,7 +42,7 @@ public class HousingAssociationServiceTest {
         UUID id = UUID.randomUUID();
         HousingAssociation housingAssociation = HousingAssociation.builder().build();
         HousingAssociationResponse mappedAssociationResponse = HousingAssociationResponse.builder().build();
-        when(housingAssociationRepository.findByIdHousingAssociation(id)).thenReturn(Optional.of(housingAssociation));
+        when(housingAssociationRepository.findHousingAssociationById(id)).thenReturn(Optional.of(housingAssociation));
         when(housingAssociationDTOMapper.mapTo(housingAssociation)).thenReturn(mappedAssociationResponse);
         // Act & Assert
         assertEquals(mappedAssociationResponse, housingAssociationService.getHousingAssociationById(id));

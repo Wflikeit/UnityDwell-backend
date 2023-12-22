@@ -27,7 +27,7 @@ public class HousingAssociationService {
     public HousingAssociationResponse getHousingAssociationById(UUID housingAssociationId) {
 
 
-        HousingAssociation housingAssociation = housingAssociationRepository.findByIdHousingAssociation(housingAssociationId)
+        HousingAssociation housingAssociation = housingAssociationRepository.findHousingAssociationById(housingAssociationId)
                 .orElseThrow();
         return housingAssociationDTOMapper.mapTo(housingAssociation);
     }
