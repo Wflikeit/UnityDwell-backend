@@ -4,12 +4,15 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.UUID;
+
 @Getter
 @Setter
 @Builder
 public class AddressResponse {
+    private UUID id;
     private String city;
-    private String Street;
+    private String street;
     private int numberOfBuilding;
-    private String PostalCode;
+    private String postalCode;
 }

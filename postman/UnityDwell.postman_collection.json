@@ -1,0 +1,106 @@
+{
+	"info": {
+		"_postman_id": "89587e24-242e-466d-9dae-914961af9197",
+		"name": "UnityDwell",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29779178"
+	},
+	"item": [
+		{
+			"name": "get HousingAssociation",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", () =>{\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/HousingAssociation/8f14bf9e-8579-41a3-a594-de8d1e2ce629",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"HousingAssociation",
+						"8f14bf9e-8579-41a3-a594-de8d1e2ce629"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get address",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", () =>{\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/address/1bce57d4-9a68-4f0d-a39b-ff3fec8fed44",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"address",
+						"1bce57d4-9a68-4f0d-a39b-ff3fec8fed44"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get publication",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", () =>{\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/publications/8f14bf9e-8579-41a3-a594-de8d1e2ce629",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"publications",
+						"8f14bf9e-8579-41a3-a594-de8d1e2ce629"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

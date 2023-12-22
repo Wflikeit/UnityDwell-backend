@@ -22,22 +22,20 @@ repositories {
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.2'  // database access via MyBatis
+	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.3'
 	implementation 'org.springframework.boot:spring-boot-starter-mail'
-	implementation 'org.springframework.boot:spring-boot-starter-security'
+//	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'com.okta.spring:okta-spring-boot-starter:3.0.6'
-	implementation 'org.flywaydb:flyway-core'
+//	implementation 'com.okta.spring:okta-spring-boot-starter:3.0.6'
 	implementation 'org.flywaydb:flyway-database-oracle'
-	implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
-	implementation 'io.jsonwebtoken:jjwt-jackson:0.11.5'
-	implementation 'io.jsonwebtoken:jjwt-impl:0.11.5'
+//	implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
+//	implementation 'io.jsonwebtoken:jjwt-jackson:0.11.5'
+//	implementation 'io.jsonwebtoken:jjwt-impl:0.11.5'
 
 	compileOnly 'org.projectlombok:lombok'
 
-	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+//	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 
 	runtimeOnly 'com.oracle.database.jdbc:ojdbc11'
 
@@ -49,4 +47,5 @@ dependencies {
 
 tasks.named('test') {
 	useJUnitPlatform()
+	systemProperty "spring.profiles.active", "local"
 }
