@@ -8,7 +8,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -20,8 +19,9 @@ public class HousingAssociationService {
     @Transactional(readOnly = true)
     public HousingAssociationResponse getHousingAssociationById(UUID housingAssociationId) {
 
-        Optional<HousingAssociation> list = Optional
-                .of(housingAssociationRepository.findByIdHousingAssociation(housingAssociationId).orElseThrow());
-        return housingAssociationDTOMapper.mapTo(list.get());
+
+        HousingAssociation housingAssociation = housingAssociationRepository.findByIdHousingAssociation(housingAssociationId)
+                .orElseThrow();
+        return housingAssociationDTOMapper.mapTo(housingAssociation);
     }
 }
