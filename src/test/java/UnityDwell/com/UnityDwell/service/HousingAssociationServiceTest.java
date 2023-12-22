@@ -5,6 +5,7 @@ import UnityDwell.com.UnityDwell.dto.PublicationResponse;
 import UnityDwell.com.UnityDwell.dto.listResponses.PublicationsResponse;
 import UnityDwell.com.UnityDwell.dto.mapper.HousingAssociationDTOMapper;
 import UnityDwell.com.UnityDwell.dto.mapper.PublicationDTOMapper;
+import UnityDwell.com.UnityDwell.error.ResourceNotFoundException;
 import UnityDwell.com.UnityDwell.model.HousingAssociation;
 import UnityDwell.com.UnityDwell.model.Publication;
 import UnityDwell.com.UnityDwell.repository.HousingAssociationRepository;
@@ -21,6 +22,7 @@ import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -42,26 +44,53 @@ public class HousingAssociationServiceTest {
         UUID id = UUID.randomUUID();
         HousingAssociation housingAssociation = HousingAssociation.builder().build();
         HousingAssociationResponse mappedAssociationResponse = HousingAssociationResponse.builder().build();
-        when(housingAssociationRepository.findHousingAssociationById(id)).thenReturn(Optional.of(housingAssociation));
+        when(housingAssociationRepository.findHousingAssociationById(id))
+                .thenReturn(Optional.of(housingAssociation));
         when(housingAssociationDTOMapper.mapTo(housingAssociation)).thenReturn(mappedAssociationResponse);
         // Act & Assert
         assertEquals(mappedAssociationResponse, housingAssociationService.getHousingAssociationById(id));
     }
 
     @Test
+    public void testGetHousingAssociationById_WhenDoesNotExists() {
+        // Arrange
+        UUID id = UUID.randomUUID();
+        when(housingAssociationRepository.findHousingAssociationById(id)).thenReturn(Optional.empty());
+
+        // Act & Assert
+        assertThrows(ResourceNotFoundException.class, () -> housingAssociationService
+                .getHousingAssociationById(id));
+    }
+
+    @Test
+    public void testGetPublicationsByHousingAssociationId_WhenDoesNotExists() {
+        // Arrange
+        UUID id = UUID.randomUUID();
+        when(housingAssociationRepository.findHousingAssociationById(id)).thenReturn(Optional.empty());
+
+        // Act & Assert
+        assertThrows(ResourceNotFoundException.class, () -> housingAssociationService
+                .getPublicationsByHousingAssociationId(id));
+    }
+
+    @Test
     public void testGetPublicationsByHousingAssociationId_WhenOneExists() {
         // Arrange
         UUID id = UUID.randomUUID();
+        HousingAssociation housingAssociation = HousingAssociation.builder().build();
         Publication publication = Publication.builder().id(id).build();
         PublicationResponse publicationResponse = PublicationResponse.builder().id(id).build();
         List<PublicationResponse> expectedPublicationResponseList = List.of(publicationResponse);
-        PublicationsResponse expectedPublicationsResponse = PublicationsResponse.builder().publications(expectedPublicationResponseList).build();
+        PublicationsResponse expectedPublicationsResponse = PublicationsResponse
+                .builder().publications(expectedPublicationResponseList).build();
 
+        when(housingAssociationRepository.findHousingAssociationById(id)).thenReturn(Optional.of(housingAssociation));
         when(publicationRepository.getAllPublicationsFromHousingAssociation(id)).thenReturn(List.of(publication));
         when(publicationDTOMapper.mapTo(publication)).thenReturn(publicationResponse);
 
         // Act
-        PublicationsResponse actualPublicationsResponse = housingAssociationService.getPublicationsByHousingAssociationId(id);
+        PublicationsResponse actualPublicationsResponse = housingAssociationService
+                .getPublicationsByHousingAssociationId(id);
 
         // Assert
         assertThat(actualPublicationsResponse)

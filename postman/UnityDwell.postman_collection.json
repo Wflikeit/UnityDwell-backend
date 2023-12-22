@@ -89,14 +89,15 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{baseUrl}}/api/publications/8f14bf9e-8579-41a3-a594-de8d1e2ce629",
+					"raw": "{{baseUrl}}/api/HousingAssociation/8f14bf9e-8579-41a3-a594-de8d1e2ce629/publications",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
 						"api",
-						"publications",
-						"8f14bf9e-8579-41a3-a594-de8d1e2ce629"
+						"HousingAssociation",
+						"8f14bf9e-8579-41a3-a594-de8d1e2ce629",
+						"publications"
 					]
 				}
 			},

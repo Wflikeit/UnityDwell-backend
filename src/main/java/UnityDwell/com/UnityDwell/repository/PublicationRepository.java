@@ -21,7 +21,7 @@ public interface PublicationRepository {
                     javaType = Publication.class,
                     column = "ID_SPOLDZIELNI",
                     one = @One(select = "UnityDwell.com.UnityDwell.repository." +
-                            "HousingAssociationRepository.findByIdHousingAssociation")
+                            "HousingAssociationRepository.findHousingAssociationById")
 
             )
 
