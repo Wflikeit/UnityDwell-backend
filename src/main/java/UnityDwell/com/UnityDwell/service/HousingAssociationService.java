@@ -5,6 +5,7 @@ import UnityDwell.com.UnityDwell.dto.PublicationResponse;
 import UnityDwell.com.UnityDwell.dto.listResponses.PublicationsResponse;
 import UnityDwell.com.UnityDwell.dto.mapper.HousingAssociationDTOMapper;
 import UnityDwell.com.UnityDwell.dto.mapper.PublicationDTOMapper;
+import UnityDwell.com.UnityDwell.error.ResourceNotFoundException;
 import UnityDwell.com.UnityDwell.model.HousingAssociation;
 import UnityDwell.com.UnityDwell.repository.HousingAssociationRepository;
 import UnityDwell.com.UnityDwell.repository.PublicationRepository;
@@ -26,16 +27,22 @@ public class HousingAssociationService {
     @Transactional(readOnly = true)
     public HousingAssociationResponse getHousingAssociationById(UUID housingAssociationId) {
 
-
         HousingAssociation housingAssociation = housingAssociationRepository.findHousingAssociationById(housingAssociationId)
-                .orElseThrow();
+                .orElseThrow(() -> new ResourceNotFoundException(String
+                        .format("HousingAssociation with id %s not found", housingAssociationId)));
+
         return housingAssociationDTOMapper.mapTo(housingAssociation);
     }
 
     @Transactional(readOnly = true)
-    public PublicationsResponse getPublicationsByHousingAssociationId(UUID publicationId) {
+    public PublicationsResponse getPublicationsByHousingAssociationId(UUID housingAssociationId) {
+
+        housingAssociationRepository.findHousingAssociationById(housingAssociationId)
+                .orElseThrow(() -> new ResourceNotFoundException(String
+                        .format("HousingAssociation with id %s not found", housingAssociationId)));
+
         List<PublicationResponse> publications = publicationRepository
-                .getAllPublicationsFromHousingAssociation(publicationId).stream()
+                .getAllPublicationsFromHousingAssociation(housingAssociationId).stream()
                 .map(publicationDTOMapper::mapTo)
                 .toList();
 

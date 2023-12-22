@@ -14,10 +14,3 @@ spring:
       max-file-size: 2MB
       max-request-size: 2MB
 
-application:
-  security:
-    jwt:
-      # Keeping secret in properties file is a temporary solution that will be reworked later (if we have time)
-      # to be kept in Kubernetes secret object
-      secret: 157f3804c29433c35430ea2fe4d292902d830a62438b53cf4314bfbe527b4327
-      expiration-millis: 14_400_000 # 4 hours
