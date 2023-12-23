@@ -33,5 +33,9 @@ public interface BuildingsRepository {
             @Result(property = "intendedForLiving", column = "CZY_ZDATNY_DO_MIESZKANIA"),
     })
     List<Building> getBuildingsInHousingAssociation(UUID id);
+    @SelectProvider(type = BuildingsSqlProvider.class, method = "getBuildingInHousingAssociationById")
+    @ResultMap("BuildingMap")
+    Building getBuildingInHousingAssociationById(UUID id);
+
 
 }
