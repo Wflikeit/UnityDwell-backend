@@ -6,6 +6,7 @@ import UnityDwell.com.UnityDwell.model.HousingAssociation;
 import UnityDwell.com.UnityDwell.model.Publication;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
 import java.util.UUID;
 
 @Component
@@ -28,7 +29,7 @@ public class PublicationDTOMapper {
                 .id(UUID.randomUUID())
                 .title(publicationRequest.getTitle())
                 .content(publicationRequest.getContent())
-                .dateOfPublishing(publicationRequest.getDateOfPublishing())
+                .dateOfPublishing(LocalDate.now())
                 .housingAssociation(housingAssociation)
                 .build();
     }
