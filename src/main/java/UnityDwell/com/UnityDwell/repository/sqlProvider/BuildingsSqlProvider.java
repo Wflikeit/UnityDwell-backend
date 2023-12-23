@@ -14,7 +14,7 @@ public class BuildingsSqlProvider implements ProviderMethodResolver {
                 .FROM("C##MACIEK.BUDYNKI b")
                 .INNER_JOIN("C##MACIEK.ADRESY a ON b.ID_ADRESU = a.ID_ADRESU")
                 .INNER_JOIN("C##MACIEK.SPOLDZIELNIE s ON b.ID_SPOLDZIELNI = s.ID_SPOLDZIELNI")
-                .WHERE("b.ID_BUDYNKU = '" + houseAssociationId + "'")
+                .WHERE("b.ID_SPOLDZIELNI = '" + houseAssociationId + "'")
                 .toString();
     }
     public static String getBuildingById(UUID buildingId){
