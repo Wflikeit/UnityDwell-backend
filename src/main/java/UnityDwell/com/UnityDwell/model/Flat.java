@@ -15,7 +15,7 @@ public class Flat {
     private int numberOfFlat;
     private double space;
     private int amountOfRooms;
-    private LocalDate DateOfLastGasControl;
+    private LocalDate dateOfLastGasControl;
     private Building building;
     private Address address;
 }
