@@ -11,7 +11,7 @@ public class AddressSqlProvider implements ProviderMethodResolver {
         return new SQL()
                 .SELECT("a.ID_ADRESU", "a.MIASTO", "a.ULICA", "a.NR_BUDYNKU", "a.KOD_POCZTOWY")
                 .FROM("C##MACIEK.ADRESY a")
-                .WHERE("a.ID_ADRESU = '" + id + "'")
+                .WHERE("a.ID_ADRESU = #{id}")
                 .toString();
     }
 

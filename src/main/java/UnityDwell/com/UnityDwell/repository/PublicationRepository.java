@@ -22,9 +22,7 @@ public interface PublicationRepository {
                     column = "ID_SPOLDZIELNI",
                     one = @One(select = "UnityDwell.com.UnityDwell.repository." +
                             "HousingAssociationRepository.findHousingAssociationById")
-
             )
-
     })
-    List<Publication> getAllPublicationsFromHousingAssociation(UUID id);
+    List<Publication> getAllPublicationsFromHousingAssociation(UUID houseAssociationId);
 }
