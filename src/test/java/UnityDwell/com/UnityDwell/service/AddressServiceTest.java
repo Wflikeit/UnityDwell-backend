@@ -2,6 +2,7 @@ package UnityDwell.com.UnityDwell.service;
 
 import UnityDwell.com.UnityDwell.dto.AddressResponse;
 import UnityDwell.com.UnityDwell.dto.mapper.AddressDTOMapper;
+import UnityDwell.com.UnityDwell.error.ResourceNotFoundException;
 import UnityDwell.com.UnityDwell.model.Address;
 import UnityDwell.com.UnityDwell.repository.AddressRepository;
 import org.junit.jupiter.api.Test;
@@ -14,6 +15,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -37,5 +39,15 @@ public class AddressServiceTest {
 
         // Act & Assert
         assertEquals(addressResponse, addressService.getAddressByHousingAssociationId(id));
+    }
+
+    @Test
+    public void getAddresById_WhenOneDoesNotExist() {
+        //Arrange
+        UUID id = UUID.randomUUID();
+        when(addressRepository.findAddressById(id)).thenReturn(Optional.empty());
+
+        //Act & Assert
+        assertThrows(ResourceNotFoundException.class, () -> addressService.getAddressByHousingAssociationId(id));
     }
 }
