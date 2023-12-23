@@ -17,7 +17,7 @@ public class BuildingsSqlProvider implements ProviderMethodResolver {
                 .WHERE("b.ID_BUDYNKU = '" + houseAssociationId + "'")
                 .toString();
     }
-    public static String getBuildingInHousingAssociationById(UUID houseAssociationId){
+    public static String getBuildingById(UUID buildingId){
         return new SQL()
                 .SELECT("b.ID_BUDYNKU", "b.DATA_MODERNIZACJI_TERMICZNEJ", "b.DATA_ODDANIA_DO_UZYTKU",
                         "b.LICZBA_PIETER", "b.DATA_REMONTU_OGOLNEGO", "b.CZY_ZDATNY_DO_MIESZKANIA",
@@ -25,7 +25,7 @@ public class BuildingsSqlProvider implements ProviderMethodResolver {
                 .FROM("C##MACIEK.BUDYNKI b")
                 .INNER_JOIN("C##MACIEK.ADRESY a ON b.ID_ADRESU = a.ID_ADRESU")
                 .INNER_JOIN("C##MACIEK.SPOLDZIELNIE s ON b.ID_SPOLDZIELNI = s.ID_SPOLDZIELNI")
-                .WHERE("b.ID_BUDYNKU = '" + houseAssociationId + "'")
+                .WHERE("b.ID_BUDYNKU = '" + buildingId + "'")
                 .toString();
     }
 
