@@ -13,7 +13,6 @@ import java.util.UUID;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("api/address")
-@Validated
 public class AddressController {
     private final AddressService addressService;
 
@@ -23,7 +22,7 @@ public class AddressController {
     }
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
-    public AddressResponse getHousingAddress(@RequestBody CreateOrUpdateAddressRequest request) {
+    public AddressResponse getHousingAddress(@Validated @RequestBody CreateOrUpdateAddressRequest request) {
         return addressService.addNewAddress(request);
     }
 }
