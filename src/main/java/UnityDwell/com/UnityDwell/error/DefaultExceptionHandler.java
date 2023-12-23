@@ -2,6 +2,7 @@ package UnityDwell.com.UnityDwell.error;
 
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -29,10 +30,11 @@ public class DefaultExceptionHandler {
                 .build();
 
     }
+
     @ExceptionHandler(ResourceNotFoundException.class)
     @ResponseBody
     public ErrorResponse handleResourceNotFoundException(HttpServletResponse response,
-                                                    ResourceNotFoundException ex) {
+                                                         ResourceNotFoundException ex) {
         response.setStatus(HttpServletResponse.SC_NOT_FOUND);
 
         log.error("ResourceNotFoundException", ex);
@@ -42,6 +44,7 @@ public class DefaultExceptionHandler {
                 .build();
 
     }
+
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
     @ResponseBody
     public ErrorResponse handleInvalidUUID(HttpServletResponse response,
@@ -54,6 +57,7 @@ public class DefaultExceptionHandler {
                 .additionalData(new HashMap<>())
                 .build();
     }
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseBody
     public ErrorResponse handleValidationException(HttpServletResponse response,
@@ -68,6 +72,23 @@ public class DefaultExceptionHandler {
 
         return ErrorResponse.builder()
                 .message("Method arguments not valid!")
+                .additionalData(additionalData)
+                .build();
+    }
+
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    @ResponseBody
+    public ErrorResponse handleDataIntegrityViolationException(HttpServletResponse response,
+                                                               DataIntegrityViolationException ex) {
+        response.setStatus(HttpServletResponse.SC_CONFLICT);
+
+        Map<String, String> additionalData = new HashMap<>();
+
+        String message = ex.getMessage();
+        log.error(message, ex);
+
+        return ErrorResponse.builder()
+                .message("Cannot delete this record because it's used somewhere else")
                 .additionalData(additionalData)
                 .build();
     }

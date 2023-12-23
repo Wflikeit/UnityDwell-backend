@@ -1,8 +1,8 @@
 package UnityDwell.com.UnityDwell.service;
 
-import UnityDwell.com.UnityDwell.dto.response.AddressResponse;
 import UnityDwell.com.UnityDwell.dto.mapper.AddressDTOMapper;
 import UnityDwell.com.UnityDwell.dto.request.CreateOrUpdateAddressRequest;
+import UnityDwell.com.UnityDwell.dto.response.AddressResponse;
 import UnityDwell.com.UnityDwell.error.ResourceNotFoundException;
 import UnityDwell.com.UnityDwell.model.Address;
 import UnityDwell.com.UnityDwell.repository.AddressRepository;
@@ -33,5 +33,13 @@ public class AddressService {
         Address address = addressDTOMapper.map(request);
         addressRepository.save(address);
         return addressDTOMapper.mapTo(address);
+    }
+
+    @Transactional
+    public void deleteAddress(UUID addressId) {
+        addressRepository.findAddressById(addressId)
+                .orElseThrow(() -> new ResourceNotFoundException(String
+                        .format("Address with id %s not found", addressId)));
+        addressRepository.delete(addressId);
     }
 }
