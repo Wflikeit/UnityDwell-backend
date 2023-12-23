@@ -1,8 +1,6 @@
 package UnityDwell.com.UnityDwell.controller;
 
-import UnityDwell.com.UnityDwell.dto.AddressResponse;
 import UnityDwell.com.UnityDwell.dto.listResponses.FlatsResponse;
-import UnityDwell.com.UnityDwell.service.AddressService;
 import UnityDwell.com.UnityDwell.service.BuildingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
