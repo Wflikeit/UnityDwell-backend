@@ -11,7 +11,7 @@ public class EmployeeSqlProvider implements ProviderMethodResolver {
         return new SQL()
                 .SELECT("p.ID_PRACOWNIKA", "p.IMIE"
                         , "p.NAZWISKO", "p.NR_TELEFONU", "p.DATA_ZATRUDNIENIA"
-                        , "p.DATA_KONCA_UMOWY", "p.PLEC", "p.PLACA", "p.EMAIL", "p.ID_SPOLDZIELNI", "p.ID_ADRESU")
+                            , "p.DATA_KONCA_UMOWY", "p.PLEC", "p.PLACA", "p.EMAIL", "p.ID_SPOLDZIELNI", "p.ID_ADRESU")
                 .FROM("C##MACIEK.PRACOWNICY p")
                 .WHERE("p.ID_PRACOWNIKA = '" + id + "'")
                 .toString();

@@ -9,9 +9,9 @@ public class EmployeeDTOMapper {
     public EmployeeResponse mapTo(Employee employee) {
         return EmployeeResponse.builder().id(employee.getId()).name(employee.getName())
                 .surname(employee.getSurname()).phoneNumber(employee.getPhoneNumber())
-                .email(employee.getEmail()).gender(employee.getGender()).salary(employee.getSalary())
-                .dateOfEmployment(employee.getDateOfEmployment())
-                .dateOfEndOfEmployment(employee.getDateOfEndOfEmployment())
-                .idOfHousingAssociation(employee.getHousingAssociation().getId()).build();
+                    .email(employee.getEmail()).gender(employee.getGender()).salary(employee.getSalary())
+                        .dateOfEmployment(employee.getDateOfEmployment())
+                            .dateOfEndOfEmployment(employee.getDateOfEndOfEmployment())
+                                .idOfHousingAssociation(employee.getHousingAssociation().getId()).build();
     }
 }

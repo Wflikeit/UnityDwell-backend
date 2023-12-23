@@ -19,7 +19,6 @@ public class EmployeeService {
 
     @Transactional(readOnly = true)
     public EmployeeResponse getEmployeeById(UUID id){
-        //temporary exception
         Employee employee = employeeRepository.findEmployeeById(id)
                 .orElseThrow(() -> new ResourceNotFoundException(String.format("Employee with id %s not found", id)));
 
