@@ -7,13 +7,14 @@ import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Repository
 @Mapper
 public interface FlatRepository {
     @SelectProvider(FlatSqlProvider.class)
-    @Results(id = "EmployeeMap", value = {
+    @Results(id = "FlatsMap", value = {
             @Result(property = "id", column = "ID_MIESZKANIA"),
             @Result(property = "numberOfFlat", column = "NR_MIESZKANIA"),
             @Result(property = "space", column = "POWIERZCHNIA"),
@@ -27,4 +28,8 @@ public interface FlatRepository {
             )
     })
     List<Flat> getAllFlatsInBuilding(UUID buildingId);
+
+    @SelectProvider(FlatSqlProvider.class)
+    @ResultMap("FlatsMap")
+    Optional<Flat> findFlatById(UUID flatId);
 }
