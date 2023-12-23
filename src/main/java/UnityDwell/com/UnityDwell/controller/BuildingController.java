@@ -18,8 +18,8 @@ import java.util.UUID;
 public class BuildingController {
     private final BuildingService buildingService;
 
-    @GetMapping(value = "/{id}")
-    public FlatsResponse getHousingAddress(@PathVariable("id") UUID buildingId) {
+    @GetMapping(value = "/{buildingId}")
+    public FlatsResponse getFlatsInBuilding(@PathVariable("buildingId") UUID buildingId) {
         return buildingService.getFlatsInBuilding(buildingId);
     }
 }
