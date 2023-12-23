@@ -19,9 +19,6 @@ public class BuildingResponse {
     private int numberOfFloors;
     private boolean intendedForLiving;
     private Address address;
-    private String city;
-    private String Street;
-    private String PostalCode;
     private UUID idOfHousingAssociation;
 
 }
