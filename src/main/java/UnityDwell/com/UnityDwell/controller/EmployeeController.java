@@ -1,6 +1,6 @@
 package UnityDwell.com.UnityDwell.controller;
 
-import UnityDwell.com.UnityDwell.dto.EmployeeResponse;
+import UnityDwell.com.UnityDwell.dto.response.EmployeeResponse;
 import UnityDwell.com.UnityDwell.service.EmployeeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;

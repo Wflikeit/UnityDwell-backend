@@ -1,6 +1,6 @@
 package UnityDwell.com.UnityDwell.dto.listResponses;
 
-import UnityDwell.com.UnityDwell.dto.EmployeeResponse;
+import UnityDwell.com.UnityDwell.dto.response.EmployeeResponse;
 import lombok.Builder;
 import lombok.Getter;
 

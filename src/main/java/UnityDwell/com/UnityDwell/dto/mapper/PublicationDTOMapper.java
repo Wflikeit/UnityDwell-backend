@@ -1,6 +1,6 @@
 package UnityDwell.com.UnityDwell.dto.mapper;
 
-import UnityDwell.com.UnityDwell.dto.PublicationResponse;
+import UnityDwell.com.UnityDwell.dto.response.PublicationResponse;
 import UnityDwell.com.UnityDwell.model.Publication;
 import org.springframework.stereotype.Component;
 

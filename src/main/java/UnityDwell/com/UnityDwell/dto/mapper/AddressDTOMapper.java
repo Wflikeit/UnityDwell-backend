@@ -1,7 +1,7 @@
 package UnityDwell.com.UnityDwell.dto.mapper;
 
-import UnityDwell.com.UnityDwell.dto.AddressResponse;
-import UnityDwell.com.UnityDwell.dto.requests.CreateOrUpdateAddressRequest;
+import UnityDwell.com.UnityDwell.dto.response.AddressResponse;
+import UnityDwell.com.UnityDwell.dto.request.CreateOrUpdateAddressRequest;
 import UnityDwell.com.UnityDwell.model.Address;
 import org.springframework.stereotype.Component;
 

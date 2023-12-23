@@ -1,6 +1,6 @@
 package UnityDwell.com.UnityDwell.dto.mapper;
 
-import UnityDwell.com.UnityDwell.dto.HousingAssociationResponse;
+import UnityDwell.com.UnityDwell.dto.response.HousingAssociationResponse;
 import UnityDwell.com.UnityDwell.model.HousingAssociation;
 import org.springframework.stereotype.Component;
 

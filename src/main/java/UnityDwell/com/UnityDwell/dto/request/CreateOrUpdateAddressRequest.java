@@ -1,4 +1,4 @@
-package UnityDwell.com.UnityDwell.dto.requests;
+package UnityDwell.com.UnityDwell.dto.request;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;

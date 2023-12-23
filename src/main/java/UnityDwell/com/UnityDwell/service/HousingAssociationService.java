@@ -1,7 +1,7 @@
 package UnityDwell.com.UnityDwell.service;
 
-import UnityDwell.com.UnityDwell.dto.HousingAssociationResponse;
-import UnityDwell.com.UnityDwell.dto.PublicationResponse;
+import UnityDwell.com.UnityDwell.dto.response.HousingAssociationResponse;
+import UnityDwell.com.UnityDwell.dto.response.PublicationResponse;
 import UnityDwell.com.UnityDwell.dto.listResponses.BuildingsResponse;
 import UnityDwell.com.UnityDwell.dto.listResponses.PublicationsResponse;
 import UnityDwell.com.UnityDwell.dto.mapper.BuildingDTOMapper;

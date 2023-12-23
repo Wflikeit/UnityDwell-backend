@@ -1,6 +1,6 @@
 package UnityDwell.com.UnityDwell.service;
 
-import UnityDwell.com.UnityDwell.dto.EmployeeResponse;
+import UnityDwell.com.UnityDwell.dto.response.EmployeeResponse;
 import UnityDwell.com.UnityDwell.dto.mapper.EmployeeDTOMapper;
 import UnityDwell.com.UnityDwell.error.ResourceNotFoundException;
 import UnityDwell.com.UnityDwell.model.Employee;

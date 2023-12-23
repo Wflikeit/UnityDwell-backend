@@ -1,4 +1,4 @@
-package UnityDwell.com.UnityDwell.dto;
+package UnityDwell.com.UnityDwell.dto.response;
 
 import lombok.Builder;
 import lombok.Getter;

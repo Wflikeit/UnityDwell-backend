@@ -1,15 +1,14 @@
 package UnityDwell.com.UnityDwell.service;
 
-import UnityDwell.com.UnityDwell.dto.AddressResponse;
+import UnityDwell.com.UnityDwell.dto.response.AddressResponse;
 import UnityDwell.com.UnityDwell.dto.mapper.AddressDTOMapper;
-import UnityDwell.com.UnityDwell.dto.requests.CreateOrUpdateAddressRequest;
+import UnityDwell.com.UnityDwell.dto.request.CreateOrUpdateAddressRequest;
 import UnityDwell.com.UnityDwell.error.ResourceNotFoundException;
 import UnityDwell.com.UnityDwell.model.Address;
 import UnityDwell.com.UnityDwell.repository.AddressRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.validation.annotation.Validated;
 
 import java.util.UUID;
 
@@ -29,6 +28,7 @@ public class AddressService {
         return addressDTOMapper.mapTo(address);
     }
 
+    @Transactional
     public AddressResponse addNewAddress(CreateOrUpdateAddressRequest request) {
         Address address = addressDTOMapper.map(request);
         addressRepository.save(address);

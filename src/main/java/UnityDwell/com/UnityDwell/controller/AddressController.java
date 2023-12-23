@@ -1,7 +1,7 @@
 package UnityDwell.com.UnityDwell.controller;
 
-import UnityDwell.com.UnityDwell.dto.AddressResponse;
-import UnityDwell.com.UnityDwell.dto.requests.CreateOrUpdateAddressRequest;
+import UnityDwell.com.UnityDwell.dto.response.AddressResponse;
+import UnityDwell.com.UnityDwell.dto.request.CreateOrUpdateAddressRequest;
 import UnityDwell.com.UnityDwell.service.AddressService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

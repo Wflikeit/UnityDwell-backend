@@ -1,5 +1,6 @@
 package UnityDwell.com.UnityDwell.repository.sqlProvider;
 
+import UnityDwell.com.UnityDwell.model.Address;
 import org.apache.ibatis.builder.annotation.ProviderMethodResolver;
 import org.apache.ibatis.jdbc.SQL;
 
@@ -14,7 +15,7 @@ public class AddressSqlProvider implements ProviderMethodResolver {
                 .toString();
     }
 
-    public static String save() {
+    public static String save(Address address) {
         return new SQL()
                 .INSERT_INTO("C##MACIEK.ADRESY")
                 .VALUES("ID_ADRESU", "#{id}")
