@@ -26,5 +26,6 @@ public interface PublicationRepository {
     })
     List<Publication> getAllPublicationsFromHousingAssociation(UUID houseAssociationId);
 
+    @InsertProvider(PublicationSqlProvider.class)
     void save(Publication publication);
 }
