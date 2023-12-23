@@ -2,8 +2,7 @@
 
 CREATE TABLE C##MACIEK.Rachunki
 (
-    Id_rachunku        CHAR(36)      NOT NULL
-        CONSTRAINT ValidValuesId_rachunku CHECK ((Id_rachunku >= 1)),
+    Id_rachunku        CHAR(36)      NOT NULL,
     Data_wystawienia   Date          NOT NULL,
     Kwota              Number(10, 2) NOT NULL,
     Id_tytulu_rachunku CHAR(36)      NOT NULL,
