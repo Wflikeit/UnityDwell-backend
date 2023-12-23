@@ -30,7 +30,7 @@ public class AddressServiceTest {
     AddressService addressService;
 
     @Test
-    public void getAddressById_WhenOneExists() {
+    public void testGetAddressById_WhenOneExists() {
 
         // Arrange
         UUID id = UUID.randomUUID();
@@ -44,17 +44,18 @@ public class AddressServiceTest {
     }
 
     @Test
-    public void getAddressById_WhenOneDoesNotExist() {
+    public void testGetAddressById_WhenOneDoesNotExist() {
         // Arrange
         UUID id = UUID.randomUUID();
         when(addressRepository.findAddressById(id)).thenReturn(Optional.empty());
 
         // Act & Assert
-        assertThrows(ResourceNotFoundException.class, () -> addressService.getAddressByHousingAssociationId(id));
+        assertThrows(ResourceNotFoundException.class,
+                () -> addressService.getAddressByHousingAssociationId(id));
     }
 
     @Test
-    public void addNewAddress_WhenOneDoesNotExist() {
+    public void testAddNewAddress_WhenOneDoesNotExist() {
         // Arrange
         CreateOrUpdateAddressRequest request = CreateOrUpdateAddressRequest.builder().build();
         Address address = Address.builder().build();
@@ -72,5 +73,32 @@ public class AddressServiceTest {
         assertEquals(expectedResponse, actualResponse);
 
         verify(addressRepository, times(1)).save(address);
+    }
+    @Test
+    public void testDeleteAddress_WhenOneDoesNotExist() {
+        // Arrange
+        UUID id = UUID.randomUUID();
+        when(addressRepository.findAddressById(id)).thenReturn(Optional.empty());
+
+        // Act & Assert
+        assertThrows(ResourceNotFoundException.class,
+                () -> addressService.deleteAddress(id));
+    }
+
+    @Test
+    public void testDeleteAddress_WhenOneExist() {
+        // Arrange
+        UUID id = UUID.randomUUID();
+        Address address = Address.builder().build();
+
+        when(addressRepository.findAddressById(id)).thenReturn(Optional.of(address));
+        doNothing().when(addressRepository).delete(id);
+
+        // Act
+        addressService.deleteAddress(id);
+
+        // Assert
+        verify(addressRepository, times(1)).findAddressById(id);
+        verify(addressRepository, times(1)).delete(id);
     }
 }
