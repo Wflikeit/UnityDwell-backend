@@ -30,10 +30,11 @@ public class DefaultExceptionHandler {
                 .build();
 
     }
+
     @ExceptionHandler(ResourceNotFoundException.class)
     @ResponseBody
     public ErrorResponse handleResourceNotFoundException(HttpServletResponse response,
-                                                    ResourceNotFoundException ex) {
+                                                         ResourceNotFoundException ex) {
         response.setStatus(HttpServletResponse.SC_NOT_FOUND);
 
         log.error("ResourceNotFoundException", ex);
@@ -43,6 +44,7 @@ public class DefaultExceptionHandler {
                 .build();
 
     }
+
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
     @ResponseBody
     public ErrorResponse handleInvalidUUID(HttpServletResponse response,
@@ -55,6 +57,7 @@ public class DefaultExceptionHandler {
                 .additionalData(new HashMap<>())
                 .build();
     }
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseBody
     public ErrorResponse handleValidationException(HttpServletResponse response,
@@ -72,10 +75,11 @@ public class DefaultExceptionHandler {
                 .additionalData(additionalData)
                 .build();
     }
+
     @ExceptionHandler(DataIntegrityViolationException.class)
     @ResponseBody
     public ErrorResponse handleDataIntegrityViolationException(HttpServletResponse response,
-                                                   DataIntegrityViolationException ex) {
+                                                               DataIntegrityViolationException ex) {
         response.setStatus(HttpServletResponse.SC_CONFLICT);
 
         Map<String, String> additionalData = new HashMap<>();

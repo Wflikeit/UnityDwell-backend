@@ -44,7 +44,7 @@ public class AddressServiceTest {
     }
 
     @Test
-    public void getAddresById_WhenOneDoesNotExist() {
+    public void getAddressById_WhenOneDoesNotExist() {
         // Arrange
         UUID id = UUID.randomUUID();
         when(addressRepository.findAddressById(id)).thenReturn(Optional.empty());
