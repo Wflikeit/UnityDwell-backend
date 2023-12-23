@@ -1,13 +1,12 @@
 package UnityDwell.com.UnityDwell.repository.sqlProvider;
 
-import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.builder.annotation.ProviderMethodResolver;
 import org.apache.ibatis.jdbc.SQL;
 
 import java.util.UUID;
 
 public class EmployeeSqlProvider implements ProviderMethodResolver {
-    public static String findEmployeeById(@Param("id") UUID id) {
+    public static String findEmployeeById(UUID id) {
         return new SQL()
                 .SELECT("p.ID_PRACOWNIKA", "p.IMIE"
                         , "p.NAZWISKO", "p.NR_TELEFONU", "p.DATA_ZATRUDNIENIA"
