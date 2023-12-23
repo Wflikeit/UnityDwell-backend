@@ -14,11 +14,11 @@ import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("api/flats")
+@RequestMapping("api/buildings")
 public class BuildingController {
     private final BuildingService buildingService;
 
-    @GetMapping(value = "/{buildingId}")
+    @GetMapping(value = "/{buildingId}/flats")
     public FlatsResponse getFlatsInBuilding(@PathVariable("buildingId") UUID buildingId) {
         return buildingService.getFlatsInBuilding(buildingId);
     }
