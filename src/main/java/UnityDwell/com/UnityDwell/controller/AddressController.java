@@ -22,7 +22,12 @@ public class AddressController {
     }
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
-    public AddressResponse getHousingAddress(@Validated @RequestBody CreateOrUpdateAddressRequest request) {
+    public AddressResponse addAddress(@Validated @RequestBody CreateOrUpdateAddressRequest request) {
         return addressService.addNewAddress(request);
+    }
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteAddress(@PathVariable("id") UUID addressId) {
+        addressService.deleteAddress(addressId);
     }
 }

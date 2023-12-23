@@ -23,4 +23,6 @@ public interface AddressRepository {
 
     @InsertProvider(AddressSqlProvider.class)
     void save(Address address);
+    @DeleteProvider(AddressSqlProvider.class)
+    void delete(UUID addressId);
 }
