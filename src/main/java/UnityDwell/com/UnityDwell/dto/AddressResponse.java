@@ -13,6 +13,6 @@ public class AddressResponse {
     private UUID id;
     private String city;
     private String street;
-    private int numberOfBuilding;
+    private String numberOfBuilding;
     private String postalCode;
 }
