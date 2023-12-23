@@ -26,5 +26,5 @@ public interface FlatRepository {
                             "BuildingsRepository.getBuildingById")
             )
     })
-    List<Flat> getAllFlatsInBuilding(UUID id);
+    List<Flat> getAllFlatsInBuilding(UUID buildingId);
 }

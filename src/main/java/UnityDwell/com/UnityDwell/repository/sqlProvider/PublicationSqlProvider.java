@@ -6,11 +6,11 @@ import org.apache.ibatis.jdbc.SQL;
 import java.util.UUID;
 
 public class PublicationSqlProvider implements ProviderMethodResolver {
-    public static String getAllPublicationsFromHousingAssociation(UUID id) {
+    public static String getAllPublicationsFromHousingAssociation(UUID houseAssociationId) {
         return new SQL()
                 .SELECT("o.ID_OGLOSZENIA", "o.DATA_WYDANIA", "o.TRESC", "o.TYTUL", "o.ID_SPOLDZIELNI")
                 .FROM("C##MACIEK.OGLOSZENIA o")
-                .WHERE("o.ID_SPOLDZIELNI = '" + id + "'")
+                .WHERE("o.ID_SPOLDZIELNI = #{houseAssociationId}")
                 .toString();
     }
 }

@@ -37,5 +37,5 @@ public interface EmployeeRepository {
                             "HousingAssociationRepository.findHousingAssociationById")
             )
     })
-    Optional<Employee> findEmployeeById(UUID id);
+    Optional<Employee> findEmployeeById(UUID employeeId);
 }

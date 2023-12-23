@@ -2,10 +2,7 @@ package UnityDwell.com.UnityDwell.repository;
 
 import UnityDwell.com.UnityDwell.model.Address;
 import UnityDwell.com.UnityDwell.repository.sqlProvider.AddressSqlProvider;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.Results;
-import org.apache.ibatis.annotations.SelectProvider;
+import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
@@ -24,4 +21,6 @@ public interface AddressRepository {
     })
     Optional<Address> findAddressById(UUID id);
 
+    @InsertProvider(AddressSqlProvider.class)
+    void save(Address address);
 }

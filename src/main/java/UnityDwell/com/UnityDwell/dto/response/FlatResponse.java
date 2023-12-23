@@ -1,4 +1,4 @@
-package UnityDwell.com.UnityDwell.dto;
+package UnityDwell.com.UnityDwell.dto.response;
 
 import UnityDwell.com.UnityDwell.model.Address;
 import UnityDwell.com.UnityDwell.model.Building;

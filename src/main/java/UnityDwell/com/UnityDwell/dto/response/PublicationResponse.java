@@ -1,4 +1,4 @@
-package UnityDwell.com.UnityDwell.dto;
+package UnityDwell.com.UnityDwell.dto.response;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -10,10 +10,11 @@ import java.util.UUID;
 @Getter
 @Setter
 @Builder
-public class BillResponse {
+public class PublicationResponse {
     private UUID id;
-    private double amount;
-    private LocalDate DateOfPublishing;
-    private UUID idOfFlatOwner;
+    private String content;
+    private String title;
+    private LocalDate dateOfPublishing;
     private UUID idOfHousingAssociation;
+
 }

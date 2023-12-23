@@ -1,6 +1,6 @@
 package UnityDwell.com.UnityDwell.service;
 
-import UnityDwell.com.UnityDwell.dto.FlatResponse;
+import UnityDwell.com.UnityDwell.dto.response.FlatResponse;
 import UnityDwell.com.UnityDwell.dto.listResponses.FlatsResponse;
 import UnityDwell.com.UnityDwell.dto.mapper.FlatDTOMapper;
 import UnityDwell.com.UnityDwell.error.ResourceNotFoundException;

@@ -33,11 +33,11 @@ public interface BuildingsRepository {
             @Result(property = "numberOfFloors", column = "LICZBA_PIETER"),
             @Result(property = "intendedForLiving", column = "CZY_ZDATNY_DO_MIESZKANIA"),
     })
-    List<Building> getBuildingsInHousingAssociation(UUID id);
+    List<Building> getBuildingsInHousingAssociation(UUID houseAssociationId);
 
     @SelectProvider(type = BuildingsSqlProvider.class)
     @ResultMap("BuildingMap")
-    Optional<Building> getBuildingById(UUID id);
+    Optional<Building> getBuildingById(UUID buildingId);
 
 
 }
