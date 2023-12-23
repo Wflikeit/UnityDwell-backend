@@ -25,4 +25,6 @@ public interface PublicationRepository {
             )
     })
     List<Publication> getAllPublicationsFromHousingAssociation(UUID houseAssociationId);
+
+    void save(Publication publication);
 }
