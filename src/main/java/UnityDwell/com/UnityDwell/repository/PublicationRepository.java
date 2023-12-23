@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Repository
@@ -28,4 +29,10 @@ public interface PublicationRepository {
 
     @InsertProvider(PublicationSqlProvider.class)
     void save(Publication publication);
+
+    @ResultMap("PublicationMapping")
+    @SelectProvider(value = PublicationSqlProvider.class)
+    Optional<Publication> findPublicationById(UUID publicationId);
+    @DeleteProvider(value = PublicationSqlProvider.class)
+    void delete(UUID publicationId);
 }

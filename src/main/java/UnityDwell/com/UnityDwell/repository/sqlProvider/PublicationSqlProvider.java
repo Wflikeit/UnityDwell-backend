@@ -25,4 +25,19 @@ public class PublicationSqlProvider implements ProviderMethodResolver {
                 .VALUES("ID_SPOLDZIELNI", "#{housingAssociation.id}")
                 .toString();
     }
+
+    public static String findPublicationById(UUID publicationId) {
+        return new SQL()
+                .SELECT("o.ID_OGLOSZENIA", "o.DATA_WYDANIA", "o.TRESC", "o.TYTUL", "o.ID_SPOLDZIELNI")
+                .FROM("C##MACIEK.OGLOSZENIA o")
+                .WHERE("o.ID_OGLOSZENIA = #{publicationId}")
+                .toString();
+    }
+
+    public static String delete(UUID publicationId) {
+        return new SQL()
+                .DELETE_FROM("C##MACIEK.OGLOSZENIA")
+                .WHERE("ID_OGLOSZENIA = #{publicationId}")
+                .toString();
+    }
 }
