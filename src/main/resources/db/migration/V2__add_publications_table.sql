@@ -1,8 +1,7 @@
 -- Add keys for table Ogloszenia
 CREATE TABLE C##MACIEK.Ogloszenia
 (
-    Id_ogloszenia  CHAR(36)      NOT NULL
-        CONSTRAINT ValidValuesId_ogloszenia CHECK ((Id_ogloszenia >= 1)),
+    Id_ogloszenia  CHAR(36)      NOT NULL,
     Data_wydania   Date          NOT NULL,
     Tresc          Varchar2(100) NOT NULL,
     Tytul          Varchar2(30)  NOT NULL,
