@@ -14,5 +14,16 @@ public class AddressSqlProvider implements ProviderMethodResolver {
                 .toString();
     }
 
+    public static String save() {
+        return new SQL()
+                .INSERT_INTO("C##MACIEK.ADRESY")
+                .VALUES("ID_ADRESU", "#{id}")
+                .VALUES("MIASTO", "#{city}")
+                .VALUES("ULICA", "#{street}")
+                .VALUES("NR_BUDYNKU", "#{numberOfBuilding}")
+                .VALUES("KOD_POCZTOWY", "#{postalCode}")
+                .toString();
+    }
+
 
 }
