@@ -46,7 +46,7 @@ public class PublicationService {
 
         publicationRepository.delete(publicationId);
     }
-
+    @Transactional
     public PublicationResponse updatePublication(CreateOrUpdatePublicationRequest request,
                                                  UUID publicationId) {
 
