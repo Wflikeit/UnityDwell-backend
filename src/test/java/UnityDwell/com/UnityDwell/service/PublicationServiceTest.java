@@ -38,18 +38,22 @@ public class PublicationServiceTest {
         // Arrange
         UUID id = UUID.randomUUID();
         Publication publication = Publication.builder().build();
-        CreateOrUpdatePublicationRequest publicationRequest = CreateOrUpdatePublicationRequest.builder().build();
+        CreateOrUpdatePublicationRequest publicationRequest = CreateOrUpdatePublicationRequest
+                .builder().build();
         HousingAssociation housingAssociation = HousingAssociation.builder().build();
         PublicationResponse expectedPublicationResponse = PublicationResponse.builder().build();
 
-        when(housingAssociationRepository.findHousingAssociationById(id)).thenReturn(Optional.of(housingAssociation));
-        when(publicationDTOMapper.map(publicationRequest, housingAssociation)).thenReturn(publication);
+        when(housingAssociationRepository.findHousingAssociationById(id))
+                .thenReturn(Optional.of(housingAssociation));
+        when(publicationDTOMapper.map(publicationRequest, housingAssociation))
+                .thenReturn(publication);
         doNothing().when(publicationRepository).save(publication);
         when(publicationDTOMapper.mapTo(publication)).thenReturn(expectedPublicationResponse);
 
         // Act & Assert
-        PublicationResponse actualPublicationResponse = publicationService.addNewPublication(publicationRequest,
-                id);
+        PublicationResponse actualPublicationResponse = publicationService
+                .addNewPublication(publicationRequest,
+                        id);
         assertThat(expectedPublicationResponse)
                 .usingRecursiveComparison()
                 .isEqualTo(actualPublicationResponse);
@@ -59,8 +63,11 @@ public class PublicationServiceTest {
     public void testAddNewPublication_WhenHousingAssociationDoesNotExists() {
         // Arrange
         UUID id = UUID.randomUUID();
-        CreateOrUpdatePublicationRequest publicationRequest = CreateOrUpdatePublicationRequest.builder().build();
-        when(housingAssociationRepository.findHousingAssociationById(id)).thenReturn(Optional.empty());
+        CreateOrUpdatePublicationRequest publicationRequest = CreateOrUpdatePublicationRequest
+                .builder().build();
+
+        when(housingAssociationRepository.findHousingAssociationById(id))
+                .thenReturn(Optional.empty());
 
         // Act & Assert
         assertThrows(ResourceNotFoundException.class,
@@ -87,6 +94,48 @@ public class PublicationServiceTest {
 
     @Test
     public void testDeletePublication_WhenOneDoesNotExist() {
+        // Arrange
+        UUID id = UUID.randomUUID();
+
+        when(publicationRepository.findPublicationById(id)).thenReturn(Optional.empty());
+
+        // Act & Assert
+        assertThrows(ResourceNotFoundException.class,
+                () -> publicationService.deletePublication(id));
+    }
+
+    @Test
+    public void testUpdatePublication_WhenOneExist() {
+        // Arrange
+        UUID id = UUID.randomUUID();
+        Publication publication = Publication.builder().build();
+        CreateOrUpdatePublicationRequest publicationRequest = CreateOrUpdatePublicationRequest
+                .builder()
+                .title("updated title")
+                .content("updated content")
+                .build();
+        PublicationResponse expectedPublicationResponse = PublicationResponse.builder()
+                .title("updated title")
+                .content("updated content")
+                .build();
+
+        when(publicationRepository.findPublicationById(id)).thenReturn(Optional.of(publication));
+        doNothing().when(publicationRepository).update(publication);
+        when(publicationDTOMapper.mapTo(publication)).thenReturn(expectedPublicationResponse);
+
+        // Act
+        PublicationResponse actualPublicationResponse = publicationService
+                .updatePublication(publicationRequest, id);
+
+        // Assert
+        assertThat(expectedPublicationResponse)
+                .usingRecursiveComparison()
+                .isEqualTo(actualPublicationResponse);
+
+    }
+
+    @Test
+    public void testUpdatePublication_WhenOneDoesNotExist() {
         // Arrange
         UUID id = UUID.randomUUID();
         when(publicationRepository.findPublicationById(id)).thenReturn(Optional.empty());
