@@ -19,8 +19,7 @@ import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class PublicationServiceTest {
@@ -68,5 +67,33 @@ public class PublicationServiceTest {
                 () -> publicationService.addNewPublication(publicationRequest, id));
     }
 
+    @Test
+    public void testDeletePublication_WhenOneExist() {
+        // Arrange
+        UUID id = UUID.randomUUID();
+        Publication publication = Publication.builder().build();
+
+        when(publicationRepository.findPublicationById(id)).thenReturn(Optional.of(publication));
+        doNothing().when(publicationRepository).delete(id);
+
+        // Act
+        publicationService.deletePublication(id);
+
+        // Assert
+        verify(publicationRepository, times(1)).findPublicationById(id);
+        verify(publicationRepository, times(1)).delete(id);
+
+    }
+
+    @Test
+    public void testDeletePublication_WhenOneDoesNotExist() {
+        // Arrange
+        UUID id = UUID.randomUUID();
+        when(publicationRepository.findPublicationById(id)).thenReturn(Optional.empty());
+
+        // Act & Assert
+        assertThrows(ResourceNotFoundException.class,
+                () -> publicationService.deletePublication(id));
+    }
 
 }
