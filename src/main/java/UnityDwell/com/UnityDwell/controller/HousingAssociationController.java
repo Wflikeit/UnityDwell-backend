@@ -38,8 +38,8 @@ public class HousingAssociationController {
 
     @PostMapping("/{housingAssociationId}/publications")
     @ResponseStatus(HttpStatus.CREATED)
-    public PublicationResponse addAddress(@Validated @RequestBody CreateOrUpdatePublicationRequest request,
-                                          @PathVariable UUID housingAssociationId) {
+    public PublicationResponse addPublication(@Validated @RequestBody CreateOrUpdatePublicationRequest request,
+                                              @PathVariable UUID housingAssociationId) {
         return publicationService.addNewPublication(request, housingAssociationId);
     }
 }
