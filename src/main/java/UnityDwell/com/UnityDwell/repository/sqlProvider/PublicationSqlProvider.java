@@ -40,4 +40,13 @@ public class PublicationSqlProvider implements ProviderMethodResolver {
                 .WHERE("ID_OGLOSZENIA = #{publicationId}")
                 .toString();
     }
+
+    public static String update(Publication publication) {
+        return new SQL()
+                .UPDATE("C##MACIEK.OGLOSZENIA")
+                .SET("TRESC = #{content}")
+                .SET("TYTUL = #{title}")
+                .WHERE("ID_OGLOSZENIA = #{id}")
+                .toString();
+    }
 }

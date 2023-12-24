@@ -36,6 +36,7 @@ public class PublicationService {
 
         return publicationDTOMapper.mapTo(publication);
     }
+
     @Transactional
     public void deletePublication(UUID publicationId) {
 
@@ -44,5 +45,20 @@ public class PublicationService {
                         .format("Publication with id %s not found", publicationId)));
 
         publicationRepository.delete(publicationId);
+    }
+
+    public PublicationResponse updatePublication(CreateOrUpdatePublicationRequest request,
+                                                 UUID publicationId) {
+
+        Publication publication = publicationRepository.findPublicationById(publicationId)
+                .orElseThrow(() -> new ResourceNotFoundException(String
+                        .format("Publication with id %s not found", publicationId)));
+
+        publication.setTitle(request.getTitle());
+        publication.setContent(request.getContent());
+
+        publicationRepository.update(publication);
+        return publicationDTOMapper.mapTo(publication);
+
     }
 }

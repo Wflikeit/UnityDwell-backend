@@ -31,8 +31,11 @@ public interface PublicationRepository {
     void save(Publication publication);
 
     @ResultMap("PublicationMapping")
-    @SelectProvider(value = PublicationSqlProvider.class)
+    @SelectProvider(PublicationSqlProvider.class)
     Optional<Publication> findPublicationById(UUID publicationId);
-    @DeleteProvider(value = PublicationSqlProvider.class)
+    @DeleteProvider(PublicationSqlProvider.class)
     void delete(UUID publicationId);
+
+    @UpdateProvider(PublicationSqlProvider.class)
+    void update(Publication publication);
 }
