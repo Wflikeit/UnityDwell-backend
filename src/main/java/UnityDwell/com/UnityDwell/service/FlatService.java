@@ -2,6 +2,7 @@ package UnityDwell.com.UnityDwell.service;
 
 import UnityDwell.com.UnityDwell.dto.listResponses.OwnersOfFlatsResponse;
 import UnityDwell.com.UnityDwell.dto.mapper.OwnerOfFlatDTOMapper;
+import UnityDwell.com.UnityDwell.error.ResourceNotFoundException;
 import UnityDwell.com.UnityDwell.model.OwnerOfFlat;
 import UnityDwell.com.UnityDwell.repository.FlatRepository;
 import UnityDwell.com.UnityDwell.repository.OwnerOfFlatRepository;
@@ -17,9 +18,12 @@ import java.util.UUID;
 public class FlatService {
     private final OwnerOfFlatRepository ownerOfFlatRepository;
     private final OwnerOfFlatDTOMapper ownerOfFlatDTOMapper;
+    private final FlatRepository flatRepository;
 
     @Transactional(readOnly = true)
     public OwnersOfFlatsResponse getAllOwnersOfAFlat(UUID flatId){
+        flatRepository.findFlatById(flatId).orElseThrow(() -> new ResourceNotFoundException(String
+                .format("Flat with id %s not found", flatId)));
         List<OwnerOfFlat> owners = ownerOfFlatRepository.findAllOwnersOfFlat(flatId);
         return OwnersOfFlatsResponse.builder()
                 .owners(ownerOfFlatDTOMapper.mapToOwnersOfFlatsList(owners))
