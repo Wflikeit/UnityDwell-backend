@@ -2,6 +2,7 @@ package UnityDwell.com.UnityDwell.repository;
 
 import UnityDwell.com.UnityDwell.model.Building;
 import UnityDwell.com.UnityDwell.model.Flat;
+import UnityDwell.com.UnityDwell.model.OwnerOfFlat;
 import UnityDwell.com.UnityDwell.repository.sqlProvider.FlatSqlProvider;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
@@ -25,11 +26,20 @@ public interface FlatRepository {
                     column = "ID_BUDYNKU",
                     one = @One(select = "UnityDwell.com.UnityDwell.repository." +
                             "BuildingsRepository.getBuildingById")
-            )
+            ),
+            @Result(property = "flatOwners",
+            javaType = OwnerOfFlat.class,
+            column = "NR_MIESZKANCA",
+            many = @Many(select = "UnityDwell.com.UnityDwell.repository." +
+                    "OwnerOfFlatRepository.findAllFlatsOfOwner"))
     })
     List<Flat> getAllFlatsInBuilding(UUID buildingId);
 
     @SelectProvider(FlatSqlProvider.class)
     @ResultMap("FlatsMap")
     Optional<Flat> findFlatById(UUID flatId);
+
+    @SelectProvider(FlatSqlProvider.class)
+    @ResultMap("FlatsMap")
+    List<Flat> findAllFlatsOfOwner(UUID flatOwnerId);
 }
