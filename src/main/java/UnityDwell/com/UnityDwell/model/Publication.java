@@ -12,8 +12,8 @@ import java.util.UUID;
 @Getter
 public class Publication {
     private UUID id;
-    private String content;
     private String title;
+    private String content;
     private LocalDate dateOfPublishing;
     private HousingAssociation housingAssociation;
 }
