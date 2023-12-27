@@ -11,6 +11,7 @@ import java.util.UUID;
 @Setter
 @Getter
 public class Employee {
+    private UUID id;
     private String name;
     private String surname;
     private String phoneNumber;
@@ -20,5 +21,5 @@ public class Employee {
     private LocalDate dateOfEmployment;
     private LocalDate dateOfEndOfEmployment;
     private HousingAssociation housingAssociation;
-
+    private Address address;
 }

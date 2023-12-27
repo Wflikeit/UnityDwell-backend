@@ -1,5 +1,7 @@
-package UnityDwell.com.UnityDwell.dto;
+package UnityDwell.com.UnityDwell.dto.response;
 
+import UnityDwell.com.UnityDwell.model.Address;
+import UnityDwell.com.UnityDwell.model.Building;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,10 +17,6 @@ public class FlatResponse {
     private int numberOfFlat;
     private double space;
     private int amountOfRooms;
-    private LocalDate DateOfLastGasControl;
-    private UUID idOfBuilding;
-    private String city;
-    private String Street;
-    private int numberOfBuilding;
-    private String PostalCode;
+    private LocalDate dateOfLastGasControl;
+    private Building building;
 }

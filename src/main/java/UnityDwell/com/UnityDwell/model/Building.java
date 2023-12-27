@@ -12,10 +12,11 @@ import java.util.UUID;
 @Getter
 public class Building {
     private UUID id;
+    private Address address;
     private LocalDate dateOfThermalModernization;
     private LocalDate dateOfCommissioning;
     private LocalDate dateOfMajorRenovation;
     private int numberOfFloors;
     private boolean intendedForLiving;
-    private Address address;
+    private HousingAssociation housingAssociation;
 }

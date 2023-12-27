@@ -1,5 +1,6 @@
-package UnityDwell.com.UnityDwell.dto;
+package UnityDwell.com.UnityDwell.dto.response;
 
+import UnityDwell.com.UnityDwell.model.Address;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,10 +18,7 @@ public class BuildingResponse {
     private LocalDate dateOfMajorRenovation;
     private int numberOfFloors;
     private boolean intendedForLiving;
-    private UUID idOfAddress;
-    private String city;
-    private String Street;
-    private String PostalCode;
+    private Address address;
     private UUID idOfHousingAssociation;
 
 }

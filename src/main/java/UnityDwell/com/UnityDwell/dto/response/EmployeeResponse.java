@@ -1,4 +1,4 @@
-package UnityDwell.com.UnityDwell.dto;
+package UnityDwell.com.UnityDwell.dto.response;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -11,6 +11,7 @@ import java.util.UUID;
 @Setter
 @Builder
 public class EmployeeResponse {
+    private UUID id;
     private String name;
     private String surname;
     private String phoneNumber;

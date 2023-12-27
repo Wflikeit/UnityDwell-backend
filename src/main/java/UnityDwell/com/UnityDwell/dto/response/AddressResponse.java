@@ -1,15 +1,15 @@
-package UnityDwell.com.UnityDwell.model;
+package UnityDwell.com.UnityDwell.dto.response;
 
-import lombok.*;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.UUID;
 
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
-@Setter
 @Getter
-public class Address {
+@Setter
+@Builder
+public class AddressResponse {
     private UUID id;
     private String city;
     private String street;
