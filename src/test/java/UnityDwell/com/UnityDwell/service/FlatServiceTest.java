@@ -35,26 +35,27 @@ public class FlatServiceTest {
 
     @Test
     public void getAllOwnersOfAFlat_WhenOneExists() {
-        //Arrange
+        // Arrange
         UUID id = UUID.randomUUID();
         OwnerOfFlat owner = OwnerOfFlat.builder().build();
         Flat flat = Flat.builder().build();
         OwnerOfFlatResponse ownerOfFlatResponse = OwnerOfFlatResponse.builder().build();
-        OwnersOfFlatsResponse mappedOwnersResponse = OwnersOfFlatsResponse.builder().owners(List.of(ownerOfFlatResponse)).build();
+        OwnersOfFlatsResponse mappedOwnersResponse = OwnersOfFlatsResponse.builder()
+                .owners(List.of(ownerOfFlatResponse)).build();
         when(flatRepository.findFlatById(id)).thenReturn(Optional.of(flat));
         when(ownerOfFlatRepository.findAllOwnersOfFlat(id)).thenReturn(List.of(owner));
         when(ownerOfFlatDTOMapper.mapToOwnersOfFlatsList(List.of(owner))).thenReturn(List.of(ownerOfFlatResponse));
-        //Act & Assert
+        // Act & Assert
         assertThat(mappedOwnersResponse).usingRecursiveComparison()
                 .isEqualTo(flatService.getAllOwnersOfAFlat(id));
     }
 
     @Test
     public void getAllOwnersOfAFlat_WhenOneNotExists() {
-        //Arrange
+        // Arrange
         UUID id = UUID.randomUUID();
         when(flatRepository.findFlatById(id)).thenReturn(Optional.empty());
-        //Act & Assert
+        // Act & Assert
         assertThrows(ResourceNotFoundException.class, () -> flatService
                 .getAllOwnersOfAFlat(id));
     }
