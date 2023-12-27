@@ -9,6 +9,6 @@ import java.util.List;
 @Getter
 @Builder
 public class OwnersOfFlatsResponse {
-    List<OwnerOfFlatResponse> flats;
+    List<OwnerOfFlatResponse> owners;
 
 }
