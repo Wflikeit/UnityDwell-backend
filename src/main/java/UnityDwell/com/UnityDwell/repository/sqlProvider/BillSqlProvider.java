@@ -1,4 +1,4 @@
-package UnityDwell.com.UnityDwell.repository.sqlProviders;
+package UnityDwell.com.UnityDwell.repository.sqlProvider;
 
 import org.apache.ibatis.builder.annotation.ProviderMethodResolver;
 import org.apache.ibatis.jdbc.SQL;
