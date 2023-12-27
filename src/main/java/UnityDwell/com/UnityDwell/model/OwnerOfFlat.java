@@ -2,6 +2,7 @@ package UnityDwell.com.UnityDwell.model;
 
 import lombok.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @Builder
@@ -14,5 +15,6 @@ public class OwnerOfFlat {
     private String pesel;
     private String nip;
     private String phoneNumber;
-    private Flat flat;
+    private List<Flat> flats;
+    private Resident resident;
 }

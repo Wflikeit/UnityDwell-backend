@@ -1,5 +1,6 @@
 package UnityDwell.com.UnityDwell.dto.response;
 
+import UnityDwell.com.UnityDwell.model.Resident;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,5 +15,5 @@ public class OwnerOfFlatResponse {
     private String pesel;
     private String nip;
     private String phoneNumber;
-
+    private Resident resident;
 }

@@ -23,4 +23,13 @@ public class FlatSqlProvider implements ProviderMethodResolver {
                 .WHERE("m.ID_MIESZKANIA = #{flatId}")
                 .toString();
     }
+
+    public static String findAllFlatsOfOwner(UUID flatOwnerId){
+        return new SQL()
+                .SELECT("m.ID_MIESZKANIA", "m.NR_MIESZKANIA", "m.POWIERZCHNIA",
+                        "m.LICZBA_POKOI", "m.DATA_KONTROLI_GAZOWEJ", "m.ID_BUDYNKU")
+                .FROM("C##MACIEK.MIESZKANIA m")
+                .INNER_JOIN("C##MACIEK.MIESZKANIA_WLASCICIELI mieszkaniaw ON mieszkaniaw.NR_MIESZKANCA = #{flatOwnerId}")
+                .toString();
+    }
 }

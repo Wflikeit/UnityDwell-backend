@@ -1,9 +1,10 @@
 {
 	"info": {
-		"_postman_id": "89587e24-242e-466d-9dae-914961af9197",
+		"_postman_id": "b59315af-ad62-4792-baa5-e8371f1cb29c",
 		"name": "UnityDwell",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "29779178"
+		"_exporter_id": "22483134",
+		"_collection_link": "https://lunar-zodiac-50418.postman.co/workspace/Team-Workspace~f5767414-3f86-464f-8c8f-1b585eb97d78/collection/22483134-b59315af-ad62-4792-baa5-e8371f1cb29c?action=share&source=collection_link&creator=22483134"
 	},
 	"item": [
 		{
@@ -98,6 +99,61 @@
 						"HousingAssociation",
 						"8f14bf9e-8579-41a3-a594-de8d1e2ce629",
 						"publications"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get employee",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8081/api/employee/1938a0ff-4589-4515-b10d-a48ef5e1fb16",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"employee",
+						"1938a0ff-4589-4515-b10d-a48ef5e1fb16"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get owners of a flat",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8081/api/flat/dcd8ff99-7a91-4868-90b2-4c5292c67246/owners",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"flat",
+						"dcd8ff99-7a91-4868-90b2-4c5292c67246",
+						"owners"
 					]
 				}
 			},
