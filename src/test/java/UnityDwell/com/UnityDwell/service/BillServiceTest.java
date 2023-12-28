@@ -20,7 +20,7 @@ import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class BillServiceTest {
@@ -58,5 +58,27 @@ public class BillServiceTest {
         // Act & Assert
         assertThrows(ResourceNotFoundException.class, () -> billService
                 .getAllBillsOfOwner(id));
+    }
+    @Test
+    public void deleteBill_WhenOneExists() {
+        // Arrange
+        UUID id = UUID.randomUUID();
+        Bill bill = Bill.builder().build();
+        when(billRepository.findBillById(id)).thenReturn(Optional.of(bill));
+        doNothing().when(billRepository).delete(id);
+        // Act
+        billService.deleteBill(id);
+        // Assert
+        verify(billRepository, times(1)).findBillById(id);
+        verify(billRepository, times(1)).delete(id);
+    }
+    @Test
+    public void deleteBill_WhenOneNotExists() {
+        // Arrange
+        UUID id = UUID.randomUUID();
+        when(billRepository.findBillById(id)).thenReturn(Optional.empty());
+        // Act & Assert
+        assertThrows(ResourceNotFoundException.class,
+                () -> billService.deleteBill(id));
     }
 }

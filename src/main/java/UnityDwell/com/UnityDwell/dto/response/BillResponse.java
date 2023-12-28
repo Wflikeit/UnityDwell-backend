@@ -18,4 +18,5 @@ public class BillResponse {
     private LocalDate DateOfPublishing;
     private OwnerOfFlat owner;
     private HousingAssociation housingAssociation;
+    private String title;
 }

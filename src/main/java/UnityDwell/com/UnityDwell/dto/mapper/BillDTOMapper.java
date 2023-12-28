@@ -20,6 +20,7 @@ public class BillDTOMapper {
                         .DateOfPublishing(bill.getDateOfPublishing())
                         .owner(bill.getFlatOwner())
                         .housingAssociation(bill.getHousingAssociation())
+                        .title(bill.getTitle())
                         .build())
                 .toList();
     }

@@ -34,4 +34,11 @@ public class BillService {
         List<Bill> bills = billRepository.getAllOwnersBills(ownerId);
         return BillsResponse.builder().bills(billDTOMapper.mapToBillList(bills)).build();
     }
+
+    @Transactional
+    public void deleteBill(UUID billId){
+        billRepository.findBillById(billId).orElseThrow(() -> new ResourceNotFoundException(String
+                .format("Bill with id %s not found", billId)));
+        billRepository.delete(billId);
+    }
 }
