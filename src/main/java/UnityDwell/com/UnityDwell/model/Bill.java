@@ -15,6 +15,6 @@ public class Bill {
     private double amount;
     private LocalDate dateOfPublishing;
     private OwnerOfFlat flatOwner;
-    private Resident resident;
     private HousingAssociation housingAssociation;
+    private String title;
 }

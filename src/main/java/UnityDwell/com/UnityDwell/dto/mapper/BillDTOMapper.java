@@ -1,6 +1,6 @@
 package UnityDwell.com.UnityDwell.dto.mapper;
 
-import UnityDwell.com.UnityDwell.dto.BillResponse;
+import UnityDwell.com.UnityDwell.dto.response.BillResponse;
 import UnityDwell.com.UnityDwell.model.Bill;
 import org.springframework.stereotype.Component;
 
@@ -18,8 +18,8 @@ public class BillDTOMapper {
                         .id(bill.getId())
                         .amount(bill.getAmount())
                         .DateOfPublishing(bill.getDateOfPublishing())
-                        .idOfFlatOwner(bill.getFlatOwner().getId())
-                        .idOfHousingAssociation(bill.getHousingAssociation().getId())
+                        .owner(bill.getFlatOwner())
+                        .housingAssociation(bill.getHousingAssociation())
                         .build())
                 .toList();
     }

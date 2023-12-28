@@ -4,8 +4,11 @@ import UnityDwell.com.UnityDwell.dto.listResponses.BillsResponse;
 import UnityDwell.com.UnityDwell.service.BillService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
@@ -15,8 +18,11 @@ public class BillController {
 
     @GetMapping(value = "")
     public BillsResponse getAllBills() {
-        return BillsResponse.builder()
-                .bills(billService.getAllBills())
-                .build();
+        return billService.getAllBills();
+    }
+
+    @GetMapping(value = "/{ownerId}")
+    public BillsResponse getAllBillsOfOwner(@PathVariable("ownerId") UUID ownerId){
+        return billService.getAllBillsOfOwner(ownerId);
     }
 }
