@@ -31,7 +31,7 @@ public interface OwnerOfFlatRepository {
                     many = @Many(select = "UnityDwell.com.UnityDwell.repository." +
                             "FlatRepository.findAllFlatsOfOwner"))
     })
-    Optional<OwnerOfFlat> findOwnerById(UUID flatOwnerId);
+    Optional<OwnerOfFlat> findOwnerOfFlatById(UUID flatOwnerId);
 
 
 
