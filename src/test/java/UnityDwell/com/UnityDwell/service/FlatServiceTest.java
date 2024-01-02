@@ -1,11 +1,18 @@
 package UnityDwell.com.UnityDwell.service;
 
 import UnityDwell.com.UnityDwell.dto.listResponses.OwnersOfFlatsResponse;
+import UnityDwell.com.UnityDwell.dto.mapper.FlatDTOMapper;
 import UnityDwell.com.UnityDwell.dto.mapper.OwnerOfFlatDTOMapper;
+import UnityDwell.com.UnityDwell.dto.request.CreateOrUpdateFlatRequest;
+import UnityDwell.com.UnityDwell.dto.response.FlatResponse;
 import UnityDwell.com.UnityDwell.dto.response.OwnerOfFlatResponse;
 import UnityDwell.com.UnityDwell.error.ResourceNotFoundException;
+import UnityDwell.com.UnityDwell.model.Address;
+import UnityDwell.com.UnityDwell.model.Building;
 import UnityDwell.com.UnityDwell.model.Flat;
 import UnityDwell.com.UnityDwell.model.OwnerOfFlat;
+import UnityDwell.com.UnityDwell.repository.AddressRepository;
+import UnityDwell.com.UnityDwell.repository.BuildingsRepository;
 import UnityDwell.com.UnityDwell.repository.FlatRepository;
 import UnityDwell.com.UnityDwell.repository.OwnerOfFlatRepository;
 import org.junit.jupiter.api.Test;
@@ -19,8 +26,8 @@ import java.util.Optional;
 import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.when;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class FlatServiceTest {
@@ -29,7 +36,13 @@ public class FlatServiceTest {
     @Mock
     FlatRepository flatRepository;
     @Mock
+    FlatDTOMapper flatDTOMapper;
+    @Mock
     OwnerOfFlatDTOMapper ownerOfFlatDTOMapper;
+    @Mock
+    AddressRepository addressRepository;
+    @Mock
+    BuildingsRepository buildingsRepository;
     @InjectMocks
     FlatService flatService;
 
@@ -58,5 +71,31 @@ public class FlatServiceTest {
         // Act & Assert
         assertThrows(ResourceNotFoundException.class, () -> flatService
                 .getAllOwnersOfAFlat(id));
+    }
+
+    @Test
+    public void addNewFlat_WhenOneNotExists() {
+        // Arrange
+        CreateOrUpdateFlatRequest request = CreateOrUpdateFlatRequest.builder().build();
+        Flat flat = Flat.builder().build();
+        FlatResponse expectedResponse = FlatResponse.builder().build();
+        Address address = Address.builder().build();
+        Building building = Building.builder().build();
+        UUID addressId = UUID.randomUUID();
+        UUID buildingId = UUID.randomUUID();
+
+        when(buildingsRepository.getBuildingById(buildingId)).thenReturn(Optional.of(building));
+        when(addressRepository.findAddressById(addressId)).thenReturn(Optional.of(address));
+        when(flatDTOMapper.map(request, building, address)).thenReturn(flat);
+        doNothing().when(flatRepository).save(flat);
+        when(flatDTOMapper.mapTo(flat)).thenReturn(expectedResponse);
+
+        // Act
+        FlatResponse actualResponse = flatService.addNewFlat(request, buildingId, addressId);
+
+        // Assert
+        assertNotNull(actualResponse);
+        assertEquals(expectedResponse, actualResponse);
+        verify(flatRepository, times(1)).save(flat);
     }
 }

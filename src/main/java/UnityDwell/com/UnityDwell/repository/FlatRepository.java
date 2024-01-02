@@ -28,10 +28,10 @@ public interface FlatRepository {
                             "BuildingsRepository.getBuildingById")
             ),
             @Result(property = "flatOwners",
-            javaType = OwnerOfFlat.class,
-            column = "NR_MIESZKANCA",
-            many = @Many(select = "UnityDwell.com.UnityDwell.repository." +
-                    "OwnerOfFlatRepository.findAllFlatsOfOwner"))
+                    javaType = OwnerOfFlat.class,
+                    column = "NR_MIESZKANCA",
+                    many = @Many(select = "UnityDwell.com.UnityDwell.repository." +
+                            "OwnerOfFlatRepository.findAllFlatsOfOwner"))
     })
     List<Flat> getAllFlatsInBuilding(UUID buildingId);
 
@@ -42,4 +42,7 @@ public interface FlatRepository {
     @SelectProvider(FlatSqlProvider.class)
     @ResultMap("FlatsMap")
     List<Flat> findAllFlatsOfOwner(UUID flatOwnerId);
+
+    @InsertProvider(FlatSqlProvider.class)
+    void save(Flat flat);
 }

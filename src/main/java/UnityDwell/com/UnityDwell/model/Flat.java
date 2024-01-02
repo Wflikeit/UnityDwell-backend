@@ -15,7 +15,7 @@ public class Flat {
     private UUID id;
     private int numberOfFlat;
     private double space;
-    private int amountOfRooms;
+    private int numberOfRooms;
     private LocalDate dateOfLastGasControl;
     private Building building;
     private Address address;
