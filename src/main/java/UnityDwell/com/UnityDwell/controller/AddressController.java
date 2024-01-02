@@ -13,11 +13,13 @@ import java.util.UUID;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("api/address")
+@CrossOrigin(origins = "*")
 public class AddressController {
     private final AddressService addressService;
 
     @GetMapping(value = "/{id}")
     public AddressResponse getHousingAddress(@PathVariable("id") UUID addressId) {
+        System.out.println("controller");
         return addressService.getAddressByHousingAssociationId(addressId);
     }
     @PostMapping()
