@@ -2,7 +2,6 @@ package UnityDwell.com.UnityDwell.dto.mapper;
 
 import UnityDwell.com.UnityDwell.dto.request.CreateOrUpdateFlatRequest;
 import UnityDwell.com.UnityDwell.dto.response.FlatResponse;
-import UnityDwell.com.UnityDwell.model.Address;
 import UnityDwell.com.UnityDwell.model.Building;
 import UnityDwell.com.UnityDwell.model.Flat;
 import org.springframework.stereotype.Component;
@@ -28,7 +27,7 @@ public class FlatDTOMapper {
                 .toList();
     }
 
-    public Flat map(CreateOrUpdateFlatRequest request, Building building, Address address) {
+    public Flat map(CreateOrUpdateFlatRequest request, Building building) {
         return Flat.builder()
                 .id(UUID.randomUUID())
                 .numberOfFlat(request.getNumberOfFlat())
@@ -36,7 +35,6 @@ public class FlatDTOMapper {
                 .numberOfRooms(request.getNumberOfRooms())
                 .dateOfLastGasControl(request.getDateOfLastGasControl())
                 .building(building)
-                .address(address)
                 .build();
     }
 
@@ -48,7 +46,6 @@ public class FlatDTOMapper {
                 .numberOfRooms(flat.getNumberOfRooms())
                 .dateOfLastGasControl(flat.getDateOfLastGasControl())
                 .buildingId(flat.getBuilding().getId())
-                .address(flat.getAddress())
                 .build();
     }
 }

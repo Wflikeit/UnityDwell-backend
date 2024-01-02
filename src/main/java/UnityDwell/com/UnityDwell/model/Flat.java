@@ -18,6 +18,5 @@ public class Flat {
     private int numberOfRooms;
     private LocalDate dateOfLastGasControl;
     private Building building;
-    private Address address;
     private List<OwnerOfFlat> flatOwners;
 }

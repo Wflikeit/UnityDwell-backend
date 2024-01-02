@@ -7,11 +7,9 @@ import UnityDwell.com.UnityDwell.dto.request.CreateOrUpdateFlatRequest;
 import UnityDwell.com.UnityDwell.dto.response.FlatResponse;
 import UnityDwell.com.UnityDwell.dto.response.OwnerOfFlatResponse;
 import UnityDwell.com.UnityDwell.error.ResourceNotFoundException;
-import UnityDwell.com.UnityDwell.model.Address;
 import UnityDwell.com.UnityDwell.model.Building;
 import UnityDwell.com.UnityDwell.model.Flat;
 import UnityDwell.com.UnityDwell.model.OwnerOfFlat;
-import UnityDwell.com.UnityDwell.repository.AddressRepository;
 import UnityDwell.com.UnityDwell.repository.BuildingsRepository;
 import UnityDwell.com.UnityDwell.repository.FlatRepository;
 import UnityDwell.com.UnityDwell.repository.OwnerOfFlatRepository;
@@ -39,8 +37,6 @@ public class FlatServiceTest {
     FlatDTOMapper flatDTOMapper;
     @Mock
     OwnerOfFlatDTOMapper ownerOfFlatDTOMapper;
-    @Mock
-    AddressRepository addressRepository;
     @Mock
     BuildingsRepository buildingsRepository;
     @InjectMocks
@@ -79,19 +75,16 @@ public class FlatServiceTest {
         CreateOrUpdateFlatRequest request = CreateOrUpdateFlatRequest.builder().build();
         Flat flat = Flat.builder().build();
         FlatResponse expectedResponse = FlatResponse.builder().build();
-        Address address = Address.builder().build();
         Building building = Building.builder().build();
-        UUID addressId = UUID.randomUUID();
         UUID buildingId = UUID.randomUUID();
 
         when(buildingsRepository.getBuildingById(buildingId)).thenReturn(Optional.of(building));
-        when(addressRepository.findAddressById(addressId)).thenReturn(Optional.of(address));
-        when(flatDTOMapper.map(request, building, address)).thenReturn(flat);
+        when(flatDTOMapper.map(request, building)).thenReturn(flat);
         doNothing().when(flatRepository).save(flat);
         when(flatDTOMapper.mapTo(flat)).thenReturn(expectedResponse);
 
         // Act
-        FlatResponse actualResponse = flatService.addNewFlat(request, buildingId, addressId);
+        FlatResponse actualResponse = flatService.addNewFlat(request, buildingId);
 
         // Assert
         assertNotNull(actualResponse);

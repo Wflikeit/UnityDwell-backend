@@ -24,13 +24,19 @@ public class FlatController {
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
-    public FlatResponse addFlat(@Validated @RequestBody CreateOrUpdateFlatRequest request, UUID buildingId, UUID addressId) {
-        return flatService.addNewFlat(request, buildingId, addressId);
+    public FlatResponse addFlat(@Validated @RequestBody CreateOrUpdateFlatRequest request, UUID buildingId) {
+        return flatService.addNewFlat(request, buildingId);
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteAddress(@PathVariable("id") UUID flatId){
+    public void deleteFlat(@PathVariable("id") UUID flatId) {
         flatService.deleteFlat(flatId);
+    }
+
+    @PutMapping("/{id}")
+    public FlatResponse updateFlat(@Validated @RequestBody CreateOrUpdateFlatRequest request
+            , @PathVariable("id") UUID id) {
+        return flatService.updateFlat(request, id);
     }
 }

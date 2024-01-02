@@ -6,11 +6,9 @@ import UnityDwell.com.UnityDwell.dto.mapper.OwnerOfFlatDTOMapper;
 import UnityDwell.com.UnityDwell.dto.request.CreateOrUpdateFlatRequest;
 import UnityDwell.com.UnityDwell.dto.response.FlatResponse;
 import UnityDwell.com.UnityDwell.error.ResourceNotFoundException;
-import UnityDwell.com.UnityDwell.model.Address;
 import UnityDwell.com.UnityDwell.model.Building;
 import UnityDwell.com.UnityDwell.model.Flat;
 import UnityDwell.com.UnityDwell.model.OwnerOfFlat;
-import UnityDwell.com.UnityDwell.repository.AddressRepository;
 import UnityDwell.com.UnityDwell.repository.BuildingsRepository;
 import UnityDwell.com.UnityDwell.repository.FlatRepository;
 import UnityDwell.com.UnityDwell.repository.OwnerOfFlatRepository;
@@ -29,7 +27,6 @@ public class FlatService {
     private final FlatRepository flatRepository;
     private final FlatDTOMapper flatDTOMapper;
     private final BuildingsRepository buildingsRepository;
-    private final AddressRepository addressRepository;
 
     @Transactional(readOnly = true)
     public OwnersOfFlatsResponse getAllOwnersOfAFlat(UUID flatId) {
@@ -42,12 +39,10 @@ public class FlatService {
     }
 
     @Transactional
-    public FlatResponse addNewFlat(CreateOrUpdateFlatRequest request, UUID buildingId, UUID addressId) {
+    public FlatResponse addNewFlat(CreateOrUpdateFlatRequest request, UUID buildingId) {
         Building building = buildingsRepository.getBuildingById(buildingId).orElseThrow(() -> new ResourceNotFoundException(String
                 .format("Building with id %s not found", buildingId)));
-        Address address = addressRepository.findAddressById(addressId).orElseThrow(() -> new ResourceNotFoundException(String
-                .format("Address with id %s not found", addressId)));
-        Flat flat = flatDTOMapper.map(request, building, address);
+        Flat flat = flatDTOMapper.map(request, building);
         flatRepository.save(flat);
         return flatDTOMapper.mapTo(flat);
     }
@@ -57,5 +52,18 @@ public class FlatService {
         flatRepository.findFlatById(flatId).orElseThrow(() -> new ResourceNotFoundException(String
                 .format("Flat with id %s not found", flatId)));
         flatRepository.delete(flatId);
+    }
+
+    @Transactional
+    public FlatResponse updateFlat(CreateOrUpdateFlatRequest request, UUID flatId) {
+        Flat flat = flatRepository.findFlatById(flatId).orElseThrow(() -> new ResourceNotFoundException(String
+                .format("Flat with id %s not found", flatId)));
+        flat.setNumberOfFlat(request.getNumberOfFlat());
+        flat.setSpace(request.getSpace());
+        flat.setNumberOfRooms(request.getNumberOfRooms());
+        flat.setDateOfLastGasControl(request.getDateOfLastGasControl());
+
+        flatRepository.update(flat);
+        return flatDTOMapper.mapTo(flat);
     }
 }

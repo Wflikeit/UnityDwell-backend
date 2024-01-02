@@ -53,4 +53,16 @@ public class FlatSqlProvider implements ProviderMethodResolver {
                 .WHERE("ID_MIESZKANIA = #{flatId}")
                 .toString();
     }
+
+    public static String update(Flat flat) {
+        return new SQL()
+                .UPDATE("C##MACIEK.MIESZKANIA")
+                .SET("NR_MIESZKANIA = #{numberOfFlat")
+                .SET("POWIERZCHNIA = #{space")
+                .SET("LICZBA_POKOI = #{numberOfRooms")
+                .SET("DATA_KONTROLI_GAZOWEJ = #{dateOfLastGasControl")
+                .SET("ID_BUDYNKU = #{building.id}")
+                .toString();
+
+    }
 }
