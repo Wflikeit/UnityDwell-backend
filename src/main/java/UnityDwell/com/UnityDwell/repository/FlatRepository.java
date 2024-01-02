@@ -45,4 +45,7 @@ public interface FlatRepository {
 
     @InsertProvider(FlatSqlProvider.class)
     void save(Flat flat);
+
+    @DeleteProvider(FlatSqlProvider.class)
+    void delete(UUID flatId);
 }

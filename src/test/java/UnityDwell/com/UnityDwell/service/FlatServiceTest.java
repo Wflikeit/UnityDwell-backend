@@ -98,4 +98,31 @@ public class FlatServiceTest {
         assertEquals(expectedResponse, actualResponse);
         verify(flatRepository, times(1)).save(flat);
     }
+
+    @Test
+    public void deleteFlat_WhenOneNotExists() {
+        // Arrange
+        UUID id = UUID.randomUUID();
+        when(flatRepository.findFlatById(id)).thenReturn(Optional.empty());
+
+        // Act & Assert
+        assertThrows(ResourceNotFoundException.class,
+                () -> flatService.deleteFlat(id));
+    }
+
+    @Test
+    public void deleteFlat_WhenOneExists() {
+        // Arrange
+        UUID id = UUID.randomUUID();
+        Flat flat = Flat.builder().build();
+
+        when(flatRepository.findFlatById(id)).thenReturn(Optional.of(flat));
+        doNothing().when(flatRepository).delete(id);
+        // Act
+        flatService.deleteFlat(id);
+
+        // Assert
+        verify(flatRepository, times(1)).findFlatById(id);
+        verify(flatRepository, times(1)).delete(id);
+    }
 }

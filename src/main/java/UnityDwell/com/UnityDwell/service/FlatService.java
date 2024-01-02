@@ -51,4 +51,11 @@ public class FlatService {
         flatRepository.save(flat);
         return flatDTOMapper.mapTo(flat);
     }
+
+    @Transactional
+    public void deleteFlat(UUID flatId) {
+        flatRepository.findFlatById(flatId).orElseThrow(() -> new ResourceNotFoundException(String
+                .format("Flat with id %s not found", flatId)));
+        flatRepository.delete(flatId);
+    }
 }

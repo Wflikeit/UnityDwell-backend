@@ -5,6 +5,7 @@ import UnityDwell.com.UnityDwell.dto.request.CreateOrUpdateFlatRequest;
 import UnityDwell.com.UnityDwell.dto.response.FlatResponse;
 import UnityDwell.com.UnityDwell.service.FlatService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,7 +23,14 @@ public class FlatController {
     }
 
     @PostMapping()
+    @ResponseStatus(HttpStatus.CREATED)
     public FlatResponse addFlat(@Validated @RequestBody CreateOrUpdateFlatRequest request, UUID buildingId, UUID addressId) {
         return flatService.addNewFlat(request, buildingId, addressId);
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteAddress(@PathVariable("id") UUID flatId){
+        flatService.deleteFlat(flatId);
     }
 }

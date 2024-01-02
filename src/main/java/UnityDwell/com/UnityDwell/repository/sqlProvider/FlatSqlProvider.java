@@ -46,4 +46,11 @@ public class FlatSqlProvider implements ProviderMethodResolver {
                 .VALUES("ID_ADRESU", "#{address.id}")
                 .toString();
     }
+
+    public static String delete(UUID flatId) {
+        return new SQL()
+                .DELETE_FROM("C##MACIEK.MIESZKANIA")
+                .WHERE("ID_MIESZKANIA = #{flatId}")
+                .toString();
+    }
 }
