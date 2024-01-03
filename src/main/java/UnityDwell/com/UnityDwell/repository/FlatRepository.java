@@ -2,7 +2,7 @@ package UnityDwell.com.UnityDwell.repository;
 
 import UnityDwell.com.UnityDwell.model.Building;
 import UnityDwell.com.UnityDwell.model.Flat;
-import UnityDwell.com.UnityDwell.model.OwnerOfFlat;
+import UnityDwell.com.UnityDwell.model.users.OwnerOfFlat;
 import UnityDwell.com.UnityDwell.repository.sqlProvider.FlatSqlProvider;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;

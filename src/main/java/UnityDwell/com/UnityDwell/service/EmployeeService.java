@@ -3,7 +3,7 @@ package UnityDwell.com.UnityDwell.service;
 import UnityDwell.com.UnityDwell.dto.response.EmployeeResponse;
 import UnityDwell.com.UnityDwell.dto.mapper.EmployeeDTOMapper;
 import UnityDwell.com.UnityDwell.error.ResourceNotFoundException;
-import UnityDwell.com.UnityDwell.model.Employee;
+import UnityDwell.com.UnityDwell.model.users.Employee;
 import UnityDwell.com.UnityDwell.repository.EmployeeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

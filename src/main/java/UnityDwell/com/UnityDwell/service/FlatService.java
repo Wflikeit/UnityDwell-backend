@@ -3,7 +3,7 @@ package UnityDwell.com.UnityDwell.service;
 import UnityDwell.com.UnityDwell.dto.listResponses.OwnersOfFlatsResponse;
 import UnityDwell.com.UnityDwell.dto.mapper.OwnerOfFlatDTOMapper;
 import UnityDwell.com.UnityDwell.error.ResourceNotFoundException;
-import UnityDwell.com.UnityDwell.model.OwnerOfFlat;
+import UnityDwell.com.UnityDwell.model.users.OwnerOfFlat;
 import UnityDwell.com.UnityDwell.repository.FlatRepository;
 import UnityDwell.com.UnityDwell.repository.OwnerOfFlatRepository;
 import lombok.RequiredArgsConstructor;

@@ -1,5 +1,6 @@
 package UnityDwell.com.UnityDwell.model;
 
+import UnityDwell.com.UnityDwell.model.users.OwnerOfFlat;
 import lombok.*;
 
 import java.time.LocalDate;

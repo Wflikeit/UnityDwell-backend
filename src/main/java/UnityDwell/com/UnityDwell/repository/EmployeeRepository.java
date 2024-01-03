@@ -1,7 +1,7 @@
 package UnityDwell.com.UnityDwell.repository;
 
 import UnityDwell.com.UnityDwell.model.Address;
-import UnityDwell.com.UnityDwell.model.Employee;
+import UnityDwell.com.UnityDwell.model.users.Employee;
 import UnityDwell.com.UnityDwell.model.HousingAssociation;
 import UnityDwell.com.UnityDwell.repository.sqlProvider.EmployeeSqlProvider;
 import org.apache.ibatis.annotations.*;

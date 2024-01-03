@@ -1,5 +1,7 @@
-package UnityDwell.com.UnityDwell.model;
+package UnityDwell.com.UnityDwell.model.users;
 
+import UnityDwell.com.UnityDwell.model.Address;
+import UnityDwell.com.UnityDwell.model.HousingAssociation;
 import lombok.*;
 
 import java.time.LocalDate;
