@@ -38,4 +38,7 @@ public interface EmployeeRepository {
             )
     })
     Optional<Employee> findEmployeeById(UUID employeeId);
+    @SelectProvider(EmployeeSqlProvider.class)
+    @ResultMap("EmployeeMap")
+    Optional<Employee> findEmployeeByEmail(String employeeEmail);
 }

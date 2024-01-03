@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Repository
@@ -37,5 +38,8 @@ public interface OwnerOfFlatRepository {
     @SelectProvider(OwnerOfFlatSqlProvider.class)
     @ResultMap("OwnerOfFlatMap")
     List<OwnerOfFlat> findAllOwnersOfFlat(UUID flatId);
+    @SelectProvider(OwnerOfFlatSqlProvider.class)
+    @ResultMap("OwnerOfFlatMap")
+    Optional<OwnerOfFlat> findOwnerOfFlatByEmail(String email);
 
 }
