@@ -30,17 +30,20 @@ public class BillService {
     private final BillTitleRepository billTitleRepository;
 
     @Transactional(readOnly = true)
-    public BillsResponse getAllBills() {
-        List<Bill> bills = billRepository.getAllBills();
-        return BillsResponse.builder().bills(billDTOMapper.mapToBillList(bills)).build();
-    }
-
-    @Transactional(readOnly = true)
     public BillsResponse getAllBillsOfOwner(UUID ownerId) {
         ownerOfFlatRepository.findOwnerOfFlatById(ownerId)
                 .orElseThrow(() -> new ResourceNotFoundException(String
                         .format("Owner with id %s not found", ownerId)));
         List<Bill> bills = billRepository.getAllOwnersBills(ownerId);
+        return BillsResponse.builder().bills(billDTOMapper.mapToBillList(bills)).build();
+    }
+
+    @Transactional(readOnly = true)
+    public BillsResponse getAllBillsOfHousingAssociation(UUID housingAssociationId) {
+        housingAssociationRepository.findHousingAssociationById(housingAssociationId)
+                .orElseThrow(() -> new ResourceNotFoundException(String
+                        .format("Housing association with id %s not found", housingAssociationId)));
+        List<Bill> bills = billRepository.getAllHousingAssociationBills(housingAssociationId);
         return BillsResponse.builder().bills(billDTOMapper.mapToBillList(bills)).build();
     }
 

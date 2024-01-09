@@ -17,14 +17,14 @@ import java.util.UUID;
 public class BillController {
     private final BillService billService;
 
-    @GetMapping(value = "")
-    public BillsResponse getAllBills() {
-        return billService.getAllBills();
-    }
-
-    @GetMapping(value = "/{ownerId}")
+    @GetMapping(value = "/owner/{ownerId}")
     public BillsResponse getAllBillsOfOwner(@PathVariable("ownerId") UUID ownerId) {
         return billService.getAllBillsOfOwner(ownerId);
+    }
+
+    @GetMapping (value = "/housingAssociation/{housingAssociationId}")
+    BillsResponse getAllBillsOfHousingAssociation(@PathVariable("housingAssociationId") UUID housingAssociationId) {
+        return billService.getAllBillsOfHousingAssociation(housingAssociationId);
     }
 
     @DeleteMapping(value = "/{billId}")

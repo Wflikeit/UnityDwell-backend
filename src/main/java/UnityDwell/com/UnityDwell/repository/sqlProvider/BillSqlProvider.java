@@ -22,6 +22,14 @@ public class BillSqlProvider implements  ProviderMethodResolver{
                 .WHERE("r.NR_MIESZKANCA = #{ownerId}")
                 .toString();
     }
+    public String getAllHousingAssociationBills(UUID housingAssociationId) {
+        return new SQL()
+                .SELECT("r.ID_RACHUNKU, r.DATA_WYSTAWIENIA, r.KWOTA, r.ID_TYTULU_RACHUNKU, r.ID_SPOLDZIELNI, R.NR_MIESZKANCA")
+                .INNER_JOIN("C##MACIEK.TYTULY_RACHUNKU t ON r.ID_TYTULU_RACHUNKU = t.ID_TYTULU_RACHUNKU")
+                .FROM("C##MACIEK.RACHUNKI r")
+                .WHERE("r.ID_SPOLDZIELNI = #{housingAssociationId}")
+                .toString();
+    }
     public String delete(UUID billId){
         return new SQL()
                 .DELETE_FROM("C##MACIEK.RACHUNKI")

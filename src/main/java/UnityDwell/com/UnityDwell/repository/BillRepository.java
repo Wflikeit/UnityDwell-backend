@@ -44,6 +44,10 @@ public interface BillRepository {
     @ResultMap("billMap")
     List<Bill> getAllOwnersBills(UUID ownerId);
 
+    @SelectProvider(BillSqlProvider.class)
+    @ResultMap("billMap")
+    List<Bill> getAllHousingAssociationBills(UUID housingAssociationId);
+
     @DeleteProvider(BillSqlProvider.class)
     void delete(UUID billId);
 
