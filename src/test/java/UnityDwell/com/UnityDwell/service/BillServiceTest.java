@@ -41,6 +41,7 @@ public class BillServiceTest {
     BillDTOMapper billDTOMapper;
     @InjectMocks
     BillService billService;
+
     @Test
     public void getAllBillsOfOwner_WhenOneExists() {
         // Arrange
@@ -59,6 +60,7 @@ public class BillServiceTest {
                 .usingRecursiveComparison()
                 .isEqualTo(billService.getAllBillsOfOwner(id));
     }
+
     @Test
     public void getAllBillsOfOwner_WhenOneNotExists() {
         // Arrange
@@ -68,6 +70,7 @@ public class BillServiceTest {
         assertThrows(ResourceNotFoundException.class, () -> billService
                 .getAllBillsOfOwner(id));
     }
+
     @Test
     public void deleteBill_WhenOneExists() {
         // Arrange
@@ -81,6 +84,7 @@ public class BillServiceTest {
         verify(billRepository, times(1)).findBillById(id);
         verify(billRepository, times(1)).delete(id);
     }
+
     @Test
     public void deleteBill_WhenOneNotExists() {
         // Arrange
@@ -90,6 +94,7 @@ public class BillServiceTest {
         assertThrows(ResourceNotFoundException.class,
                 () -> billService.deleteBill(id));
     }
+
     @Test
     public void addNewAddress_WhenOneNotExists() {
         // Arrange
@@ -99,6 +104,9 @@ public class BillServiceTest {
         HousingAssociation housingAssociation = HousingAssociation.builder().id(UUID.randomUUID()).build();
         OwnerOfFlat owner = OwnerOfFlat.builder().id(UUID.randomUUID()).build();
         BillTitle billTitle = BillTitle.builder().id(UUID.randomUUID()).title("title").build();
+        request.setBillTitleId(billTitle.getId());
+        request.setFlatOwnerId(owner.getId());
+        request.setHousingAssociationId(housingAssociation.getId());
 
         when(housingAssociationRepository.findHousingAssociationById(housingAssociation.getId())).thenReturn(Optional.of(housingAssociation));
         when(billTitleRepository.findBillTitleById(billTitle.getId())).thenReturn(Optional.of(billTitle));
@@ -107,7 +115,7 @@ public class BillServiceTest {
         doNothing().when(billRepository).save(bill);
         when(billDTOMapper.mapTo(bill)).thenReturn(expectedResponse);
         // Act
-        BillResponse actualResponse = billService.addBill(request, billTitle.getId(), housingAssociation.getId(), owner.getId());
+        BillResponse actualResponse = billService.addBill(request);
 
         // Assert
         assertNotNull(actualResponse);

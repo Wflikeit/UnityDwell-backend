@@ -23,19 +23,18 @@ public class BillController {
     }
 
     @GetMapping(value = "/{ownerId}")
-    public BillsResponse getAllBillsOfOwner(@PathVariable("ownerId") UUID ownerId){
+    public BillsResponse getAllBillsOfOwner(@PathVariable("ownerId") UUID ownerId) {
         return billService.getAllBillsOfOwner(ownerId);
     }
 
     @DeleteMapping(value = "/{billId}")
-    public void deleteBill(@PathVariable("billId") UUID billId){
+    public void deleteBill(@PathVariable("billId") UUID billId) {
         billService.deleteBill(billId);
     }
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
-    public BillResponse addBill(@Validated @RequestBody CreateOrUpdateBillRequest request,
-                                UUID billTitleId, UUID ownerId, UUID housingAssociationId){
-        return billService.addBill(request, billTitleId, housingAssociationId, ownerId);
+    public BillResponse addBill(@Validated @RequestBody CreateOrUpdateBillRequest request) {
+        return billService.addBill(request);
     }
 }

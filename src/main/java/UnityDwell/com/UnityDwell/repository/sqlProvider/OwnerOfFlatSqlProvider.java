@@ -6,16 +6,16 @@ import org.apache.ibatis.jdbc.SQL;
 import java.util.UUID;
 
 public class OwnerOfFlatSqlProvider implements ProviderMethodResolver {
-    public static String findOwnerOfFlatById(UUID flatOwnerId){
+    public static String findOwnerOfFlatById(UUID flatOwnerId) {
         return new SQL()
                 .SELECT("w.NR_MIESZKANCA", "w.PESEL", "w.NIP_FIRMY", "w.NR_TELEFONU")
-                .FROM("WLASCICIELE_MIESZKAN w")
+                .FROM("C##MACIEK.WLASCICIELE_MIESZKAN w")
                 .WHERE("w.NR_MIESZKANCA = #{flatOwnerId}")
                 .toString();
     }
 
 
-    public static String findAllOwnersOfFlat(UUID flatId){
+    public static String findAllOwnersOfFlat(UUID flatId) {
         return new SQL()
                 .SELECT("wlasc.NR_MIESZKANCA", "wlasc.PESEL", "wlasc.NIP_FIRMY", "wlasc.NR_TELEFONU")
                 .FROM("C##MACIEK.MIESZKANIA mieszkania")
