@@ -64,7 +64,7 @@ public class FlatService {
         flat.setDateOfLastGasControl(request.getDateOfLastGasControl());
         Building building = buildingsRepository
                 .getBuildingById(request.getBuildingId()).orElseThrow(() -> new ResourceNotFoundException(String
-                .format("Building with id %s not found", request.getBuildingId())));
+                        .format("Building with id %s not found", request.getBuildingId())));
         flat.setBuilding(building);
 
         flatRepository.update(flat);
