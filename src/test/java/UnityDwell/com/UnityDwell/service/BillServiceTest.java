@@ -72,6 +72,36 @@ public class BillServiceTest {
     }
 
     @Test
+    public void getAllBillsOfHousingAssociation_WhenOneExists() {
+        // Arrange
+        UUID id = UUID.randomUUID();
+        Bill bill = Bill.builder().build();
+        HousingAssociation housingAssociation = HousingAssociation.builder().build();
+        BillResponse billResponse = BillResponse.builder().build();
+        BillsResponse mappedBillsResponse = BillsResponse.builder().bills(List.of(billResponse)).build();
+        when(housingAssociationRepository.findHousingAssociationById(id))
+                .thenReturn(Optional.of(housingAssociation));
+        when(billRepository.getAllHousingAssociationBills(id))
+                .thenReturn(List.of(bill));
+        when(billDTOMapper.mapToBillList(List.of(bill)))
+                .thenReturn(List.of(billResponse));
+        // Act & Assert
+        assertThat(mappedBillsResponse)
+                .usingRecursiveComparison()
+                .isEqualTo(billService.getAllBillsOfHousingAssociation(id));
+    }
+
+    @Test
+    public void getAllBillsOfHousingAssociation_WhenOneNotExists() {
+        // Arrange
+        UUID id = UUID.randomUUID();
+        when(housingAssociationRepository.findHousingAssociationById(id)).thenReturn(Optional.empty());
+        // Act & Assert
+        assertThrows(ResourceNotFoundException.class, () -> billService
+                .getAllBillsOfHousingAssociation(id));
+    }
+
+    @Test
     public void deleteBill_WhenOneExists() {
         // Arrange
         UUID id = UUID.randomUUID();
@@ -96,7 +126,7 @@ public class BillServiceTest {
     }
 
     @Test
-    public void addNewAddress_WhenOneNotExists() {
+    public void addNewBill_WhenOneNotExists() {
         // Arrange
         CreateOrUpdateBillRequest request = CreateOrUpdateBillRequest.builder().build();
         Bill bill = Bill.builder().build();
