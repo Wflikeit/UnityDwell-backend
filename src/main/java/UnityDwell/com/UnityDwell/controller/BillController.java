@@ -38,4 +38,10 @@ public class BillController {
     public BillResponse addBill(@Validated @RequestBody CreateOrUpdateBillRequest request) {
         return billService.addBill(request);
     }
+
+    @PutMapping(value = "/{billId}")
+    public BillResponse updateBill(@Validated @RequestBody CreateOrUpdateBillRequest request,
+                                   @PathVariable("billId") UUID billId) {
+        return billService.updateBill(request, billId);
+    }
 }

@@ -16,6 +16,17 @@ import java.util.UUID;
 @Repository
 public interface BillRepository {
     @SelectProvider(BillSqlProvider.class)
+    @ResultMap("billMap")
+    List<Bill> getAllOwnersBills(UUID ownerId);
+
+    @SelectProvider(BillSqlProvider.class)
+    @ResultMap("billMap")
+    List<Bill> getAllHousingAssociationBills(UUID housingAssociationId);
+
+    @DeleteProvider(BillSqlProvider.class)
+    void delete(UUID billId);
+
+    @SelectProvider(BillSqlProvider.class)
     @Results(id = "billMap", value = {
             @Result(property = "id", column = "ID_RACHUNKU"),
             @Result(property = "amount", column = "KWOTA"),
@@ -38,24 +49,12 @@ public interface BillRepository {
                     one = @One(select = "UnityDwell.com.UnityDwell.repository." +
                             "BillTitleRepository.findBillTitleById"))
     })
-    List<Bill> getAllBills();
-
-    @SelectProvider(BillSqlProvider.class)
-    @ResultMap("billMap")
-    List<Bill> getAllOwnersBills(UUID ownerId);
-
-    @SelectProvider(BillSqlProvider.class)
-    @ResultMap("billMap")
-    List<Bill> getAllHousingAssociationBills(UUID housingAssociationId);
-
-    @DeleteProvider(BillSqlProvider.class)
-    void delete(UUID billId);
-
-    @SelectProvider(BillSqlProvider.class)
-    @ResultMap("billMap")
     Optional<Bill> findBillById(UUID billId);
 
     @InsertProvider(BillSqlProvider.class)
     void save(Bill bill);
+
+    @UpdateProvider(BillSqlProvider.class)
+    void update(Bill bill);
 }
 

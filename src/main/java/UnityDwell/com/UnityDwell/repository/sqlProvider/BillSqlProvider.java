@@ -55,4 +55,15 @@ public class BillSqlProvider implements  ProviderMethodResolver{
                 .VALUES("NR_MIESZKANCA", "#{flatOwner.id}")
                 .toString();
     }
+    public String update(Bill bill) {
+        return new SQL()
+                .UPDATE("C##MACIEK.RACHUNKI")
+                .SET("DATA_WYSTAWIENIA = #{dateOfPublishing}")
+                .SET("KWOTA = #{amount}")
+                .SET("ID_TYTULU_RACHUNKU = #{billTitle.id}")
+                .SET("ID_SPOLDZIELNI = #{housingAssociation.id}")
+                .SET("NR_MIESZKANCA = #{flatOwner.id}")
+                .WHERE("ID_RACHUNKU = #{id}")
+                .toString();
+    }
 }

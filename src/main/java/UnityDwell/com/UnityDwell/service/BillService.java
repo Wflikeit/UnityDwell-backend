@@ -56,20 +56,35 @@ public class BillService {
 
     @Transactional
     public BillResponse addBill(CreateOrUpdateBillRequest request) {
-
         OwnerOfFlat owner = ownerOfFlatRepository.findOwnerOfFlatById(request.getFlatOwnerId()).orElseThrow(() -> new ResourceNotFoundException(String
                 .format("Owner with id %s not found", request.getFlatOwnerId())));
-
         HousingAssociation housingAssociation = housingAssociationRepository
                 .findHousingAssociationById(request.getHousingAssociationId()).orElseThrow(() -> new ResourceNotFoundException(String
                         .format("Housing association with id %s not found", request.getHousingAssociationId())));
-
         BillTitle billTitle = billTitleRepository.findBillTitleById(request.getBillTitleId()).orElseThrow(() -> new ResourceNotFoundException(String
                 .format("Bill title with id %s not found", request.getBillTitleId())));
-
-
         Bill bill = billDTOMapper.map(request, billTitle, housingAssociation, owner);
         billRepository.save(bill);
+        return billDTOMapper.mapTo(bill);
+    }
+
+    @Transactional
+    public BillResponse updateBill(CreateOrUpdateBillRequest request, UUID billId) {
+        Bill bill = billRepository.findBillById(billId).orElseThrow(() -> new ResourceNotFoundException(String
+                .format("Bill with id %s not found", billId)));
+        OwnerOfFlat owner = ownerOfFlatRepository.findOwnerOfFlatById(request.getFlatOwnerId()).orElseThrow(() -> new ResourceNotFoundException(String
+                .format("Owner with id %s not found", request.getFlatOwnerId())));
+        HousingAssociation housingAssociation = housingAssociationRepository
+                .findHousingAssociationById(request.getHousingAssociationId()).orElseThrow(() -> new ResourceNotFoundException(String
+                        .format("Housing association with id %s not found", request.getHousingAssociationId())));
+        BillTitle billTitle = billTitleRepository.findBillTitleById(request.getBillTitleId()).orElseThrow(() -> new ResourceNotFoundException(String
+                .format("Bill title with id %s not found", request.getBillTitleId())));
+        bill.setAmount(request.getAmount());
+        bill.setDateOfPublishing(request.getDateOfPublishing());
+        bill.setFlatOwner(owner);
+        bill.setHousingAssociation(housingAssociation);
+        bill.setBillTitle(billTitle);
+        billRepository.update(bill);
         return billDTOMapper.mapTo(bill);
     }
 }
