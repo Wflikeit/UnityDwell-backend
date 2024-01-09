@@ -40,10 +40,9 @@ public class FlatSqlProvider implements ProviderMethodResolver {
                 .VALUES("ID_MIESZKANIA", "#{id}")
                 .VALUES("NR_MIESZKANIA", "#{numberOfFlat}")
                 .VALUES("POWIERZCHNIA", "#{space}")
-                .VALUES("LICZBA_POKOI", "numberOfRooms")
-                .VALUES("DATA_KONTROLI_GAZOWEJ", "dateOfLastGasControl")
+                .VALUES("LICZBA_POKOI", "#{numberOfRooms}")
+                .VALUES("DATA_KONTROLI_GAZOWEJ", "#{dateOfLastGasControl}")
                 .VALUES("ID_BUDYNKU", "#{building.id}")
-                .VALUES("ID_ADRESU", "#{address.id}")
                 .toString();
     }
 
@@ -57,11 +56,12 @@ public class FlatSqlProvider implements ProviderMethodResolver {
     public static String update(Flat flat) {
         return new SQL()
                 .UPDATE("C##MACIEK.MIESZKANIA")
-                .SET("NR_MIESZKANIA = #{numberOfFlat")
-                .SET("POWIERZCHNIA = #{space")
-                .SET("LICZBA_POKOI = #{numberOfRooms")
-                .SET("DATA_KONTROLI_GAZOWEJ = #{dateOfLastGasControl")
+                .SET("NR_MIESZKANIA = #{numberOfFlat}")
+                .SET("POWIERZCHNIA = #{space}")
+                .SET("LICZBA_POKOI = #{numberOfRooms}")
+                .SET("DATA_KONTROLI_GAZOWEJ = #{dateOfLastGasControl}")
                 .SET("ID_BUDYNKU = #{building.id}")
+                .WHERE("ID_MIESZKANIA = #{id}")
                 .toString();
 
     }

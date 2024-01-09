@@ -19,7 +19,7 @@ public interface FlatRepository {
             @Result(property = "id", column = "ID_MIESZKANIA"),
             @Result(property = "numberOfFlat", column = "NR_MIESZKANIA"),
             @Result(property = "space", column = "POWIERZCHNIA"),
-            @Result(property = "amountOfRooms", column = "LICZBA_POKOI"),
+            @Result(property = "numberOfRooms", column = "LICZBA_POKOI"),
             @Result(property = "dateOfLastGasControl", column = "DATA_KONTROLI_GAZOWEJ"),
             @Result(property = "building",
                     javaType = Building.class,

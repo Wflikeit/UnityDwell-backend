@@ -77,6 +77,7 @@ public class FlatServiceTest {
         FlatResponse expectedResponse = FlatResponse.builder().build();
         Building building = Building.builder().build();
         UUID buildingId = UUID.randomUUID();
+        request.setBuildingId(buildingId);
 
         when(buildingsRepository.getBuildingById(buildingId)).thenReturn(Optional.of(building));
         when(flatDTOMapper.map(request, building)).thenReturn(flat);
@@ -84,7 +85,7 @@ public class FlatServiceTest {
         when(flatDTOMapper.mapTo(flat)).thenReturn(expectedResponse);
 
         // Act
-        FlatResponse actualResponse = flatService.addNewFlat(request, buildingId);
+        FlatResponse actualResponse = flatService.addNewFlat(request);
 
         // Assert
         assertNotNull(actualResponse);

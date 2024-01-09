@@ -24,8 +24,8 @@ public class FlatController {
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
-    public FlatResponse addFlat(@Validated @RequestBody CreateOrUpdateFlatRequest request, UUID buildingId) {
-        return flatService.addNewFlat(request, buildingId);
+    public FlatResponse addFlat(@Validated @RequestBody CreateOrUpdateFlatRequest request) {
+        return flatService.addNewFlat(request);
     }
 
     @DeleteMapping("/{id}")

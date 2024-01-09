@@ -8,6 +8,7 @@ import lombok.Builder;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 @Data
 @Builder
@@ -24,4 +25,6 @@ public class CreateOrUpdateFlatRequest {
     @NotNull(message = "Date of last gas control is required")
     @PastOrPresent(message = "Date of last gas control must be from past or present")
     private LocalDate dateOfLastGasControl;
+    @NotNull(message = "Building id is required")
+    private UUID buildingId;
 }

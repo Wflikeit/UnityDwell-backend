@@ -39,9 +39,9 @@ public class FlatService {
     }
 
     @Transactional
-    public FlatResponse addNewFlat(CreateOrUpdateFlatRequest request, UUID buildingId) {
-        Building building = buildingsRepository.getBuildingById(buildingId).orElseThrow(() -> new ResourceNotFoundException(String
-                .format("Building with id %s not found", buildingId)));
+    public FlatResponse addNewFlat(CreateOrUpdateFlatRequest request) {
+        Building building = buildingsRepository.getBuildingById(request.getBuildingId()).orElseThrow(() -> new ResourceNotFoundException(String
+                .format("Building with id %s not found", request.getBuildingId())));
         Flat flat = flatDTOMapper.map(request, building);
         flatRepository.save(flat);
         return flatDTOMapper.mapTo(flat);
@@ -62,6 +62,10 @@ public class FlatService {
         flat.setSpace(request.getSpace());
         flat.setNumberOfRooms(request.getNumberOfRooms());
         flat.setDateOfLastGasControl(request.getDateOfLastGasControl());
+        Building building = buildingsRepository
+                .getBuildingById(request.getBuildingId()).orElseThrow(() -> new ResourceNotFoundException(String
+                .format("Building with id %s not found", request.getBuildingId())));
+        flat.setBuilding(building);
 
         flatRepository.update(flat);
         return flatDTOMapper.mapTo(flat);
