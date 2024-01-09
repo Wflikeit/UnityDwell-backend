@@ -1,9 +1,6 @@
 package UnityDwell.com.UnityDwell.dto.request;
 
-import jakarta.validation.constraints.DecimalMin;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.PastOrPresent;
+import jakarta.validation.constraints.*;
 import lombok.Builder;
 import lombok.Data;
 
@@ -17,10 +14,11 @@ public class CreateOrUpdateFlatRequest {
     @Min(1)
     private int numberOfFlat;
     @NotNull(message = "Space is required")
-    @DecimalMin(value = "0.01", message = "Value must be greater than 0.01")
+    @DecimalMin(value = "13.00", message = "Value must be greater than 13.00")
     private double space;
     @NotNull(message = "Number of rooms is required")
-    @Min(1)
+    @Min(value = 1, message = "Number of rooms must be between 1 and 5")
+    @Max(value = 5, message = "Number of rooms must be between 1 and 5")
     private int numberOfRooms;
     @NotNull(message = "Date of last gas control is required")
     @PastOrPresent(message = "Date of last gas control must be from past or present")
