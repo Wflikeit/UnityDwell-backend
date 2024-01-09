@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Repository
@@ -30,7 +31,7 @@ public interface OwnerOfFlatRepository {
                     many = @Many(select = "UnityDwell.com.UnityDwell.repository." +
                             "FlatRepository.findAllFlatsOfOwner"))
     })
-    OwnerOfFlat findOwnerById(UUID flatOwnerId);
+    Optional<OwnerOfFlat> findOwnerOfFlatById(UUID flatOwnerId);
 
 
 
