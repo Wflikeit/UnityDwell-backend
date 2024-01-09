@@ -22,12 +22,13 @@ public class BillController {
         return billService.getAllBillsOfOwner(ownerId);
     }
 
-    @GetMapping (value = "/housingAssociation/{housingAssociationId}")
+    @GetMapping(value = "/housingAssociation/{housingAssociationId}")
     BillsResponse getAllBillsOfHousingAssociation(@PathVariable("housingAssociationId") UUID housingAssociationId) {
         return billService.getAllBillsOfHousingAssociation(housingAssociationId);
     }
 
     @DeleteMapping(value = "/{billId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteBill(@PathVariable("billId") UUID billId) {
         billService.deleteBill(billId);
     }
