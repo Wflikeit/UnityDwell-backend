@@ -39,5 +39,12 @@ public interface BuildingsRepository {
     @ResultMap("BuildingMap")
     Optional<Building> getBuildingById(UUID buildingId);
 
+    @InsertProvider(BuildingsSqlProvider.class)
+    void save(Building building);
 
+    @UpdateProvider(BuildingsSqlProvider.class)
+    void update(Building building);
+
+    @DeleteProvider(BuildingsSqlProvider.class)
+    void delete(UUID buildingId);
 }
