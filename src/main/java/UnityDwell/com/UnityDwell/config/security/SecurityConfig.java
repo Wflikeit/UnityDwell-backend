@@ -1,32 +1,35 @@
 package UnityDwell.com.UnityDwell.config.security;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
-
-import static org.springframework.security.config.Customizer.withDefaults;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
+@EnableMethodSecurity(securedEnabled = true)
+@RequiredArgsConstructor
 public class SecurityConfig {
+
+    private final JWTFilter jwtFilter;
+    private final JWTAuthenticationEntryPoint jwtAuthenticationEntryPoint;
+
     @Bean
-    SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
-                .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/").permitAll()
-                        .anyRequest().authenticated())
-                .oauth2ResourceServer(oauth2 -> oauth2
-                        .jwt(withDefaults())
-                )
+                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
+                .securityMatcher("/api/**").authorizeHttpRequests(authorizeHttpRequestsConfigurer ->
+                        authorizeHttpRequestsConfigurer.requestMatchers("/api/**").authenticated())
+                .exceptionHandling((exception) ->
+                        exception.authenticationEntryPoint(jwtAuthenticationEntryPoint))
                 .sessionManagement(sessionManagementConfigurer ->
                         sessionManagementConfigurer
                                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .build();
     }
-
-
 }
-
