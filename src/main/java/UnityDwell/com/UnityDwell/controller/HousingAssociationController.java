@@ -16,7 +16,8 @@ import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("api/HousingAssociation")
+@RequestMapping("api/housing-association")
+@CrossOrigin(origins = "*")
 public class HousingAssociationController {
     private final HousingAssociationService housingAssociationService;
     private final PublicationService publicationService;

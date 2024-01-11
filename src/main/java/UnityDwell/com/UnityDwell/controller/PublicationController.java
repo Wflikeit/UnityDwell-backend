@@ -13,6 +13,7 @@ import java.util.UUID;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("api/publications")
+@CrossOrigin(origins = "*")
 public class PublicationController {
     private final PublicationService publicationService;
 

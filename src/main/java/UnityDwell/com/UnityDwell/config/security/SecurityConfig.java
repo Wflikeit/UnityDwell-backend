@@ -9,6 +9,11 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+
+import java.util.List;
+
+import static org.springframework.security.config.Customizer.withDefaults;
 
 @Configuration
 @EnableWebSecurity
@@ -20,16 +25,31 @@ public class SecurityConfig {
     private final JWTAuthenticationEntryPoint jwtAuthenticationEntryPoint;
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
                 .securityMatcher("/api/**").authorizeHttpRequests(authorizeHttpRequestsConfigurer ->
                         authorizeHttpRequestsConfigurer.requestMatchers("/api/**").authenticated())
                 .exceptionHandling((exception) ->
                         exception.authenticationEntryPoint(jwtAuthenticationEntryPoint))
+                .cors(httpSecurityCorsConfigurer ->
+                        httpSecurityCorsConfigurer.configurationSource(request -> getCorsConfiguration()))
                 .sessionManagement(sessionManagementConfigurer ->
                         sessionManagementConfigurer
                                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .build();
     }
+    private CorsConfiguration getCorsConfiguration () {
+
+        CorsConfiguration corsConfiguration = new CorsConfiguration();
+        corsConfiguration.setAllowedHeaders(List.of("Authorization", "Cache-Control", "Content-Type"));
+        corsConfiguration.setAllowedOrigins(List.of("*"));
+        corsConfiguration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "PUT", "OPTIONS", "PATCH", "DELETE"));
+        corsConfiguration.setAllowCredentials(false);
+        corsConfiguration.setExposedHeaders(List.of("Authorization"));
+        return corsConfiguration;
+    }
+
+
 }
+
