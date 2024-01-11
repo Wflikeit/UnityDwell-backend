@@ -13,8 +13,6 @@ import org.springframework.web.cors.CorsConfiguration;
 
 import java.util.List;
 
-import static org.springframework.security.config.Customizer.withDefaults;
-
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity(securedEnabled = true)
@@ -39,6 +37,7 @@ public class SecurityConfig {
                                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .build();
     }
+
     private CorsConfiguration getCorsConfiguration () {
 
         CorsConfiguration corsConfiguration = new CorsConfiguration();
@@ -49,7 +48,5 @@ public class SecurityConfig {
         corsConfiguration.setExposedHeaders(List.of("Authorization"));
         return corsConfiguration;
     }
-
-
 }
 
