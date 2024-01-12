@@ -29,7 +29,7 @@ public class AddressSqlProvider implements ProviderMethodResolver {
     public static String delete(UUID addressId) {
         return new SQL()
                 .DELETE_FROM("C##MACIEK.ADRESY")
-                .WHERE("ID_ADRESU = #{id}")
+                .WHERE("ID_ADRESU = #{addressId}")
                 .toString();
     }
 
