@@ -1,5 +1,6 @@
 package UnityDwell.com.UnityDwell.repository;
 
+import UnityDwell.com.UnityDwell.model.HousingAssociation;
 import UnityDwell.com.UnityDwell.model.Publication;
 import UnityDwell.com.UnityDwell.repository.sqlProvider.PublicationSqlProvider;
 import org.apache.ibatis.annotations.*;
@@ -19,7 +20,7 @@ public interface PublicationRepository {
             @Result(property = "title", column = "TYTUL"),
             @Result(property = "dateOfPublishing", column = "DATA_WYDANIA"),
             @Result(property = "housingAssociation",
-                    javaType = Publication.class,
+                    javaType = HousingAssociation.class,
                     column = "ID_SPOLDZIELNI",
                     one = @One(select = "UnityDwell.com.UnityDwell.repository." +
                             "HousingAssociationRepository.findHousingAssociationById")

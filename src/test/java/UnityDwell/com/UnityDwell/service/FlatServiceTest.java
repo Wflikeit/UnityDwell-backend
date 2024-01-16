@@ -1,11 +1,16 @@
 package UnityDwell.com.UnityDwell.service;
 
 import UnityDwell.com.UnityDwell.dto.listResponses.OwnersOfFlatsResponse;
+import UnityDwell.com.UnityDwell.dto.mapper.FlatDTOMapper;
 import UnityDwell.com.UnityDwell.dto.mapper.OwnerOfFlatDTOMapper;
+import UnityDwell.com.UnityDwell.dto.request.CreateOrUpdateFlatRequest;
+import UnityDwell.com.UnityDwell.dto.response.FlatResponse;
 import UnityDwell.com.UnityDwell.dto.response.OwnerOfFlatResponse;
 import UnityDwell.com.UnityDwell.error.ResourceNotFoundException;
+import UnityDwell.com.UnityDwell.model.Building;
 import UnityDwell.com.UnityDwell.model.Flat;
 import UnityDwell.com.UnityDwell.model.users.OwnerOfFlat;
+import UnityDwell.com.UnityDwell.repository.BuildingsRepository;
 import UnityDwell.com.UnityDwell.repository.FlatRepository;
 import UnityDwell.com.UnityDwell.repository.OwnerOfFlatRepository;
 import org.junit.jupiter.api.Test;
@@ -19,8 +24,8 @@ import java.util.Optional;
 import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.when;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class FlatServiceTest {
@@ -29,7 +34,11 @@ public class FlatServiceTest {
     @Mock
     FlatRepository flatRepository;
     @Mock
+    FlatDTOMapper flatDTOMapper;
+    @Mock
     OwnerOfFlatDTOMapper ownerOfFlatDTOMapper;
+    @Mock
+    BuildingsRepository buildingsRepository;
     @InjectMocks
     FlatService flatService;
 
@@ -58,5 +67,56 @@ public class FlatServiceTest {
         // Act & Assert
         assertThrows(ResourceNotFoundException.class, () -> flatService
                 .getAllOwnersOfAFlat(id));
+    }
+
+    @Test
+    public void addNewFlat_WhenOneNotExists() {
+        // Arrange
+        CreateOrUpdateFlatRequest request = CreateOrUpdateFlatRequest.builder().build();
+        Flat flat = Flat.builder().build();
+        FlatResponse expectedResponse = FlatResponse.builder().build();
+        Building building = Building.builder().build();
+        UUID buildingId = UUID.randomUUID();
+        request.setBuildingId(buildingId);
+
+        when(buildingsRepository.getBuildingById(buildingId)).thenReturn(Optional.of(building));
+        when(flatDTOMapper.map(request, building)).thenReturn(flat);
+        doNothing().when(flatRepository).save(flat);
+        when(flatDTOMapper.mapTo(flat)).thenReturn(expectedResponse);
+
+        // Act
+        FlatResponse actualResponse = flatService.addNewFlat(request);
+
+        // Assert
+        assertNotNull(actualResponse);
+        assertEquals(expectedResponse, actualResponse);
+        verify(flatRepository, times(1)).save(flat);
+    }
+
+    @Test
+    public void deleteFlat_WhenOneNotExists() {
+        // Arrange
+        UUID id = UUID.randomUUID();
+        when(flatRepository.findFlatById(id)).thenReturn(Optional.empty());
+
+        // Act & Assert
+        assertThrows(ResourceNotFoundException.class,
+                () -> flatService.deleteFlat(id));
+    }
+
+    @Test
+    public void deleteFlat_WhenOneExists() {
+        // Arrange
+        UUID id = UUID.randomUUID();
+        Flat flat = Flat.builder().build();
+
+        when(flatRepository.findFlatById(id)).thenReturn(Optional.of(flat));
+        doNothing().when(flatRepository).delete(id);
+        // Act
+        flatService.deleteFlat(id);
+
+        // Assert
+        verify(flatRepository, times(1)).findFlatById(id);
+        verify(flatRepository, times(1)).delete(id);
     }
 }

@@ -74,6 +74,7 @@ public class AddressServiceTest {
 
         verify(addressRepository, times(1)).save(address);
     }
+
     @Test
     public void testDeleteAddress_WhenOneDoesNotExist() {
         // Arrange
