@@ -6,7 +6,7 @@ import org.apache.ibatis.jdbc.SQL;
 import java.util.UUID;
 
 public class OwnerOfFlatSqlProvider implements ProviderMethodResolver {
-    public static String findOwnerById(UUID flatOwnerId) {
+    public static String findOwnerOfFlatById(UUID flatOwnerId) {
         return new SQL()
                 .SELECT("w.NR_MIESZKANCA", "w.PESEL", "w.NIP_FIRMY", "w.NR_TELEFONU", "w.EMAIL")
                 .FROM("WLASCICIELE_MIESZKAN w")

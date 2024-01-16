@@ -16,8 +16,9 @@ import java.util.UUID;
 @RequestMapping("api/buildings")
 public class BuildingController {
     private final BuildingService buildingService;
-    @Secured({"ROLE_ADMIN", "ROLE_EMPLOYEE"})
+
     @GetMapping(value = "/{buildingId}/flats")
+    @Secured({"ROLE_ADMIN", "ROLE_EMPLOYEE"})
     public FlatsResponse getFlatsInBuilding(@PathVariable("buildingId") UUID buildingId) {
         return buildingService.getFlatsInBuilding(buildingId);
     }

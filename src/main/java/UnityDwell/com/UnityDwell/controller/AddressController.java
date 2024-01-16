@@ -1,7 +1,7 @@
 package UnityDwell.com.UnityDwell.controller;
 
-import UnityDwell.com.UnityDwell.dto.response.AddressResponse;
 import UnityDwell.com.UnityDwell.dto.request.CreateOrUpdateAddressRequest;
+import UnityDwell.com.UnityDwell.dto.response.AddressResponse;
 import UnityDwell.com.UnityDwell.service.AddressService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -17,20 +17,23 @@ import java.util.UUID;
 @CrossOrigin(origins = "*")
 public class AddressController {
     private final AddressService addressService;
-    @Secured({"ROLE_ADMIN", "ROLE_EMPLOYEE", "ROLE_FLAT_OWNER"})
+
     @GetMapping(value = "/{id}")
+    @Secured({"ROLE_ADMIN", "ROLE_EMPLOYEE", "ROLE_FLAT_OWNER"})
     public AddressResponse getHousingAddress(@PathVariable("id") UUID addressId) {
         return addressService.getAddressByHousingAssociationId(addressId);
     }
-    @Secured({"ROLE_ADMIN", "ROLE_EMPLOYEE", "ROLE_FLAT_OWNER"})
+
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
+    @Secured({"ROLE_ADMIN", "ROLE_EMPLOYEE", "ROLE_FLAT_OWNER"})
     public AddressResponse addAddress(@Validated @RequestBody CreateOrUpdateAddressRequest request) {
         return addressService.addNewAddress(request);
     }
-    @Secured({"ROLE_ADMIN", "ROLE_EMPLOYEE"})
+
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
+    @Secured({"ROLE_ADMIN", "ROLE_EMPLOYEE"})
     public void deleteAddress(@PathVariable("id") UUID addressId) {
         addressService.deleteAddress(addressId);
     }

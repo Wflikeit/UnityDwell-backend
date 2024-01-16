@@ -16,9 +16,10 @@ import java.util.UUID;
 @RequestMapping("api/employee")
 public class EmployeeController {
     private final EmployeeService employeeService;
-    @Secured({"ROLE_ADMIN", "ROLE_EMPLOYEE"})
+
     @GetMapping(value = "/{id}")
-    public EmployeeResponse getEmployee(@PathVariable("id") UUID employeeId){
+    @Secured({"ROLE_ADMIN", "ROLE_EMPLOYEE"})
+    public EmployeeResponse getEmployee(@PathVariable("id") UUID employeeId) {
         return employeeService.getEmployeeById(employeeId);
     }
 }

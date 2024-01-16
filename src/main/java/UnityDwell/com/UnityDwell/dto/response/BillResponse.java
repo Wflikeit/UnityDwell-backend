@@ -1,7 +1,7 @@
 package UnityDwell.com.UnityDwell.dto.response;
 
 import UnityDwell.com.UnityDwell.model.HousingAssociation;
-import UnityDwell.com.UnityDwell.model.OwnerOfFlat;
+import UnityDwell.com.UnityDwell.model.users.OwnerOfFlat;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;

@@ -4,7 +4,7 @@ import UnityDwell.com.UnityDwell.dto.listResponses.OwnersOfFlatsResponse;
 import UnityDwell.com.UnityDwell.dto.mapper.FlatDTOMapper;
 import UnityDwell.com.UnityDwell.dto.mapper.OwnerOfFlatDTOMapper;
 import UnityDwell.com.UnityDwell.dto.request.CreateOrUpdateFlatRequest;
-import UnityDwell.com.UnityDwell.dto.response.FlatResponse;
+import UnityDwell.com.UnityDwell.dto.response.*;
 import UnityDwell.com.UnityDwell.error.ResourceNotFoundException;
 import UnityDwell.com.UnityDwell.model.users.OwnerOfFlat;
 import UnityDwell.com.UnityDwell.model.Building;

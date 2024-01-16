@@ -3,7 +3,7 @@ package UnityDwell.com.UnityDwell.repository;
 import UnityDwell.com.UnityDwell.model.Bill;
 import UnityDwell.com.UnityDwell.model.BillTitle;
 import UnityDwell.com.UnityDwell.model.HousingAssociation;
-import UnityDwell.com.UnityDwell.model.OwnerOfFlat;
+import UnityDwell.com.UnityDwell.model.users.OwnerOfFlat;
 import UnityDwell.com.UnityDwell.repository.sqlProvider.BillSqlProvider;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;

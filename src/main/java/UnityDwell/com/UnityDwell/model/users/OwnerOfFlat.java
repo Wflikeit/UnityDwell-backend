@@ -5,6 +5,7 @@ import UnityDwell.com.UnityDwell.model.Resident;
 import lombok.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @Builder
 @NoArgsConstructor

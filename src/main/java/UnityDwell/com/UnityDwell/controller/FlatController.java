@@ -5,12 +5,8 @@ import UnityDwell.com.UnityDwell.dto.request.CreateOrUpdateFlatRequest;
 import UnityDwell.com.UnityDwell.dto.response.FlatResponse;
 import UnityDwell.com.UnityDwell.service.FlatService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.access.annotation.Secured;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,27 +17,32 @@ import java.util.UUID;
 @RequestMapping("api/flat")
 public class FlatController {
     private final FlatService flatService;
-    @Secured({"ROLE_ADMIN", "ROLE_EMPLOYEE", "ROLE_FLAT_OWNER"})
+
+
     @GetMapping(value = "/{flatId}/owners")
+    @Secured({"ROLE_ADMIN", "ROLE_EMPLOYEE"})
     public OwnersOfFlatsResponse getAllOwnersOfAFlat(@PathVariable("flatId") UUID flatId) {
         return flatService.getAllOwnersOfAFlat(flatId);
     }
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
+    @Secured({"ROLE_ADMIN"})
     public FlatResponse addFlat(@Validated @RequestBody CreateOrUpdateFlatRequest request) {
         return flatService.addNewFlat(request);
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
+    @Secured({"ROLE_ADMIN"})
     public void deleteFlat(@PathVariable("id") UUID flatId) {
         flatService.deleteFlat(flatId);
     }
 
     @PutMapping("/{id}")
-    public FlatResponse updateFlat(@Validated @RequestBody CreateOrUpdateFlatRequest request
-            , @PathVariable("id") UUID id) {
+    @Secured({"ROLE_ADMIN"})
+    public FlatResponse updateFlat(@Validated @RequestBody CreateOrUpdateFlatRequest request,
+                                   @PathVariable("id") UUID id) {
         return flatService.updateFlat(request, id);
     }
 }
