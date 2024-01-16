@@ -15,3 +15,17 @@ spring:
       max-request-size: 2MB
   flyway:
     baselineOnMigrate: true
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: https://dev-n77kfaed5rdxvufs.eu.auth0.com/
+
+okta:
+  oauth2:
+    audience: http://localhost:8080/
+    issuer: https://dev-n77kfaed5rdxvufs.eu.auth0.com/
+
+auth0:
+  audience: dev-n77kfaed5rdxvufs.eu.auth0.com
+  domain:

@@ -8,7 +8,7 @@ import UnityDwell.com.UnityDwell.error.ResourceNotFoundException;
 import UnityDwell.com.UnityDwell.model.Bill;
 import UnityDwell.com.UnityDwell.model.BillTitle;
 import UnityDwell.com.UnityDwell.model.HousingAssociation;
-import UnityDwell.com.UnityDwell.model.OwnerOfFlat;
+import UnityDwell.com.UnityDwell.model.users.OwnerOfFlat;
 import UnityDwell.com.UnityDwell.repository.BillRepository;
 import UnityDwell.com.UnityDwell.repository.BillTitleRepository;
 import UnityDwell.com.UnityDwell.repository.HousingAssociationRepository;
@@ -132,7 +132,7 @@ public class BillServiceTest {
         Bill bill = Bill.builder().build();
         BillResponse expectedResponse = BillResponse.builder().build();
         HousingAssociation housingAssociation = HousingAssociation.builder().id(UUID.randomUUID()).build();
-        OwnerOfFlat owner = OwnerOfFlat.builder().id(UUID.randomUUID()).build();
+        OwnerOfFlat owner = OwnerOfFlat.builder().build();
         BillTitle billTitle = BillTitle.builder().id(UUID.randomUUID()).title("title").build();
         request.setBillTitleId(billTitle.getId());
         request.setFlatOwnerId(owner.getId());

@@ -5,7 +5,7 @@ import UnityDwell.com.UnityDwell.dto.response.BillResponse;
 import UnityDwell.com.UnityDwell.model.Bill;
 import UnityDwell.com.UnityDwell.model.BillTitle;
 import UnityDwell.com.UnityDwell.model.HousingAssociation;
-import UnityDwell.com.UnityDwell.model.OwnerOfFlat;
+import UnityDwell.com.UnityDwell.model.users.OwnerOfFlat;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;

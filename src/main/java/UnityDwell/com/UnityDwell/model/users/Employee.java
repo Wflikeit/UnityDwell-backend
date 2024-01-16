@@ -1,21 +1,20 @@
-package UnityDwell.com.UnityDwell.model;
+package UnityDwell.com.UnityDwell.model.users;
 
+import UnityDwell.com.UnityDwell.model.Address;
+import UnityDwell.com.UnityDwell.model.HousingAssociation;
 import lombok.*;
 
 import java.time.LocalDate;
-import java.util.UUID;
 
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Setter
 @Getter
-public class Employee {
-    private UUID id;
+public class Employee extends User {
     private String name;
     private String surname;
     private String phoneNumber;
-    private String email;
     private String gender;
     private double salary;
     private LocalDate dateOfEmployment;

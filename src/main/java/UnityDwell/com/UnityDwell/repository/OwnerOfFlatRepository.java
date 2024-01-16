@@ -1,8 +1,8 @@
 package UnityDwell.com.UnityDwell.repository;
 
 import UnityDwell.com.UnityDwell.model.Flat;
-import UnityDwell.com.UnityDwell.model.OwnerOfFlat;
 import UnityDwell.com.UnityDwell.model.Resident;
+import UnityDwell.com.UnityDwell.model.users.OwnerOfFlat;
 import UnityDwell.com.UnityDwell.repository.sqlProvider.OwnerOfFlatSqlProvider;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
@@ -17,6 +17,7 @@ public interface OwnerOfFlatRepository {
     @SelectProvider(OwnerOfFlatSqlProvider.class)
     @Results(id = "OwnerOfFlatMap", value = {
             @Result(property = "id", column = "NR_MIESZKANCA"),
+            @Result(property = "email", column = "EMAIL"),
             @Result(property = "nip", column = "NIP_FIRMY"),
             @Result(property = "pesel", column = "PESEL"),
             @Result(property = "phoneNumber", column = "NR_TELEFONU"),
@@ -34,9 +35,11 @@ public interface OwnerOfFlatRepository {
     Optional<OwnerOfFlat> findOwnerOfFlatById(UUID flatOwnerId);
 
 
-
     @SelectProvider(OwnerOfFlatSqlProvider.class)
     @ResultMap("OwnerOfFlatMap")
     List<OwnerOfFlat> findAllOwnersOfFlat(UUID flatId);
+    @SelectProvider(OwnerOfFlatSqlProvider.class)
+    @ResultMap("OwnerOfFlatMap")
+    Optional<OwnerOfFlat> findOwnerOfFlatByEmail(String email);
 
 }
