@@ -36,7 +36,7 @@ public class JWTService {
                 .findFirst().orElse(null);
     }
 
-    public boolean isTokenValid(String jwtToken, User userDetails) {
+    public boolean  isTokenValid(String jwtToken, User userDetails) {
         final String userName = extractUserEmail(jwtToken);
         final String userId = extractUserId(jwtToken);
         return userName.equals(userDetails.getUsername()) && userId.equals(userDetails.getId().toString());
