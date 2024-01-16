@@ -1,5 +1,6 @@
 package UnityDwell.com.UnityDwell.repository;
 
+import UnityDwell.com.UnityDwell.dto.response.EmployeeResponse;
 import UnityDwell.com.UnityDwell.model.Address;
 import UnityDwell.com.UnityDwell.model.Employee;
 import UnityDwell.com.UnityDwell.model.HousingAssociation;
@@ -7,6 +8,7 @@ import UnityDwell.com.UnityDwell.repository.sqlProvider.EmployeeSqlProvider;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -38,4 +40,13 @@ public interface EmployeeRepository {
             )
     })
     Optional<Employee> findEmployeeById(UUID employeeId);
+    @SelectProvider(EmployeeSqlProvider.class)
+    @ResultMap("EmployeeMap")
+    List<Employee> getEmployeesOfHA(UUID housingAssociatioId);
+    @InsertProvider(EmployeeSqlProvider.class)
+    EmployeeResponse save(Employee employee);
+    @UpdateProvider(EmployeeSqlProvider.class)
+    EmployeeResponse update(Employee employee);
+    @DeleteProvider(EmployeeSqlProvider.class)
+    void delete(UUID employeeId);
 }
