@@ -20,7 +20,6 @@ public class AddressController {
     @Secured({"ROLE_ADMIN", "ROLE_EMPLOYEE", "ROLE_FLAT_OWNER"})
     @GetMapping(value = "/{id}")
     public AddressResponse getHousingAddress(@PathVariable("id") UUID addressId) {
-        System.out.println("controller");
         return addressService.getAddressByHousingAssociationId(addressId);
     }
     @Secured({"ROLE_ADMIN", "ROLE_EMPLOYEE", "ROLE_FLAT_OWNER"})
