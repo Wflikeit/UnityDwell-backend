@@ -2,7 +2,7 @@ package UnityDwell.com.UnityDwell.repository;
 
 import UnityDwell.com.UnityDwell.model.Building;
 import UnityDwell.com.UnityDwell.model.Flat;
-import UnityDwell.com.UnityDwell.model.OwnerOfFlat;
+import UnityDwell.com.UnityDwell.model.users.OwnerOfFlat;
 import UnityDwell.com.UnityDwell.repository.sqlProvider.FlatSqlProvider;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
@@ -19,7 +19,7 @@ public interface FlatRepository {
             @Result(property = "id", column = "ID_MIESZKANIA"),
             @Result(property = "numberOfFlat", column = "NR_MIESZKANIA"),
             @Result(property = "space", column = "POWIERZCHNIA"),
-            @Result(property = "amountOfRooms", column = "LICZBA_POKOI"),
+            @Result(property = "numberOfRooms", column = "LICZBA_POKOI"),
             @Result(property = "dateOfLastGasControl", column = "DATA_KONTROLI_GAZOWEJ"),
             @Result(property = "building",
                     javaType = Building.class,
@@ -28,10 +28,10 @@ public interface FlatRepository {
                             "BuildingsRepository.getBuildingById")
             ),
             @Result(property = "flatOwners",
-            javaType = OwnerOfFlat.class,
-            column = "NR_MIESZKANCA",
-            many = @Many(select = "UnityDwell.com.UnityDwell.repository." +
-                    "OwnerOfFlatRepository.findAllFlatsOfOwner"))
+                    javaType = OwnerOfFlat.class,
+                    column = "NR_MIESZKANCA",
+                    many = @Many(select = "UnityDwell.com.UnityDwell.repository." +
+                            "OwnerOfFlatRepository.findAllFlatsOfOwner"))
     })
     List<Flat> getAllFlatsInBuilding(UUID buildingId);
 
@@ -42,4 +42,13 @@ public interface FlatRepository {
     @SelectProvider(FlatSqlProvider.class)
     @ResultMap("FlatsMap")
     List<Flat> findAllFlatsOfOwner(UUID flatOwnerId);
+
+    @InsertProvider(FlatSqlProvider.class)
+    void save(Flat flat);
+
+    @DeleteProvider(FlatSqlProvider.class)
+    void delete(UUID flatId);
+
+    @UpdateProvider(FlatSqlProvider.class)
+    void update(Flat flat);
 }

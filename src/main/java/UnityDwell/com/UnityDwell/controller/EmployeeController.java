@@ -3,6 +3,7 @@ package UnityDwell.com.UnityDwell.controller;
 import UnityDwell.com.UnityDwell.dto.response.EmployeeResponse;
 import UnityDwell.com.UnityDwell.service.EmployeeService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,7 +18,8 @@ public class EmployeeController {
     private final EmployeeService employeeService;
 
     @GetMapping(value = "/{id}")
-    public EmployeeResponse getEmployee(@PathVariable("id") UUID employeeId){
+    @Secured({"ROLE_ADMIN", "ROLE_EMPLOYEE"})
+    public EmployeeResponse getEmployee(@PathVariable("id") UUID employeeId) {
         return employeeService.getEmployeeById(employeeId);
     }
 }

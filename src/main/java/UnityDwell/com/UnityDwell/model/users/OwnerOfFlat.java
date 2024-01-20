@@ -1,5 +1,7 @@
-package UnityDwell.com.UnityDwell.model;
+package UnityDwell.com.UnityDwell.model.users;
 
+import UnityDwell.com.UnityDwell.model.Flat;
+import UnityDwell.com.UnityDwell.model.Resident;
 import lombok.*;
 
 import java.util.List;
@@ -10,8 +12,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @Setter
 @Getter
-public class OwnerOfFlat {
-    private UUID id;
+public class OwnerOfFlat extends User {
     private String pesel;
     private String nip;
     private String phoneNumber;
