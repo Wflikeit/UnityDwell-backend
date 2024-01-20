@@ -1,6 +1,6 @@
 package UnityDwell.com.UnityDwell.repository.sqlProvider;
 
-import UnityDwell.com.UnityDwell.model.Employee;
+import UnityDwell.com.UnityDwell.model.users.Employee;
 import org.apache.ibatis.builder.annotation.ProviderMethodResolver;
 import org.apache.ibatis.jdbc.SQL;
 
