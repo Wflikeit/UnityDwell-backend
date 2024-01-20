@@ -30,6 +30,7 @@ public class BuildingController {
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
+    @Secured({"ROLE_ADMIN", "ROLE_EMPLOYEE"})
     public BuildingResponse addBuilding(@Validated @RequestBody CreateOrUpdateBuildingRequest request) {
         return buildingService.addNewBuilding(request);
     }
