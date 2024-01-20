@@ -1,7 +1,7 @@
 package UnityDwell.com.UnityDwell.dto.mapper;
 
 import UnityDwell.com.UnityDwell.dto.response.OwnerOfFlatResponse;
-import UnityDwell.com.UnityDwell.model.OwnerOfFlat;
+import UnityDwell.com.UnityDwell.model.users.OwnerOfFlat;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;

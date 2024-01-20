@@ -2,7 +2,7 @@ package UnityDwell.com.UnityDwell.repository;
 
 import UnityDwell.com.UnityDwell.dto.response.EmployeeResponse;
 import UnityDwell.com.UnityDwell.model.Address;
-import UnityDwell.com.UnityDwell.model.Employee;
+import UnityDwell.com.UnityDwell.model.users.Employee;
 import UnityDwell.com.UnityDwell.model.HousingAssociation;
 import UnityDwell.com.UnityDwell.repository.sqlProvider.EmployeeSqlProvider;
 import org.apache.ibatis.annotations.*;
@@ -40,6 +40,9 @@ public interface EmployeeRepository {
             )
     })
     Optional<Employee> findEmployeeById(UUID employeeId);
+    @SelectProvider(EmployeeSqlProvider.class)
+    @ResultMap("EmployeeMap")
+    Optional<Employee> findEmployeeByEmail(String employeeEmail);
     @SelectProvider(EmployeeSqlProvider.class)
     @ResultMap("EmployeeMap")
     List<Employee> getEmployeesOfHA(UUID housingAssociatioId);

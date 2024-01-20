@@ -4,6 +4,7 @@ import UnityDwell.com.UnityDwell.dto.request.CreateOrUpdateEmployeeRequest;
 import UnityDwell.com.UnityDwell.dto.response.EmployeeResponse;
 import UnityDwell.com.UnityDwell.dto.mapper.EmployeeDTOMapper;
 import UnityDwell.com.UnityDwell.error.ResourceNotFoundException;
+import UnityDwell.com.UnityDwell.model.users.Employee;
 import UnityDwell.com.UnityDwell.model.Address;
 import UnityDwell.com.UnityDwell.model.Employee;
 import UnityDwell.com.UnityDwell.model.HousingAssociation;

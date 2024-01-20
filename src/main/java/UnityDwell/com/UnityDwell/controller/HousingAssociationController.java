@@ -11,6 +11,7 @@ import UnityDwell.com.UnityDwell.service.HousingAssociationService;
 import UnityDwell.com.UnityDwell.service.PublicationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,23 +19,27 @@ import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("api/HousingAssociation")
+@RequestMapping("api/housing-association")
+@CrossOrigin(origins = "*")
 public class HousingAssociationController {
     private final HousingAssociationService housingAssociationService;
     private final PublicationService publicationService;
     private final EmployeeService employeeService;
 
     @GetMapping(value = "/{id}")
+    @Secured({"ROLE_ADMIN", "ROLE_EMPLOYEE", "ROLE_FLAT_OWNER"})
     public HousingAssociationResponse getHousingAssociation(@PathVariable("id") UUID housingAssociationId) {
         return housingAssociationService.getHousingAssociationById(housingAssociationId);
     }
 
     @GetMapping("/{id}/buildings")
+    @Secured({"ROLE_ADMIN", "ROLE_EMPLOYEE"})
     public BuildingsResponse getBuildingsFromHousingAssociation(@PathVariable("id") UUID housingAssociationId) {
         return housingAssociationService.getBuildings(housingAssociationId);
     }
 
     @GetMapping("/{id}/publications")
+    @Secured({"ROLE_ADMIN", "ROLE_EMPLOYEE", "ROLE_FLAT_OWNER"})
     public PublicationsResponse getPublicationsFromHousingAssociation(@PathVariable("id") UUID id) {
         return housingAssociationService.getPublicationsByHousingAssociationId(id);
     }
@@ -46,6 +51,7 @@ public class HousingAssociationController {
 
     @PostMapping("/{housingAssociationId}/publications")
     @ResponseStatus(HttpStatus.CREATED)
+    @Secured({"ROLE_ADMIN", "ROLE_EMPLOYEE"})
     public PublicationResponse addPublication(@Validated @RequestBody CreateOrUpdatePublicationRequest request,
                                               @PathVariable UUID housingAssociationId) {
         return publicationService.addNewPublication(request, housingAssociationId);

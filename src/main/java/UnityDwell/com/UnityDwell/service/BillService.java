@@ -8,7 +8,7 @@ import UnityDwell.com.UnityDwell.error.ResourceNotFoundException;
 import UnityDwell.com.UnityDwell.model.Bill;
 import UnityDwell.com.UnityDwell.model.BillTitle;
 import UnityDwell.com.UnityDwell.model.HousingAssociation;
-import UnityDwell.com.UnityDwell.model.OwnerOfFlat;
+import UnityDwell.com.UnityDwell.model.users.OwnerOfFlat;
 import UnityDwell.com.UnityDwell.repository.BillRepository;
 import UnityDwell.com.UnityDwell.repository.BillTitleRepository;
 import UnityDwell.com.UnityDwell.repository.HousingAssociationRepository;
