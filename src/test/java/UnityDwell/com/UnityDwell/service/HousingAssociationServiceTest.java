@@ -1,6 +1,9 @@
 package UnityDwell.com.UnityDwell.service;
 
+import UnityDwell.com.UnityDwell.dto.listResponses.EmployeesResponse;
+import UnityDwell.com.UnityDwell.dto.mapper.EmployeeDTOMapper;
 import UnityDwell.com.UnityDwell.dto.response.BuildingResponse;
+import UnityDwell.com.UnityDwell.dto.response.EmployeeResponse;
 import UnityDwell.com.UnityDwell.dto.response.HousingAssociationResponse;
 import UnityDwell.com.UnityDwell.dto.response.PublicationResponse;
 import UnityDwell.com.UnityDwell.dto.listResponses.BuildingsResponse;
@@ -12,7 +15,9 @@ import UnityDwell.com.UnityDwell.error.ResourceNotFoundException;
 import UnityDwell.com.UnityDwell.model.Building;
 import UnityDwell.com.UnityDwell.model.HousingAssociation;
 import UnityDwell.com.UnityDwell.model.Publication;
+import UnityDwell.com.UnityDwell.model.users.Employee;
 import UnityDwell.com.UnityDwell.repository.BuildingsRepository;
+import UnityDwell.com.UnityDwell.repository.EmployeeRepository;
 import UnityDwell.com.UnityDwell.repository.HousingAssociationRepository;
 import UnityDwell.com.UnityDwell.repository.PublicationRepository;
 import org.junit.jupiter.api.Test;
@@ -44,6 +49,10 @@ public class HousingAssociationServiceTest {
     PublicationDTOMapper publicationDTOMapper;
     @Mock
     BuildingDTOMapper buildingDTOMapper;
+    @Mock
+    EmployeeRepository employeeRepository;
+    @Mock
+    EmployeeDTOMapper employeeDTOMapper;
     @InjectMocks
     HousingAssociationService housingAssociationService;
 
@@ -123,13 +132,13 @@ public class HousingAssociationServiceTest {
         HousingAssociation housingAssociation = HousingAssociation.builder().build();
         Building building = Building.builder().id(id).build();
         BuildingResponse buildingResponse = BuildingResponse.builder().id(id).build();
-        List<BuildingResponse> expectedPublicationResponseList = List.of(buildingResponse);
+        List<BuildingResponse> expectedBuildingResponseList = List.of(buildingResponse);
         BuildingsResponse expectedBuildingsResponse = BuildingsResponse
-                .builder().buildings(expectedPublicationResponseList).build();
+                .builder().buildings(expectedBuildingResponseList).build();
 
         when(housingAssociationRepository.findHousingAssociationById(id)).thenReturn(Optional.of(housingAssociation));
         when(buildingsRepository.getBuildingsInHousingAssociation(id)).thenReturn(List.of(building));
-        when(buildingDTOMapper.mapToBuildingList(List.of(building))).thenReturn(expectedPublicationResponseList);
+        when(buildingDTOMapper.mapToBuildingList(List.of(building))).thenReturn(expectedBuildingResponseList);
 
         // Act
         BuildingsResponse actualBuildingsResponse = housingAssociationService
@@ -141,6 +150,23 @@ public class HousingAssociationServiceTest {
                 .ignoringFields("id")
                 .isEqualTo(expectedBuildingsResponse);
     }
-
-
+    @Test
+    public void testGetEmployees_WhenHousingAssociationExists() {
+        // Arrange
+        UUID id = UUID.randomUUID();
+        HousingAssociation housingAssociation = HousingAssociation.builder().build();
+        Employee employee = Employee.builder().build();
+        EmployeeResponse employeeResponse = EmployeeResponse.builder().build();
+        List<EmployeeResponse> expectedEmployeeResponseList = List.of(employeeResponse);
+        EmployeesResponse expectedEmployeesResponse = EmployeesResponse.builder()
+                .employees(expectedEmployeeResponseList).build();
+        when(housingAssociationRepository.findHousingAssociationById(id)).thenReturn(Optional.of(housingAssociation));
+        when(employeeRepository.getEmployeesOfHA(id)).thenReturn(List.of(employee));
+        when(employeeDTOMapper.mapToEmployeeList(List.of(employee))).thenReturn(expectedEmployeeResponseList);
+        // Act & Assert
+        assertThat(housingAssociationService.getEmployeesOfHA(id))
+                .usingRecursiveComparison()
+                .ignoringFields("id")
+                .isEqualTo(expectedEmployeesResponse);
+    }
 }

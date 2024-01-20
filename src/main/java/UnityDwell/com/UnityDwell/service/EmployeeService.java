@@ -1,6 +1,5 @@
 package UnityDwell.com.UnityDwell.service;
 
-import UnityDwell.com.UnityDwell.dto.listResponses.EmployeesResponse;
 import UnityDwell.com.UnityDwell.dto.request.CreateOrUpdateEmployeeRequest;
 import UnityDwell.com.UnityDwell.dto.response.EmployeeResponse;
 import UnityDwell.com.UnityDwell.dto.mapper.EmployeeDTOMapper;
@@ -18,7 +17,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -37,15 +35,7 @@ public class EmployeeService implements UserDetailsService {
         return employeeDTOMapper.mapTo(employee);
     }
 
-    @Transactional(readOnly = true)
-    public EmployeesResponse getEmployeesOfHA(UUID housingAssociationId) {
-        housingAssociationRepository.findHousingAssociationById(housingAssociationId)
-                .orElseThrow(() -> new ResourceNotFoundException(String.format("Housing association with id %s not found", housingAssociationId)));
-        List<Employee> employees = employeeRepository.getEmployeesOfHA(housingAssociationId);
-        return EmployeesResponse.builder()
-                .employees(employeeDTOMapper.mapToEmployeeList(employees))
-                .build();
-    }
+
 
     @Transactional
     public EmployeeResponse addNewEmployee(CreateOrUpdateEmployeeRequest request) {

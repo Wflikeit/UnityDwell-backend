@@ -45,7 +45,7 @@ public interface EmployeeRepository {
     Optional<Employee> findEmployeeByEmail(String employeeEmail);
     @SelectProvider(EmployeeSqlProvider.class)
     @ResultMap("EmployeeMap")
-    List<Employee> getEmployeesOfHA(UUID housingAssociatioId);
+    List<Employee> getEmployeesOfHA(UUID housingAssociationId);
     @InsertProvider(EmployeeSqlProvider.class)
     EmployeeResponse save(Employee employee);
     @UpdateProvider(EmployeeSqlProvider.class)

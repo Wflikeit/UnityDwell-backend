@@ -1,5 +1,7 @@
 package UnityDwell.com.UnityDwell.service;
 
+import UnityDwell.com.UnityDwell.dto.listResponses.EmployeesResponse;
+import UnityDwell.com.UnityDwell.dto.mapper.EmployeeDTOMapper;
 import UnityDwell.com.UnityDwell.dto.response.HousingAssociationResponse;
 import UnityDwell.com.UnityDwell.dto.response.PublicationResponse;
 import UnityDwell.com.UnityDwell.dto.listResponses.BuildingsResponse;
@@ -10,7 +12,9 @@ import UnityDwell.com.UnityDwell.dto.mapper.PublicationDTOMapper;
 import UnityDwell.com.UnityDwell.error.ResourceNotFoundException;
 import UnityDwell.com.UnityDwell.model.Building;
 import UnityDwell.com.UnityDwell.model.HousingAssociation;
+import UnityDwell.com.UnityDwell.model.users.Employee;
 import UnityDwell.com.UnityDwell.repository.BuildingsRepository;
+import UnityDwell.com.UnityDwell.repository.EmployeeRepository;
 import UnityDwell.com.UnityDwell.repository.HousingAssociationRepository;
 import UnityDwell.com.UnityDwell.repository.PublicationRepository;
 import lombok.RequiredArgsConstructor;
@@ -30,6 +34,8 @@ public class HousingAssociationService {
     private final PublicationRepository publicationRepository;
     private final PublicationDTOMapper publicationDTOMapper;
     private final BuildingDTOMapper buildingDTOMapper;
+    private final EmployeeDTOMapper employeeDTOMapper;
+    private final EmployeeRepository employeeRepository;
 
     @Transactional(readOnly = true)
     public HousingAssociationResponse getHousingAssociationById(UUID housingAssociationId) {
@@ -69,6 +75,16 @@ public class HousingAssociationService {
 
         return BuildingsResponse.builder()
                 .buildings(buildingDTOMapper.mapToBuildingList(buildingList))
+                .build();
+    }
+
+    @Transactional(readOnly = true)
+    public EmployeesResponse getEmployeesOfHA(UUID housingAssociationId) {
+        housingAssociationRepository.findHousingAssociationById(housingAssociationId)
+                .orElseThrow(() -> new ResourceNotFoundException(String.format("Housing association with id %s not found", housingAssociationId)));
+        List<Employee> employees = employeeRepository.getEmployeesOfHA(housingAssociationId);
+        return EmployeesResponse.builder()
+                .employees(employeeDTOMapper.mapToEmployeeList(employees))
                 .build();
     }
 }

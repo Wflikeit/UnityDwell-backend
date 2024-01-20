@@ -6,7 +6,6 @@ import UnityDwell.com.UnityDwell.dto.listResponses.PublicationsResponse;
 import UnityDwell.com.UnityDwell.dto.request.CreateOrUpdatePublicationRequest;
 import UnityDwell.com.UnityDwell.dto.response.HousingAssociationResponse;
 import UnityDwell.com.UnityDwell.dto.response.PublicationResponse;
-import UnityDwell.com.UnityDwell.service.EmployeeService;
 import UnityDwell.com.UnityDwell.service.HousingAssociationService;
 import UnityDwell.com.UnityDwell.service.PublicationService;
 import lombok.RequiredArgsConstructor;
@@ -24,7 +23,6 @@ import java.util.UUID;
 public class HousingAssociationController {
     private final HousingAssociationService housingAssociationService;
     private final PublicationService publicationService;
-    private final EmployeeService employeeService;
 
     @GetMapping(value = "/{id}")
     @Secured({"ROLE_ADMIN", "ROLE_EMPLOYEE", "ROLE_FLAT_OWNER"})
@@ -45,8 +43,9 @@ public class HousingAssociationController {
     }
 
     @GetMapping("/{id}/employees")
+    @Secured({"ROLE_ADMIN"})
     public EmployeesResponse getEmployeesFromHousingAssociation(@PathVariable("id") UUID id) {
-        return employeeService.getEmployeesOfHA(id);
+        return housingAssociationService.getEmployeesOfHA(id);
     }
 
     @PostMapping("/{housingAssociationId}/publications")
