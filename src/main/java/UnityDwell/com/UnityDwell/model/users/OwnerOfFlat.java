@@ -5,7 +5,6 @@ import UnityDwell.com.UnityDwell.model.Resident;
 import lombok.*;
 
 import java.util.List;
-import java.util.UUID;
 
 @Builder
 @NoArgsConstructor
@@ -18,9 +17,4 @@ public class OwnerOfFlat extends User {
     private String phoneNumber;
     private List<Flat> flats;
     private Resident resident;
-
-    @Override
-    public Role getRole() {
-        return Role.FLAT_OWNER;
-    }
 }
