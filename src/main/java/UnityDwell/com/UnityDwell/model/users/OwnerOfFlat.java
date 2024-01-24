@@ -18,4 +18,9 @@ public class OwnerOfFlat extends User {
     private String phoneNumber;
     private List<Flat> flats;
     private Resident resident;
+
+    @Override
+    public Role getRole() {
+        return Role.FLAT_OWNER;
+    }
 }

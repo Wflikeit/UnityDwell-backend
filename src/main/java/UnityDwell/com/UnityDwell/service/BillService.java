@@ -9,6 +9,7 @@ import UnityDwell.com.UnityDwell.model.Bill;
 import UnityDwell.com.UnityDwell.model.BillTitle;
 import UnityDwell.com.UnityDwell.model.HousingAssociation;
 import UnityDwell.com.UnityDwell.model.users.OwnerOfFlat;
+import UnityDwell.com.UnityDwell.model.users.Role;
 import UnityDwell.com.UnityDwell.repository.BillRepository;
 import UnityDwell.com.UnityDwell.repository.BillTitleRepository;
 import UnityDwell.com.UnityDwell.repository.HousingAssociationRepository;
@@ -44,6 +45,8 @@ public class BillService {
                 .orElseThrow(() -> new ResourceNotFoundException(String
                         .format("Housing association with id %s not found", housingAssociationId)));
         List<Bill> bills = billRepository.getAllHousingAssociationBills(housingAssociationId);
+// temporary solution due to deadline
+        bills.forEach(bill -> bill.getFlatOwner().setRole(Role.FLAT_OWNER));
         return BillsResponse.builder().bills(billDTOMapper.mapToBillList(bills)).build();
     }
 
