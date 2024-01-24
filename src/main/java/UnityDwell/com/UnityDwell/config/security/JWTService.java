@@ -52,7 +52,7 @@ public class JWTService {
         Algorithm algorithm = Algorithm.RSA256((RSAPublicKey) getPublicKey(jwt), null);
         JWTVerifier verifier = JWT.require(algorithm)
                 .withIssuer(tenantURI)
-                .acceptExpiresAt(3)
+                .ignoreIssuedAt() //temporary solution
                 .build();
         verifier.verify(jwtToken);
     }
