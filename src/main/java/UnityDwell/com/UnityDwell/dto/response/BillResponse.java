@@ -15,7 +15,8 @@ public class BillResponse {
     private UUID id;
     private double amount;
     private LocalDate DateOfPublishing;
-    private OwnerOfFlatResponse owner;
+    private UUID flatOwnerId;
+    private String flatOwnerPhoneNumber;
     private HousingAssociation housingAssociation;
     private String title;
 }
