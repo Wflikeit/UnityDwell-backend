@@ -6,6 +6,7 @@ import UnityDwell.com.UnityDwell.model.Bill;
 import UnityDwell.com.UnityDwell.model.BillTitle;
 import UnityDwell.com.UnityDwell.model.HousingAssociation;
 import UnityDwell.com.UnityDwell.model.users.OwnerOfFlat;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -14,7 +15,10 @@ import java.util.Objects;
 import java.util.UUID;
 
 @Component
+@RequiredArgsConstructor
 public class BillDTOMapper {
+
+    private final OwnerOfFlatDTOMapper ownerOfFlatDTOMapper;
 
     public List<BillResponse> mapToBillList(List<Bill> bills) {
 
@@ -23,7 +27,7 @@ public class BillDTOMapper {
                         .id(bill.getId())
                         .amount(bill.getAmount())
                         .DateOfPublishing(bill.getDateOfPublishing())
-                        .owner(bill.getFlatOwner())
+                        .owner(ownerOfFlatDTOMapper.mapToOwnerOfFlat(bill.getFlatOwner()))
                         .housingAssociation(bill.getHousingAssociation())
                         .title(bill.getBillTitle().getTitle())
                         .build())
@@ -47,7 +51,7 @@ public class BillDTOMapper {
                 .id(bill.getId())
                 .amount(bill.getAmount())
                 .DateOfPublishing(bill.getDateOfPublishing())
-                .owner(bill.getFlatOwner())
+                .owner(ownerOfFlatDTOMapper.mapToOwnerOfFlat(bill.getFlatOwner()))
                 .housingAssociation(bill.getHousingAssociation())
                 .title(bill.getBillTitle().getTitle())
                 .build();
