@@ -17,7 +17,7 @@ public class BuildingResponse {
     private LocalDate dateOfCommissioning;
     private LocalDate dateOfMajorRenovation;
     private int numberOfFloors;
-    private boolean intendedForLiving;
+    private char intendedForLiving;
     private Address address;
     private UUID idOfHousingAssociation;
 
