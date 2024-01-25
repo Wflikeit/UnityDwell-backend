@@ -24,4 +24,7 @@ public interface ResidentRepository {
                             "FlatRepository.findFlatById"))
     })
     Optional<Resident> findResidentById(UUID id);
+
+    @InsertProvider(ResidentSqlProvider.class)
+    void save(Resident resident);
 }

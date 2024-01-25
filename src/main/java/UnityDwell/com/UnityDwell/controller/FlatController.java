@@ -2,8 +2,11 @@ package UnityDwell.com.UnityDwell.controller;
 
 import UnityDwell.com.UnityDwell.dto.listResponses.OwnersOfFlatsResponse;
 import UnityDwell.com.UnityDwell.dto.request.CreateOrUpdateFlatRequest;
+import UnityDwell.com.UnityDwell.dto.request.CreateOrUpdateResidentRequest;
 import UnityDwell.com.UnityDwell.dto.response.FlatResponse;
+import UnityDwell.com.UnityDwell.dto.response.ResidentResponse;
 import UnityDwell.com.UnityDwell.service.FlatService;
+import UnityDwell.com.UnityDwell.service.ResidentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.annotation.Secured;
@@ -17,7 +20,7 @@ import java.util.UUID;
 @RequestMapping("api/flat")
 public class FlatController {
     private final FlatService flatService;
-
+    private final ResidentService residentService;
 
     @GetMapping(value = "/{flatId}/owners")
     @Secured({"ROLE_ADMIN", "ROLE_EMPLOYEE"})
@@ -44,5 +47,13 @@ public class FlatController {
     public FlatResponse updateFlat(@Validated @RequestBody CreateOrUpdateFlatRequest request,
                                    @PathVariable("id") UUID id) {
         return flatService.updateFlat(request, id);
+    }
+
+    @PostMapping("/{id}")
+    @ResponseStatus(HttpStatus.CREATED)
+    @Secured({"ROLE_ADMIN", "ROLE_EMPLOYEE", "ROLE_FLAT_OWNER"})
+    public ResidentResponse addResidentToFlat(@Validated @RequestBody CreateOrUpdateResidentRequest request,
+                                              @PathVariable("id") UUID id) {
+        return residentService.addResident(request, id);
     }
 }
