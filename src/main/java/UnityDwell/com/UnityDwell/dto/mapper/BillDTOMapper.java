@@ -21,13 +21,13 @@ public class BillDTOMapper {
     private final OwnerOfFlatDTOMapper ownerOfFlatDTOMapper;
 
     public List<BillResponse> mapToBillList(List<Bill> bills) {
-
         return bills == null ? new ArrayList<>() : bills.stream().filter(Objects::nonNull)
                 .map(bill -> BillResponse.builder()
                         .id(bill.getId())
                         .amount(bill.getAmount())
                         .DateOfPublishing(bill.getDateOfPublishing())
-                        .owner(ownerOfFlatDTOMapper.mapToOwnerOfFlat(bill.getFlatOwner()))
+                        .flatOwnerId(ownerOfFlatDTOMapper.mapToOwnerOfFlat(bill.getFlatOwner()).getId())
+                        .flatOwnerPhoneNumber(ownerOfFlatDTOMapper.mapToOwnerOfFlat(bill.getFlatOwner()).getPhoneNumber())
                         .housingAssociation(bill.getHousingAssociation())
                         .title(bill.getBillTitle().getTitle())
                         .build())
@@ -51,7 +51,8 @@ public class BillDTOMapper {
                 .id(bill.getId())
                 .amount(bill.getAmount())
                 .DateOfPublishing(bill.getDateOfPublishing())
-                .owner(ownerOfFlatDTOMapper.mapToOwnerOfFlat(bill.getFlatOwner()))
+                .flatOwnerPhoneNumber(ownerOfFlatDTOMapper.mapToOwnerOfFlat(bill.getFlatOwner()).getPhoneNumber())
+                .flatOwnerId(ownerOfFlatDTOMapper.mapToOwnerOfFlat(bill.getFlatOwner()).getId())
                 .housingAssociation(bill.getHousingAssociation())
                 .title(bill.getBillTitle().getTitle())
                 .build();
