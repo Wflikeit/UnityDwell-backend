@@ -24,7 +24,7 @@ public class BuildingDTOMapper {
                         .dateOfCommissioning(building.getDateOfCommissioning())
                         .dateOfMajorRenovation(building.getDateOfMajorRenovation())
                         .numberOfFloors(building.getNumberOfFloors())
-                        .intendedForLiving(building.isIntendedForLiving())
+                        .intendedForLiving(building.getIntendedForLiving())
                         .idOfHousingAssociation(building.getHousingAssociation().getId())
                         .build())
                 .toList();
@@ -39,7 +39,7 @@ public class BuildingDTOMapper {
                 .dateOfCommissioning(request.getDateOfCommissioning())
                 .dateOfMajorRenovation(request.getDateOfMajorRenovation())
                 .numberOfFloors(request.getNumberOfFloors())
-                .intendedForLiving(request.isIntendedForLiving())
+                .intendedForLiving(request.getIntendedForLiving())
                 .housingAssociation(housingAssociation)
                 .build();
     }
@@ -51,7 +51,7 @@ public class BuildingDTOMapper {
                 .dateOfCommissioning(building.getDateOfCommissioning())
                 .dateOfMajorRenovation(building.getDateOfMajorRenovation())
                 .numberOfFloors(building.getNumberOfFloors())
-                .intendedForLiving(building.isIntendedForLiving())
+                .intendedForLiving(building.getIntendedForLiving())
                 .address(building.getAddress())
                 .idOfHousingAssociation(building.getHousingAssociation().getId())
                 .build();
