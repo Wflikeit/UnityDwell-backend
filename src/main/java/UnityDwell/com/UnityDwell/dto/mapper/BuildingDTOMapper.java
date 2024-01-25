@@ -39,7 +39,7 @@ public class BuildingDTOMapper {
                 .dateOfCommissioning(request.getDateOfCommissioning())
                 .dateOfMajorRenovation(request.getDateOfMajorRenovation())
                 .numberOfFloors(request.getNumberOfFloors())
-                .intendedForLiving(request.getIntendedForLiving())
+                .intendedForLiving(request.isIntendedForLiving() ? 'T' : 'N')
                 .housingAssociation(housingAssociation)
                 .build();
     }

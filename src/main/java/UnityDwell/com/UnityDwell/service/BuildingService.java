@@ -84,7 +84,7 @@ public class BuildingService {
         building.setDateOfThermalModernization(request.getDateOfThermalModernization());
         building.setHousingAssociation(housingAssociation);
         building.setNumberOfFloors(request.getNumberOfFloors());
-        building.setIntendedForLiving(request.getIntendedForLiving());
+        building.setIntendedForLiving(request.isIntendedForLiving() ? 'T' : 'N');
         buildingsRepository.update(building);
         return buildingDTOMapper.mapTo(building);
     }

@@ -1,10 +1,8 @@
 package UnityDwell.com.UnityDwell.dto.request;
 
-import UnityDwell.com.UnityDwell.validation.CharTN;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.PastOrPresent;
 import lombok.Builder;
 import lombok.Data;
 
@@ -29,8 +27,7 @@ public class CreateOrUpdateBuildingRequest {
     private int numberOfFloors;
 
     @NotNull(message = "Intended for living is required")
-    @CharTN
-    private char intendedForLiving;
+    private boolean intendedForLiving;
 
     @NotNull(message = "Housing association id is required")
     private UUID housingAssociationId;
