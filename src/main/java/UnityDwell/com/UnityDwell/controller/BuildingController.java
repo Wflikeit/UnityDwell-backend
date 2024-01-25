@@ -28,9 +28,9 @@ public class BuildingController {
         return buildingService.getFlatsInBuilding(buildingId);
     }
 
-//    @Secured({"ROLE_ADMIN", "ROLE_EMPLOYEE"})
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
+    @Secured({"ROLE_ADMIN", "ROLE_EMPLOYEE"})
     public BuildingResponse addBuilding(@Validated @RequestBody CreateOrUpdateBuildingRequest request) {
         return buildingService.addNewBuilding(request);
     }
