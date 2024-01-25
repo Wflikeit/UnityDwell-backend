@@ -21,4 +21,14 @@ public class OwnerOfFlatDTOMapper {
                         .build())
                 .toList();
     }
+
+    public OwnerOfFlatResponse mapToOwnerOfFlat(OwnerOfFlat owner){
+        return OwnerOfFlatResponse.builder()
+                        .id(owner.getId())
+                        .pesel(owner.getPesel())
+                        .nip(owner.getNip())
+                        .phoneNumber(owner.getPhoneNumber())
+                        .resident(owner.getResident())
+                        .build();
+    }
 }
