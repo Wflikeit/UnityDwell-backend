@@ -13,4 +13,11 @@ public class BillTitleSqlProvider implements ProviderMethodResolver {
                 .WHERE("ID_TYTULU_RACHUNKU = #{billTitleId}")
                 .toString();
     }
+    public static String getAllBillTitles(UUID billTitleId){
+        return new SQL()
+                .SELECT("ID_TYTULU_RACHUNKU", "TYTUL")
+                .FROM("C##MACIEK.TYTULY_RACHUNKU")
+                .toString();
+    }
+
 }

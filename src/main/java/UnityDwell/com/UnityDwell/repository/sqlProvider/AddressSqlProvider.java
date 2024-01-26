@@ -33,5 +33,12 @@ public class AddressSqlProvider implements ProviderMethodResolver {
                 .toString();
     }
 
+    public static String getAddressesByHousingAssociation(UUID housingAssociationId) {
+        return new SQL()
+                .SELECT("a.ID_ADRESU", "a.MIASTO", "a.ULICA", "a.NR_BUDYNKU", "a.KOD_POCZTOWY")
+                .FROM("C##MACIEK.ADRESY a")
+                .WHERE("a.ID_ADRESU = #{id}")
+                .toString();
+    }
 
 }
