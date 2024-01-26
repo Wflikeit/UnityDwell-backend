@@ -36,13 +36,22 @@ public class EmployeeService implements UserDetailsService {
     }
 
 
-
     @Transactional
     public EmployeeResponse addNewEmployee(CreateOrUpdateEmployeeRequest request) {
         HousingAssociation housingAssociation = housingAssociationRepository.findHousingAssociationById(request.getHousingAssociationId())
                 .orElseThrow(() -> new ResourceNotFoundException(String.format("Housing association with id %s not found", request.getHousingAssociationId())));
-        Address address = addressRepository.findAddressById(request.getAddressId())
-                .orElseThrow(() -> new ResourceNotFoundException(String.format("Address with id %s not found", request.getAddressId())));
+        Address address = Address.builder().build();
+        if (request.getAddressId() != null) {
+            address = addressRepository.findAddressById(request.getAddressId()).orElseThrow(() -> new ResourceNotFoundException(String
+                    .format("Address with id %s not found", request.getAddressId())));
+        } else {
+            address.setId(UUID.randomUUID());
+            address.setNumberOfBuilding(request.getNumberOfBuilding());
+            address.setCity(request.getCity());
+            address.setStreet(request.getStreet());
+            address.setPostalCode(request.getPostalCode());
+            addressRepository.save(address);
+        }
         Employee employee = employeeDTOMapper.map(request, housingAssociation, address);
         employeeRepository.save(employee);
         return employeeDTOMapper.mapTo(employee);
@@ -54,8 +63,18 @@ public class EmployeeService implements UserDetailsService {
                 .orElseThrow(() -> new ResourceNotFoundException(String.format("Employee with id %s not found", employeeId)));
         HousingAssociation housingAssociation = housingAssociationRepository.findHousingAssociationById(request.getHousingAssociationId())
                 .orElseThrow(() -> new ResourceNotFoundException(String.format("Housing association with id %s not found", request.getHousingAssociationId())));
-        Address address = addressRepository.findAddressById(request.getAddressId())
-                .orElseThrow(() -> new ResourceNotFoundException(String.format("Address with id %s not found", request.getAddressId())));
+        Address address = Address.builder().build();
+        if (request.getAddressId() != null) {
+            address = addressRepository.findAddressById(request.getAddressId()).orElseThrow(() -> new ResourceNotFoundException(String
+                    .format("Address with id %s not found", request.getAddressId())));
+        } else {
+            address.setId(UUID.randomUUID());
+            address.setNumberOfBuilding(request.getNumberOfBuilding());
+            address.setCity(request.getCity());
+            address.setStreet(request.getStreet());
+            address.setPostalCode(request.getPostalCode());
+            addressRepository.save(address);
+        }
         employee.setAddress(address);
         employee.setHousingAssociation(housingAssociation);
         employee.setName(request.getName());
