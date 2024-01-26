@@ -15,7 +15,6 @@ public class EmployeeResponse {
     private String name;
     private String surname;
     private String phoneNumber;
-    private String email;
     private String gender;
     private double salary;
     private LocalDate dateOfEmployment;

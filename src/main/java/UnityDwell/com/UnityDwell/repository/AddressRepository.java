@@ -22,11 +22,15 @@ public interface AddressRepository {
     })
     Optional<Address> findAddressById(UUID id);
 
+    @SelectProvider(AddressSqlProvider.class)
+    @ResultMap("AddressMap")
+    List<Address> getAllAddresses();
+
     @InsertProvider(AddressSqlProvider.class)
     void save(Address address);
     @DeleteProvider(AddressSqlProvider.class)
     void delete(UUID addressId);
-    @SelectProvider(AddressSqlProvider.class)
-    @ResultMap("AddressMap")
-    List<Address> getAddressesByHousingAssociation(UUID housingAssociationId);
+//    @SelectProvider(AddressSqlProvider.class)
+//    @ResultMap("AddressMap")
+//    List<Address> getAddressesByHousingAssociation(UUID housingAssociationId);
 }
