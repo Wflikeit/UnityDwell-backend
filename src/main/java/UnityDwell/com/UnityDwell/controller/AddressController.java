@@ -1,5 +1,6 @@
 package UnityDwell.com.UnityDwell.controller;
 
+import UnityDwell.com.UnityDwell.dto.listResponses.AddressesResponse;
 import UnityDwell.com.UnityDwell.dto.request.CreateOrUpdateAddressRequest;
 import UnityDwell.com.UnityDwell.dto.response.AddressResponse;
 import UnityDwell.com.UnityDwell.service.AddressService;
@@ -36,5 +37,11 @@ public class AddressController {
     @Secured({"ROLE_ADMIN", "ROLE_EMPLOYEE"})
     public void deleteAddress(@PathVariable("id") UUID addressId) {
         addressService.deleteAddress(addressId);
+    }
+
+    @GetMapping()
+    @Secured({"ROLE_ADMIN", "ROLE_EMPLOYEE", "ROLE_FLAT_OWNER"})
+    public AddressesResponse getAddresses() {
+        return addressService.getAddresses();
     }
 }

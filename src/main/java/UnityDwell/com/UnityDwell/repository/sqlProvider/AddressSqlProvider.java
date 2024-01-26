@@ -33,5 +33,10 @@ public class AddressSqlProvider implements ProviderMethodResolver {
                 .toString();
     }
 
-
+    public static String getAllAddresses() {
+        return new SQL()
+                .SELECT("a.ID_ADRESU", "a.MIASTO", "a.ULICA", "a.NR_BUDYNKU", "a.KOD_POCZTOWY")
+                .FROM("C##MACIEK.ADRESY a")
+                .toString();
+    }
 }

@@ -5,6 +5,7 @@ import UnityDwell.com.UnityDwell.repository.sqlProvider.AddressSqlProvider;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -20,6 +21,10 @@ public interface AddressRepository {
             @Result(property = "postalCode", column = "KOD_POCZTOWY")
     })
     Optional<Address> findAddressById(UUID id);
+
+    @SelectProvider(AddressSqlProvider.class)
+    @ResultMap("AddressMap")
+    List<Address> getAllAddresses();
 
     @InsertProvider(AddressSqlProvider.class)
     void save(Address address);
