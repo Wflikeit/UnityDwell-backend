@@ -20,12 +20,9 @@ public class CreateOrUpdateEmployeeRequest {
     @NotNull(message = "Phone number is required")
     @Length(min = 11, max = 11, message = "Please enter a valid phone number")
     private String phoneNumber;
-    @NotNull(message = "Email is required")
-    @Length(min = 10, max = 30, message = "Email length must be between 10 and 30 letters")
-    private String email;
     @NotNull(message = "Gender is required")
     @Pattern(regexp = "[MK]", message = "Gender must be either M or K")
-    private char gender;
+    private String gender;
     @NotNull(message = "Salary is required")
     @DecimalMin(value = "100.00", message = "Salary must be greater or equal to 100.00")
     private double salary;

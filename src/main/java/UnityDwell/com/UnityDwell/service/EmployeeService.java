@@ -84,7 +84,6 @@ public class EmployeeService implements UserDetailsService {
         employee.setGender(request.getGender());
         employee.setDateOfEmployment(request.getDateOfEmployment());
         employee.setDateOfEndOfEmployment(request.getDateOfEndOfEmployment());
-        employee.setEmail(request.getEmail());
         employeeRepository.update(employee);
         return employeeDTOMapper.mapTo(employee);
     }
