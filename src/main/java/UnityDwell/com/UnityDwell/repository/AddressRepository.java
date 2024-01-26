@@ -5,6 +5,7 @@ import UnityDwell.com.UnityDwell.repository.sqlProvider.AddressSqlProvider;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -25,4 +26,7 @@ public interface AddressRepository {
     void save(Address address);
     @DeleteProvider(AddressSqlProvider.class)
     void delete(UUID addressId);
+    @SelectProvider(AddressSqlProvider.class)
+    @ResultMap("AddressMap")
+    List<Address> getAddressesByHousingAssociation(UUID housingAssociationId);
 }
