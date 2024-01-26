@@ -48,10 +48,18 @@ public class BuildingService {
                 .findHousingAssociationById(request.getHousingAssociationId())
                 .orElseThrow(() -> new ResourceNotFoundException(String
                         .format("Housing association with id %s not found", request.getHousingAssociationId())));
-        Address address = addressRepository
-                .findAddressById(request.getAddressId())
-                .orElseThrow(() -> new ResourceNotFoundException(String
-                        .format("Address with id %s not found", request.getAddressId())));
+        Address address = Address.builder().build();
+        if (request.getAddressId() != null) {
+            address = addressRepository.findAddressById(request.getAddressId()).orElseThrow(() -> new ResourceNotFoundException(String
+                    .format("Address with id %s not found", request.getAddressId())));
+        } else {
+            address.setId(UUID.randomUUID());
+            address.setNumberOfBuilding(request.getNumberOfBuilding());
+            address.setCity(request.getCity());
+            address.setStreet(request.getStreet());
+            address.setPostalCode(request.getPostalCode());
+            addressRepository.save(address);
+        }
         Building building = buildingDTOMapper.map(request, housingAssociation, address);
         buildingsRepository.save(building);
         return buildingDTOMapper.mapTo(building);
