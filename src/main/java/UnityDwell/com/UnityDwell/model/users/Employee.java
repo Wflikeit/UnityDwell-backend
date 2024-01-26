@@ -15,7 +15,8 @@ public class Employee extends User {
     private String name;
     private String surname;
     private String phoneNumber;
-    private String gender;
+    private String email;
+    private char gender;
     private double salary;
     private LocalDate dateOfEmployment;
     private LocalDate dateOfEndOfEmployment;

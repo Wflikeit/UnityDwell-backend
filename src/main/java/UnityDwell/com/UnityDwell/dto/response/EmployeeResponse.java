@@ -16,7 +16,7 @@ public class EmployeeResponse {
     private String surname;
     private String phoneNumber;
     private String email;
-    private String gender;
+    private char gender;
     private double salary;
     private LocalDate dateOfEmployment;
     private LocalDate dateOfEndOfEmployment;

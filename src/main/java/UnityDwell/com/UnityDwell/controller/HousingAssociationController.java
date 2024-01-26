@@ -1,6 +1,7 @@
 package UnityDwell.com.UnityDwell.controller;
 
 import UnityDwell.com.UnityDwell.dto.listResponses.BuildingsResponse;
+import UnityDwell.com.UnityDwell.dto.listResponses.EmployeesResponse;
 import UnityDwell.com.UnityDwell.dto.listResponses.PublicationsResponse;
 import UnityDwell.com.UnityDwell.dto.request.CreateOrUpdatePublicationRequest;
 import UnityDwell.com.UnityDwell.dto.response.HousingAssociationResponse;
@@ -39,6 +40,12 @@ public class HousingAssociationController {
     @Secured({"ROLE_ADMIN", "ROLE_EMPLOYEE", "ROLE_FLAT_OWNER"})
     public PublicationsResponse getPublicationsFromHousingAssociation(@PathVariable("id") UUID id) {
         return housingAssociationService.getPublicationsByHousingAssociationId(id);
+    }
+
+    @GetMapping("/{id}/employees")
+    @Secured({"ROLE_ADMIN"})
+    public EmployeesResponse getEmployeesFromHousingAssociation(@PathVariable("id") UUID id) {
+        return housingAssociationService.getEmployeesOfHA(id);
     }
 
     @PostMapping("/{housingAssociationId}/publications")
