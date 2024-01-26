@@ -1,7 +1,9 @@
 package UnityDwell.com.UnityDwell.service;
 
+import UnityDwell.com.UnityDwell.dto.listResponses.BillTitlesResponse;
 import UnityDwell.com.UnityDwell.dto.listResponses.BillsResponse;
 import UnityDwell.com.UnityDwell.dto.mapper.BillDTOMapper;
+import UnityDwell.com.UnityDwell.dto.mapper.BillTitleDTOMapper;
 import UnityDwell.com.UnityDwell.dto.request.CreateOrUpdateBillRequest;
 import UnityDwell.com.UnityDwell.dto.response.BillResponse;
 import UnityDwell.com.UnityDwell.error.ResourceNotFoundException;
@@ -9,10 +11,7 @@ import UnityDwell.com.UnityDwell.model.Bill;
 import UnityDwell.com.UnityDwell.model.BillTitle;
 import UnityDwell.com.UnityDwell.model.HousingAssociation;
 import UnityDwell.com.UnityDwell.model.users.OwnerOfFlat;
-import UnityDwell.com.UnityDwell.repository.BillRepository;
-import UnityDwell.com.UnityDwell.repository.BillTitleRepository;
-import UnityDwell.com.UnityDwell.repository.HousingAssociationRepository;
-import UnityDwell.com.UnityDwell.repository.OwnerOfFlatRepository;
+import UnityDwell.com.UnityDwell.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,7 +23,9 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class BillService {
     private final BillRepository billRepository;
+    private final BillTitlesRepository billTitlesRepository;
     private final BillDTOMapper billDTOMapper;
+    private final BillTitleDTOMapper billTitleDTOMapper;
     private final OwnerOfFlatRepository ownerOfFlatRepository;
     private final HousingAssociationRepository housingAssociationRepository;
     private final BillTitleRepository billTitleRepository;
@@ -72,7 +73,8 @@ public class BillService {
     public BillResponse updateBill(CreateOrUpdateBillRequest request, UUID billId) {
         Bill bill = billRepository.findBillById(billId).orElseThrow(() -> new ResourceNotFoundException(String
                 .format("Bill with id %s not found", billId)));
-        OwnerOfFlat owner = ownerOfFlatRepository.findOwnerOfFlatById(request.getFlatOwnerId()).orElseThrow(() -> new ResourceNotFoundException(String
+        OwnerOfFlat owner = ownerOfFlatRepository.findOwnerOfFlatById(request.getFlatOwnerId())
+                .orElseThrow(() -> new ResourceNotFoundException(String
                 .format("Owner with id %s not found", request.getFlatOwnerId())));
         HousingAssociation housingAssociation = housingAssociationRepository
                 .findHousingAssociationById(request.getHousingAssociationId()).orElseThrow(() -> new ResourceNotFoundException(String
@@ -86,5 +88,15 @@ public class BillService {
         bill.setBillTitle(billTitle);
         billRepository.update(bill);
         return billDTOMapper.mapTo(bill);
+    }
+
+    @Transactional
+    public BillTitlesResponse getAllBillTitles() {
+
+        List<BillTitle> billsTitles = billTitlesRepository.getAllBillTitles();
+        return BillTitlesResponse.builder()
+                .titles(billTitleDTOMapper.mapToBillTitleList(billsTitles))
+                .build();
+
     }
 }

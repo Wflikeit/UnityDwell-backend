@@ -1,5 +1,6 @@
 package UnityDwell.com.UnityDwell.controller;
 
+import UnityDwell.com.UnityDwell.dto.listResponses.BillTitlesResponse;
 import UnityDwell.com.UnityDwell.dto.listResponses.BillsResponse;
 import UnityDwell.com.UnityDwell.dto.request.CreateOrUpdateBillRequest;
 import UnityDwell.com.UnityDwell.dto.response.BillResponse;
@@ -22,6 +23,11 @@ public class BillController {
     @Secured({"ROLE_ADMIN", "ROLE_EMPLOYEE", "ROLE_FLAT_OWNER"})
     public BillsResponse getAllBillsOfOwner(@PathVariable("ownerId") UUID ownerId) {
         return billService.getAllBillsOfOwner(ownerId);
+    }
+    @GetMapping(value = "/titles")
+    @Secured({"ROLE_ADMIN", "ROLE_EMPLOYEE"})
+    public BillTitlesResponse getAllBillsTitles() {
+        return billService.getAllBillTitles();
     }
 
     @GetMapping(value = "/housingAssociation/{housingAssociationId}")
