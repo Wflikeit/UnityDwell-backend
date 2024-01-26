@@ -33,5 +33,13 @@ public class OwnerOfFlatSqlProvider implements ProviderMethodResolver {
                 .WHERE("w.EMAIL = #{email}")
                 .toString();
     }
+
+    public static String findOwnerOfFlatByPhoneNumber(String flatOwnerPhoneNumber) {
+        return new SQL()
+                .SELECT("w.NR_MIESZKANCA", "w.PESEL", "w.NIP_FIRMY", "w.NR_TELEFONU", "w.EMAIL")
+                .FROM("WLASCICIELE_MIESZKAN w")
+                .WHERE("w.NR_TELEFONU = #{flatOwnerPhoneNumber}")
+                .toString();
+    }
 }
 

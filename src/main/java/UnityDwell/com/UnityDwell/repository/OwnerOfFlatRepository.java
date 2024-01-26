@@ -34,10 +34,15 @@ public interface OwnerOfFlatRepository {
     })
     Optional<OwnerOfFlat> findOwnerOfFlatById(UUID flatOwnerId);
 
+    @SelectProvider(OwnerOfFlatSqlProvider.class)
+    @ResultMap("OwnerOfFlatMap")
+    Optional<OwnerOfFlat> findOwnerOfFlatByPhoneNumber(String flatOwnerPhoneNumber);
+
 
     @SelectProvider(OwnerOfFlatSqlProvider.class)
     @ResultMap("OwnerOfFlatMap")
     List<OwnerOfFlat> findAllOwnersOfFlat(UUID flatId);
+
     @SelectProvider(OwnerOfFlatSqlProvider.class)
     @ResultMap("OwnerOfFlatMap")
     Optional<OwnerOfFlat> findOwnerOfFlatByEmail(String email);
