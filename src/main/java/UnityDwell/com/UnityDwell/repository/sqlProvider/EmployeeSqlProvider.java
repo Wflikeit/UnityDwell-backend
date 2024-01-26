@@ -1,8 +1,8 @@
 package UnityDwell.com.UnityDwell.repository.sqlProvider;
 
+import UnityDwell.com.UnityDwell.model.users.Employee;
 import org.apache.ibatis.builder.annotation.ProviderMethodResolver;
 import org.apache.ibatis.jdbc.SQL;
-import UnityDwell.com.UnityDwell.model.users.Employee;
 
 import java.util.UUID;
 
@@ -64,7 +64,6 @@ public class EmployeeSqlProvider implements ProviderMethodResolver {
                 .toString();
 
     }
-
     public static String findEmployeeByEmail(String email){
         return new SQL()
                 .SELECT("p.ID_PRACOWNIKA", "p.IMIE"

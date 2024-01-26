@@ -49,7 +49,7 @@ public class BuildingService {
                 .orElseThrow(() -> new ResourceNotFoundException(String
                         .format("Housing association with id %s not found", request.getHousingAssociationId())));
         Address address = Address.builder().build();
-        if (request.getAddressId() != null) {
+        if(request.getAddressId() != null) {
             address = addressRepository.findAddressById(request.getAddressId()).orElseThrow(() -> new ResourceNotFoundException(String
                     .format("Address with id %s not found", request.getAddressId())));
         } else {

@@ -1,5 +1,6 @@
 package UnityDwell.com.UnityDwell.service;
 
+import UnityDwell.com.UnityDwell.dto.listResponses.AddressesResponse;
 import UnityDwell.com.UnityDwell.dto.mapper.AddressDTOMapper;
 import UnityDwell.com.UnityDwell.dto.request.CreateOrUpdateAddressRequest;
 import UnityDwell.com.UnityDwell.dto.response.AddressResponse;
@@ -41,5 +42,17 @@ public class AddressService {
                 .orElseThrow(() -> new ResourceNotFoundException(String
                         .format("Address with id %s not found", addressId)));
         addressRepository.delete(addressId);
+    }
+
+    @Transactional(readOnly = true)
+    public AddressesResponse getAddresses() {
+        return AddressesResponse.builder().addresses(addressRepository.getAllAddresses().stream().map(address ->
+                AddressResponse.builder()
+                        .id(address.getId())
+                        .city(address.getCity())
+                        .street(address.getStreet())
+                        .postalCode(address.getPostalCode())
+                        .numberOfBuilding(address.getNumberOfBuilding())
+                        .build()).toList()).build();
     }
 }
