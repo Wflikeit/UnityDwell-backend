@@ -18,7 +18,7 @@ public class CreateOrUpdateBillRequest {
     @NotNull(message = "Housing association id is required")
     private UUID housingAssociationId;
     @NotNull(message = "Flat owner id is required")
-    private UUID flatOwnerId;
-    @NotNull(message = "Bill title id is required")
-    private UUID billTitleId;
+    private String flatOwnerPhoneNumber;
+    @NotNull(message = "Bill title is required")
+    private String title;
 }
